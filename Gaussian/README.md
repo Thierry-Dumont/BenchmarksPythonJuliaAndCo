@@ -1,7 +1,8 @@
 
-The programs perform a Gaussian elimination with partial pivoting, except the
-C++Lib, PyScipy and JuLib which call the Lapack and blas libraries, to perform
-a LU factorization. The cost, in term of operation counts is similar.
+The programs perform a Gaussian elimination with partial pivoting, except those
+in 
+C++Lib/, PyScipy/ and JuLib/ which call the Lapack and blas libraries, to perform
+a LU factorization, but the cost, in term of operation counts is similar.
 
 The  Gaussian elimination with partial pivoting, even if this is something one
 should not code in the real life (except for pedagogical purpose) seems to be
