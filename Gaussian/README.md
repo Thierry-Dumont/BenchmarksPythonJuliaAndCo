@@ -8,7 +8,7 @@ should not code in the real life (except for pedagogical purpose) seems to be
 a good prototype of numerical algorithm an user would like to code (as it uses
 about n^3 floating point operations and array manipulations).
 
-* ## Realisation:
+### Realisation:
 
 Thierry Dumont   tdumont@math.univ-lyon1.fr
 
@@ -81,7 +81,7 @@ You can also install them with conda.
 
 Just install the with apt or the corresponding tool of your distribution.
 
-* running the benchmarks
+### Running the benchmarks
 
 cd succesively in C++, Ju, Numba Py, Pythran, PyVec, C++Lib, JuLib,
 PyScipy PythranVec.
