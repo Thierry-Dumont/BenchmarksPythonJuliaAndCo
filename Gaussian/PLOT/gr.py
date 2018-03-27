@@ -1,15 +1,17 @@
 #!/usr/bin/python3
-#comparaison c++ et autres calculs
+#
+#comparison c++ and other computations
+#
 import socket
 
 def parsit(D,l):
-    # decompose une ligne en 2 nombres.
+    # extract two numbers from a line.
     ll=l.split(" ")
     if len(ll) == 2:
         D[int(ll[0])]=float(ll[1].replace("\n",""))
 
         
-#les repertoires à explorer ---------   
+# directoies to explore ---------   
 files=[
     "../Py",
     "../Ju",
@@ -19,18 +21,19 @@ files=[
     "../PyVec",
     "../PythranVec",
     "../Numba",
-    "../C++Lib","../C++"]
+    "../C++Lib",
+    "../C++"]
 cpp="../C++"
 
 
-#-----------------------------------
-#construire un dictionnaire n-> durée pour C++
+#-------------------------------------------
+# build a dict  n-> computing time for  C++
 C={}
 with open(cpp+"/RuningOn"+socket.gethostname(), 'r') as file:
     for line in file:
         parsit(C,line)
 
-#construire un dictionnaire n-> durée pour chaque répertoire de "files"
+#  build a dict  n-> computing time for all directories if files[]
 T={}
 for n in files:
     T[n]={}
@@ -39,14 +42,14 @@ for n in files:
         for line in file:
             parsit(T[n],line)
 print("all files parsed.")
-# Calculer le ratio temps/ temps C++
+# Compute ratio time/(time C++).
 for n in files:
     D=T[n]
     for k in D.keys():
         if k in C.keys():
             D[k]/=C[k]
 print("ratios computed.")       
-# créer les fichiers (pour gnuplot).
+# create file for gnuplot.
 for n in files:
     D=T[n]
     thefile=n.replace("..","./Results")

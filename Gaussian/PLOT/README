@@ -1,9 +1,11 @@
-Run ./gr.py
+> mkdir ./Results (if ./Results does not exists).
+> ./gr.py
 
 It will parse your results (aka RuningOn<<your hotsname>>) and populate
 Results/ with gnuplot plotable files.
 
-Then
+Then:
+
 >gnuplot
 gnuplot> load "gpc"
 
