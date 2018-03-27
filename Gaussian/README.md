@@ -18,28 +18,28 @@ Roland Denis     denis@math.univ-lyon1.fr
 
 ### The directories contain:
 
-C++/      pure C++, sequential.
+C++/:      pure C++, sequential.
 
-C++Lib/   C++ and lapack + openblas.
+C++Lib/:   C++ and lapack + openblas.
 
-Ju/       pure Julia
+Ju/:       pure Julia
 
-JuLib/    Julia +  lapack + openblas.
+JuLib/:    Julia +  lapack + openblas.
 
 
-Py/       pure Python
+Py/:       pure Python
 
-PyVec/    pure Python, vectorized.
+PyVec/:    pure Python, vectorized.
 
-PyScipy/  Python + Scipy.
+PyScipy/:  Python + Scipy.
 
-Pythran/  Pythran.
+Pythran/:  Pythran.
 
-PythranVec/ Pythran vectorized
+PythranVec/: Pythran vectorized
 
-Numba/    Python + Numba
+Numba/:    Python + Numba
 
-PLOT /    graphical material
+PLOT/:    graphical material
 
 ### Dependencies:
 
@@ -49,7 +49,7 @@ PLOT /    graphical material
 
 !ZZZ! Julia: runs with version Version 0.6.2 (stable version in March 2018; note
 that the Ubuntu 17-10 version is older). Install the stable version from
-https://julialang.org
+https:/:/:julialang.org
 
 
 
@@ -86,16 +86,18 @@ Just install the with apt or the corresponding tool of your distribution.
 ### Running the benchmarks
 
 cd succesively in C++, Ju, Numba Py, Pythran, PyVec, C++Lib, JuLib,
-PyScipy PythranVec. The:
+PyScipy PythranVec.
 
-- For Ju* directories, as well as for Numba/,  run  ./script
+Then:
+
+- For Ju* directories, as well as for Numba/:,  run  ./:script
 
 
 - For C++* directories:
 
 mkdir Build
 
-cd Build
+cd Build/
 
 cmake ..
 
