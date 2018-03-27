@@ -1,0 +1,2 @@
+#!/bin/bash
+pythran -march=native -O3 factorMatrix.py

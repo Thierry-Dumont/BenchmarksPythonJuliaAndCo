@@ -1,0 +1,16 @@
+include/ :the library.
+try/     :a test suite.
+
+-> to generate the documentation: 
+  doxygen Doxyfile
+
+-> to compile and run the test suite:
+   cd try
+   cd Build
+   cmake ../CMakeLists.txt
+   ./run
+
+   have a look at CMakeLists.txt before !
+
+bugs and remarks: tdumont@math.univ-lyon1.fr
+   

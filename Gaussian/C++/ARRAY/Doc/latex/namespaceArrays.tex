@@ -1,0 +1,58 @@
+\hypertarget{namespaceArrays}{}\section{Arrays Namespace Reference}
+\label{namespaceArrays}\index{Arrays@{Arrays}}
+
+
+C-\/like indexing.  
+
+
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classArrays_1_1Array}{Array}
+\item 
+class \hyperlink{classArrays_1_1ArrayException}{Array\+Exception}
+\item 
+struct \hyperlink{structArrays_1_1BaseExept}{Base\+Exept}
+\item 
+class \hyperlink{classArrays_1_1CEngine}{C\+Engine}
+\item 
+class \hyperlink{classArrays_1_1FEngine}{F\+Engine}
+\item 
+struct \hyperlink{structArrays_1_1Range}{Range}
+\begin{DoxyCompactList}\small\item\em class of integer intervals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T , int n, class Engine $>$ }\\std\+::ostream \& \hyperlink{namespaceArrays_aab9f03b321449d8046150f3634b23e21}{operator$<$$<$} (std\+::ostream \&out, const \hyperlink{classArrays_1_1Array}{Array}$<$ T, n, Engine $>$ \&A)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+C-\/like indexing. 
+
+Fortran-\/like indexing.
+
+Manage a \char`\"{}\+C like\char`\"{} access. store bounds...
+
+Manage a \char`\"{}\+Fortran like\char`\"{} access. store bounds... 
+
+\subsection{Function Documentation}
+\hypertarget{namespaceArrays_aab9f03b321449d8046150f3634b23e21}{}\index{Arrays@{Arrays}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Arrays@{Arrays}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, class Engine $>$ std\+::ostream\& Arrays\+::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{out, }
+\item[{const {\bf Array}$<$ T, n, Engine $>$ \&}]{A}
+\end{DoxyParamCaption}
+)}\label{namespaceArrays_aab9f03b321449d8046150f3634b23e21}
+Overload operator $<$$<$.
+
+This is restricted to \hyperlink{namespaceArrays}{Arrays} with n$<$=2 indices!
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & the stream. \\
+\hline
+{\em A} & the array. \\
+\hline
+\end{DoxyParams}

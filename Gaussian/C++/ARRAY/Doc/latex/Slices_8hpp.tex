@@ -1,0 +1,46 @@
+\hypertarget{Slices_8hpp}{}\section{include/\+Slices.hpp File Reference}
+\label{Slices_8hpp}\index{include/\+Slices.\+hpp@{include/\+Slices.\+hpp}}
+{\ttfamily \#include $<$utility$>$}\\*
+Include dependency graph for Slices.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{Slices_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{Slices_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Array_8hpp_aabd8e3ecfe0ad1ff01b8e13b4909f9b4}{Slices\+\_\+\+\_\+h}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Array__Constructors__RangeBased__NotSafe_8hpp_acf5110f23c03aaeda0b2a5448ed4a9f0}{Array}$<$ T, n-\/1, Engine $>$ \hyperlink{Slices_8hpp_a1e18a88d71d5d129d4edc69123df9bfd}{slice\+\_\+ref} (int i)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{Array_8hpp_aabd8e3ecfe0ad1ff01b8e13b4909f9b4}{}\index{Slices.\+hpp@{Slices.\+hpp}!Slices\+\_\+\+\_\+h@{Slices\+\_\+\+\_\+h}}
+\index{Slices\+\_\+\+\_\+h@{Slices\+\_\+\+\_\+h}!Slices.\+hpp@{Slices.\+hpp}}
+\subsubsection[{Slices\+\_\+\+\_\+h}]{\setlength{\rightskip}{0pt plus 5cm}\#define Slices\+\_\+\+\_\+h}\label{Array_8hpp_aabd8e3ecfe0ad1ff01b8e13b4909f9b4}
+
+
+\subsection{Function Documentation}
+\hypertarget{Slices_8hpp_a1e18a88d71d5d129d4edc69123df9bfd}{}\index{Slices.\+hpp@{Slices.\+hpp}!slice\+\_\+ref@{slice\+\_\+ref}}
+\index{slice\+\_\+ref@{slice\+\_\+ref}!Slices.\+hpp@{Slices.\+hpp}}
+\subsubsection[{slice\+\_\+ref}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Array}$<$T,n-\/1,Engine$>$ slice\+\_\+ref (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}\label{Slices_8hpp_a1e18a88d71d5d129d4edc69123df9bfd}
+return a \char`\"{}natural\char`\"{} slice at line i (C like Array) or at column i (Fortran like Array). \begin{DoxyNote}{Note}
+A \char`\"{}\+R\+E\+F\+E\+R\+E\+N\+C\+E\char`\"{} is returned! thre is {\itshape no} copy of the array of data; so the returned Array is flagged \char`\"{}not deletable\char`\"{} and will actually not delete his datas when the destructor is called. 
+\end{DoxyNote}

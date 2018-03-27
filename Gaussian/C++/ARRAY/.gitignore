@@ -1,0 +1,10 @@
+*.log
+_*_.tex
+mr2014.pdf
+*.aux
+toto*
+*out
+*.bbl
+*.blg
+Build*
+Cfile*

@@ -1,0 +1,7 @@
+First compile factorMatrix.py; just type:
+./script
+
+Then run the code:
+
+python3 main.py
+

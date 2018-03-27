@@ -1,0 +1,14 @@
+set logscale 
+set key top right box
+set xlabel "matrix size"
+set ylabel "cpu time / cpu time C++"
+plot "./Results/C++" title "C++" with linespoint pointtype 7 
+replot "./Results/Py"      title "Python" with linespoint
+replot "./Results/PyVec"      title "Python vect." with linespoint
+replot "./Results/Ju"      title "Julia" with linespoint
+replot "./Results/PythranVec" title "Pythran vec." with linespoint
+replot "./Results/Pythran" title "Pythran" with linespoint
+replot "./Results/Numba" title "Numba" with linespoint
+replot "./Results/JuLib"   title "Julia + libs" with linespoint
+replot "./Results/PyScipy" title "Python + Scipy" with linespoint
+replot "./Results/C++Lib" title "C++ +  libs" with linespoint

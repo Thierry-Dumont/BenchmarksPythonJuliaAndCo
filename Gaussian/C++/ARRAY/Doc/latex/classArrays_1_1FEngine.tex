@@ -1,0 +1,375 @@
+\hypertarget{classArrays_1_1FEngine}{}\section{Arrays\+:\+:F\+Engine Class Reference}
+\label{classArrays_1_1FEngine}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+
+
+{\ttfamily \#include $<$F\+Engine.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classArrays_1_1FEngine_a9c234babc4416e5dcfc467a32a520509}{F\+Engine} ()
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\hyperlink{classArrays_1_1FEngine_a2905fdfb09ac7e5c31ec679756303b34}{$\sim$\+F\+Engine} ()
+\begin{DoxyCompactList}\small\item\em destructor \end{DoxyCompactList}\item 
+void \hyperlink{classArrays_1_1FEngine_a5a72986852a90f4661a3fbe3cdcabda3}{operator=} (const \hyperlink{classArrays_1_1FEngine}{F\+Engine} \&F\+E)
+\item 
+void \hyperlink{classArrays_1_1FEngine_ab2eb2c10e789bd7b61d94b87ae10a7cb}{init} (\hyperlink{structArrays_1_1Range}{Range} R)
+\item 
+void \hyperlink{classArrays_1_1FEngine_a13213addb5d54e4f4df925f036d5fa1a}{init} (\hyperlink{structArrays_1_1Range}{Range} R0, \hyperlink{structArrays_1_1Range}{Range} R1)
+\item 
+void \hyperlink{classArrays_1_1FEngine_aa3c5e7c09c618b8a9842a7ee4f514dcd}{init} (\hyperlink{structArrays_1_1Range}{Range} R0, \hyperlink{structArrays_1_1Range}{Range} R1, \hyperlink{structArrays_1_1Range}{Range} R2)
+\item 
+void \hyperlink{classArrays_1_1FEngine_ad65e8e153b3467f57081f23050b6e32a}{init} (\hyperlink{structArrays_1_1Range}{Range} R0, \hyperlink{structArrays_1_1Range}{Range} R1, \hyperlink{structArrays_1_1Range}{Range} R2, \hyperlink{structArrays_1_1Range}{Range} R3)
+\item 
+void \hyperlink{classArrays_1_1FEngine_a4712bf78ad34f1d29d34425b902cdb16}{init} (\hyperlink{structArrays_1_1Range}{Range} R\mbox{[}$\,$\mbox{]}, int n)
+\item 
+int \hyperlink{classArrays_1_1FEngine_a72b83f7c48ad7a8fd2fc5ac2de3f28bb}{operator()} (int i1) const 
+\item 
+int \hyperlink{classArrays_1_1FEngine_a705e28236e7eb14bcd3091dc76b4a534}{operator()} (int i0, int i1) const 
+\item 
+int \hyperlink{classArrays_1_1FEngine_a4a627878d3983c23593b557cfe4fa140}{operator()} (int i0, int i1, int i2) const 
+\item 
+int \hyperlink{classArrays_1_1FEngine_a209153b11daf1dc33b708d236c86c317}{operator()} (int i0, int i1, int i2, int i3) const 
+\item 
+int \hyperlink{classArrays_1_1FEngine_a09a12c71ad9703bf8dce82a24428476e}{min\+Indix} (int i) const 
+\item 
+int \hyperlink{classArrays_1_1FEngine_a3bf36efeca79e02e0187786cade6faad}{mins} (int i) const 
+\item 
+int \hyperlink{classArrays_1_1FEngine_a4add3785be98a25d1166c9758fb179a1}{maxs} (int i) const 
+\item 
+int \hyperlink{classArrays_1_1FEngine_abdd71e76e671a3731aae793e6c482287}{size} () const 
+\begin{DoxyCompactList}\small\item\em size of the C array we need to allocate. \end{DoxyCompactList}\item 
+\hyperlink{structArrays_1_1Range}{Range} \hyperlink{classArrays_1_1FEngine_a2716ef7750e2946399bf463c4406d080}{my\+\_\+range} (int i) const 
+\begin{DoxyCompactList}\small\item\em return a copy of kth range \end{DoxyCompactList}\item 
+int \hyperlink{classArrays_1_1FEngine_a4279cd21a94ae8b04bf7e8ee58535679}{slice} (int i) const 
+\begin{DoxyCompactList}\small\item\em return coeffs\mbox{[}0\mbox{]}, which is the size of a \char`\"{}natural\char`\"{} sub array. \end{DoxyCompactList}\item 
+pair$<$ int, int $>$ \hyperlink{classArrays_1_1FEngine_a22f0ef3f1e408e6d6ba864468bb4907f}{slice\+Limits} () const 
+\item 
+pair$<$ int, int $>$ \hyperlink{classArrays_1_1FEngine_a96ef7f338ed9cc5486408b8b162b42db}{slice\+Ranges\+Indexes} () const 
+\begin{DoxyCompactList}\small\item\em where are the ranges for a slice? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classArrays_1_1FEngine_a6ec952e41017b4dee5cf7f804588b489}{coeffs} \mbox{[}6\mbox{]}
+\item 
+int \hyperlink{classArrays_1_1FEngine_afc7ce2b095e7c2305a1c936ba643349f}{Mins} \mbox{[}6\mbox{]}
+\item 
+int \hyperlink{classArrays_1_1FEngine_a2d2ca2f6c1414a4b341d9ef62d3368b4}{Maxs} \mbox{[}6\mbox{]}
+\item 
+int \hyperlink{classArrays_1_1FEngine_a4cf5233fcd84c0a23cd39e9cae028b95}{sub}
+\item 
+int \hyperlink{classArrays_1_1FEngine_a4ed91b37b3779039561ec88093fc8497}{Alloc\+Size}
+\item 
+int \hyperlink{classArrays_1_1FEngine_a9b0fe97f01e164bc78e3fd2d5c864949}{used\+Dims}
+\item 
+int \hyperlink{classArrays_1_1FEngine_a3ad1d65b38389d72b07e9411877feaaa}{slice\+Size}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classArrays_1_1FEngine_a9c234babc4416e5dcfc467a32a520509}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!F\+Engine@{F\+Engine}}
+\index{F\+Engine@{F\+Engine}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{F\+Engine}]{\setlength{\rightskip}{0pt plus 5cm}Arrays\+::\+F\+Engine\+::\+F\+Engine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a9c234babc4416e5dcfc467a32a520509}
+
+
+constructor 
+
+\hypertarget{classArrays_1_1FEngine_a2905fdfb09ac7e5c31ec679756303b34}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!````~F\+Engine@{$\sim$\+F\+Engine}}
+\index{````~F\+Engine@{$\sim$\+F\+Engine}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{$\sim$\+F\+Engine}]{\setlength{\rightskip}{0pt plus 5cm}Arrays\+::\+F\+Engine\+::$\sim$\+F\+Engine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a2905fdfb09ac7e5c31ec679756303b34}
+
+
+destructor 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classArrays_1_1FEngine_ab2eb2c10e789bd7b61d94b87ae10a7cb}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!init@{init}}
+\index{init@{init}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Arrays\+::\+F\+Engine\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Range}}]{R}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_ab2eb2c10e789bd7b61d94b87ae10a7cb}
+Initialize for 1d arrays. 
+\begin{DoxyParams}{Parameters}
+{\em R} & \hyperlink{structArrays_1_1Range}{Range} \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a13213addb5d54e4f4df925f036d5fa1a}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!init@{init}}
+\index{init@{init}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Arrays\+::\+F\+Engine\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Range}}]{R0, }
+\item[{{\bf Range}}]{R1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a13213addb5d54e4f4df925f036d5fa1a}
+Initialize for 2d arrays. 
+\begin{DoxyParams}{Parameters}
+{\em R0} & (1rst indix) \\
+\hline
+{\em R1} & size (2nd indix) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_aa3c5e7c09c618b8a9842a7ee4f514dcd}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!init@{init}}
+\index{init@{init}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Arrays\+::\+F\+Engine\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Range}}]{R0, }
+\item[{{\bf Range}}]{R1, }
+\item[{{\bf Range}}]{R2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_aa3c5e7c09c618b8a9842a7ee4f514dcd}
+Initialize or 3d arrays. 
+\begin{DoxyParams}{Parameters}
+{\em R0} & \hyperlink{structArrays_1_1Range}{Range} (1rst indix) \\
+\hline
+{\em R1} & \hyperlink{structArrays_1_1Range}{Range} (2nd indix) \\
+\hline
+{\em R2} & \hyperlink{structArrays_1_1Range}{Range} (3rd indix) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_ad65e8e153b3467f57081f23050b6e32a}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!init@{init}}
+\index{init@{init}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Arrays\+::\+F\+Engine\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Range}}]{R0, }
+\item[{{\bf Range}}]{R1, }
+\item[{{\bf Range}}]{R2, }
+\item[{{\bf Range}}]{R3}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_ad65e8e153b3467f57081f23050b6e32a}
+Initialize or 4d arrays. 
+\begin{DoxyParams}{Parameters}
+{\em R0} & \hyperlink{structArrays_1_1Range}{Range} (1rst indix) \\
+\hline
+{\em R1} & \hyperlink{structArrays_1_1Range}{Range} (2nd indix) \\
+\hline
+{\em R2} & \hyperlink{structArrays_1_1Range}{Range} (3rd indix) \\
+\hline
+{\em R3} & \hyperlink{structArrays_1_1Range}{Range} (3rd indix) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a4712bf78ad34f1d29d34425b902cdb16}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!init@{init}}
+\index{init@{init}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Arrays\+::\+F\+Engine\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Range}}]{R\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a4712bf78ad34f1d29d34425b902cdb16}
+initialization based on an array of \hyperlink{structArrays_1_1Range}{Range}\textquotesingle{}s. 
+\begin{DoxyParams}{Parameters}
+{\em R} & \\
+\hline
+{\em n} & size of R. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a4add3785be98a25d1166c9758fb179a1}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!maxs@{maxs}}
+\index{maxs@{maxs}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{maxs}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::maxs (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a4add3785be98a25d1166c9758fb179a1}
+return max value for indice i. 
+\begin{DoxyParams}{Parameters}
+{\em i} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+bound is included! 
+\end{DoxyNote}
+\hypertarget{classArrays_1_1FEngine_a09a12c71ad9703bf8dce82a24428476e}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!min\+Indix@{min\+Indix}}
+\index{min\+Indix@{min\+Indix}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{min\+Indix}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::min\+Indix (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a09a12c71ad9703bf8dce82a24428476e}
+return min value of indix i 
+\begin{DoxyParams}{Parameters}
+{\em i} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a3bf36efeca79e02e0187786cade6faad}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!mins@{mins}}
+\index{mins@{mins}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{mins}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::mins (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a3bf36efeca79e02e0187786cade6faad}
+return min value for indice i. 
+\begin{DoxyParams}{Parameters}
+{\em i} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a2716ef7750e2946399bf463c4406d080}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!my\+\_\+range@{my\+\_\+range}}
+\index{my\+\_\+range@{my\+\_\+range}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{my\+\_\+range}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Range} Arrays\+::\+F\+Engine\+::my\+\_\+range (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a2716ef7750e2946399bf463c4406d080}
+
+
+return a copy of kth range 
+
+\hypertarget{classArrays_1_1FEngine_a72b83f7c48ad7a8fd2fc5ac2de3f28bb}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!operator()@{operator()}}
+\index{operator()@{operator()}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::operator() (
+\begin{DoxyParamCaption}
+\item[{int}]{i1}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a72b83f7c48ad7a8fd2fc5ac2de3f28bb}
+access operator for 1d array 
+\begin{DoxyParams}{Parameters}
+{\em i1} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a705e28236e7eb14bcd3091dc76b4a534}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!operator()@{operator()}}
+\index{operator()@{operator()}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::operator() (
+\begin{DoxyParamCaption}
+\item[{int}]{i0, }
+\item[{int}]{i1}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a705e28236e7eb14bcd3091dc76b4a534}
+access operator for 2d array 
+\begin{DoxyParams}{Parameters}
+{\em i0} & \\
+\hline
+{\em i1} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a4a627878d3983c23593b557cfe4fa140}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!operator()@{operator()}}
+\index{operator()@{operator()}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::operator() (
+\begin{DoxyParamCaption}
+\item[{int}]{i0, }
+\item[{int}]{i1, }
+\item[{int}]{i2}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a4a627878d3983c23593b557cfe4fa140}
+access operator for 3d array 
+\begin{DoxyParams}{Parameters}
+{\em i0} & \\
+\hline
+{\em i1} & \\
+\hline
+{\em i2} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a209153b11daf1dc33b708d236c86c317}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!operator()@{operator()}}
+\index{operator()@{operator()}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::operator() (
+\begin{DoxyParamCaption}
+\item[{int}]{i0, }
+\item[{int}]{i1, }
+\item[{int}]{i2, }
+\item[{int}]{i3}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a209153b11daf1dc33b708d236c86c317}
+access operator for 4d array 
+\begin{DoxyParams}{Parameters}
+{\em i0} & \\
+\hline
+{\em i1} & \\
+\hline
+{\em i2} & \\
+\hline
+{\em i3} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_a5a72986852a90f4661a3fbe3cdcabda3}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!operator=@{operator=}}
+\index{operator=@{operator=}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}void Arrays\+::\+F\+Engine\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf F\+Engine} \&}]{F\+E}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a5a72986852a90f4661a3fbe3cdcabda3}
+operator= 
+\begin{DoxyParams}{Parameters}
+{\em F\+E} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrays_1_1FEngine_abdd71e76e671a3731aae793e6c482287}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!size@{size}}
+\index{size@{size}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_abdd71e76e671a3731aae793e6c482287}
+
+
+size of the C array we need to allocate. 
+
+\hypertarget{classArrays_1_1FEngine_a4279cd21a94ae8b04bf7e8ee58535679}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!slice@{slice}}
+\index{slice@{slice}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{slice}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::slice (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a4279cd21a94ae8b04bf7e8ee58535679}
+
+
+return coeffs\mbox{[}0\mbox{]}, which is the size of a \char`\"{}natural\char`\"{} sub array. 
+
+\hypertarget{classArrays_1_1FEngine_a22f0ef3f1e408e6d6ba864468bb4907f}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!slice\+Limits@{slice\+Limits}}
+\index{slice\+Limits@{slice\+Limits}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{slice\+Limits}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$int,int$>$ Arrays\+::\+F\+Engine\+::slice\+Limits (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a22f0ef3f1e408e6d6ba864468bb4907f}
+give the bounds of the \char`\"{}natural\char`\"{} slice index. \begin{DoxyNote}{Note}
+mainly for debugging. 
+\end{DoxyNote}
+\hypertarget{classArrays_1_1FEngine_a96ef7f338ed9cc5486408b8b162b42db}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!slice\+Ranges\+Indexes@{slice\+Ranges\+Indexes}}
+\index{slice\+Ranges\+Indexes@{slice\+Ranges\+Indexes}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{slice\+Ranges\+Indexes}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$int,int$>$ Arrays\+::\+F\+Engine\+::slice\+Ranges\+Indexes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrays_1_1FEngine_a96ef7f338ed9cc5486408b8b162b42db}
+
+
+where are the ranges for a slice? 
+
+
+
+\subsection{Field Documentation}
+\hypertarget{classArrays_1_1FEngine_a4ed91b37b3779039561ec88093fc8497}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!Alloc\+Size@{Alloc\+Size}}
+\index{Alloc\+Size@{Alloc\+Size}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{Alloc\+Size}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::\+Alloc\+Size\hspace{0.3cm}{\ttfamily [private]}}\label{classArrays_1_1FEngine_a4ed91b37b3779039561ec88093fc8497}
+\hypertarget{classArrays_1_1FEngine_a6ec952e41017b4dee5cf7f804588b489}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!coeffs@{coeffs}}
+\index{coeffs@{coeffs}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{coeffs}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::coeffs\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\label{classArrays_1_1FEngine_a6ec952e41017b4dee5cf7f804588b489}
+\hypertarget{classArrays_1_1FEngine_a2d2ca2f6c1414a4b341d9ef62d3368b4}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!Maxs@{Maxs}}
+\index{Maxs@{Maxs}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{Maxs}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::\+Maxs\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\label{classArrays_1_1FEngine_a2d2ca2f6c1414a4b341d9ef62d3368b4}
+\hypertarget{classArrays_1_1FEngine_afc7ce2b095e7c2305a1c936ba643349f}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!Mins@{Mins}}
+\index{Mins@{Mins}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{Mins}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::\+Mins\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\label{classArrays_1_1FEngine_afc7ce2b095e7c2305a1c936ba643349f}
+\hypertarget{classArrays_1_1FEngine_a3ad1d65b38389d72b07e9411877feaaa}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!slice\+Size@{slice\+Size}}
+\index{slice\+Size@{slice\+Size}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{slice\+Size}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::slice\+Size\hspace{0.3cm}{\ttfamily [private]}}\label{classArrays_1_1FEngine_a3ad1d65b38389d72b07e9411877feaaa}
+\hypertarget{classArrays_1_1FEngine_a4cf5233fcd84c0a23cd39e9cae028b95}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!sub@{sub}}
+\index{sub@{sub}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{sub}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::sub\hspace{0.3cm}{\ttfamily [private]}}\label{classArrays_1_1FEngine_a4cf5233fcd84c0a23cd39e9cae028b95}
+\hypertarget{classArrays_1_1FEngine_a9b0fe97f01e164bc78e3fd2d5c864949}{}\index{Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}!used\+Dims@{used\+Dims}}
+\index{used\+Dims@{used\+Dims}!Arrays\+::\+F\+Engine@{Arrays\+::\+F\+Engine}}
+\subsubsection[{used\+Dims}]{\setlength{\rightskip}{0pt plus 5cm}int Arrays\+::\+F\+Engine\+::used\+Dims\hspace{0.3cm}{\ttfamily [private]}}\label{classArrays_1_1FEngine_a9b0fe97f01e164bc78e3fd2d5c864949}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{FEngine_8hpp}{F\+Engine.\+hpp}\end{DoxyCompactItemize}

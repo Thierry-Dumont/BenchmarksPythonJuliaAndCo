@@ -1,0 +1,151 @@
+\hypertarget{classArrayIterator}{}\section{Array\+Iterator$<$ T $>$ Class Template Reference}
+\label{classArrayIterator}\index{Array\+Iterator$<$ T $>$@{Array\+Iterator$<$ T $>$}}
+
+
+iterator  
+
+
+
+
+{\ttfamily \#include $<$Array\+\_\+iterators.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classArrayIterator_a650c33a77485acadfe1db8eec612020d}{Array\+Iterator} (T $\ast$x)
+\item 
+\hyperlink{classArrayIterator_a001bb049c3eddf473fa6b3fcf5b44559}{Array\+Iterator} (const \hyperlink{classArrayIterator}{Array\+Iterator} \&mit)
+\item 
+\hyperlink{classArrayIterator}{Array\+Iterator} \& \hyperlink{classArrayIterator_a089ab3c97d0133fcd778b35086b9aa1c}{operator++} ()
+\begin{DoxyCompactList}\small\item\em pre-\/instantiation (++\+I) \end{DoxyCompactList}\item 
+\hyperlink{classArrayIterator}{Array\+Iterator} \hyperlink{classArrayIterator_aa63a6291ac8a3e20b6051b0f2fbad27a}{operator++} (int)
+\begin{DoxyCompactList}\small\item\em post-\/instantiation (I++) \end{DoxyCompactList}\item 
+bool \hyperlink{classArrayIterator_a0dae7a77a39a0bd1799cc209775589bd}{operator==} (const \hyperlink{classArrayIterator}{Array\+Iterator} \&rhs)
+\item 
+bool \hyperlink{classArrayIterator_abbbd89f94af592c09bc768d0f842bdb3}{operator!=} (const \hyperlink{classArrayIterator}{Array\+Iterator} \&rhs)
+\item 
+T \& \hyperlink{classArrayIterator_a42889f9485e5477403155060a8686b44}{operator$\ast$} ()
+\begin{DoxyCompactList}\small\item\em dereferentiation. \end{DoxyCompactList}\item 
+T $\ast$ \hyperlink{classArrayIterator_abf1239e6b314c137b836beb0be217c60}{Tpointer} ()
+\begin{DoxyCompactList}\small\item\em return the pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ \hyperlink{classArrayIterator_ad825113dc5353457965a54c3595aef26}{p}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$class Array\+Iterator$<$ T $>$}
+
+iterator 
+
+Iterator class for the Array class should be compatible with stl iterators. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classArrayIterator_a650c33a77485acadfe1db8eec612020d}{}\index{Array\+Iterator@{Array\+Iterator}!Array\+Iterator@{Array\+Iterator}}
+\index{Array\+Iterator@{Array\+Iterator}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{Array\+Iterator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Array\+Iterator}$<$ T $>$\+::{\bf Array\+Iterator} (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrayIterator_a650c33a77485acadfe1db8eec612020d}
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em x} & C vector of an Array. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrayIterator_a001bb049c3eddf473fa6b3fcf5b44559}{}\index{Array\+Iterator@{Array\+Iterator}!Array\+Iterator@{Array\+Iterator}}
+\index{Array\+Iterator@{Array\+Iterator}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{Array\+Iterator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Array\+Iterator}$<$ T $>$\+::{\bf Array\+Iterator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Array\+Iterator}$<$ T $>$ \&}]{mit}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrayIterator_a001bb049c3eddf473fa6b3fcf5b44559}
+copy constructor. 
+\begin{DoxyParams}{Parameters}
+{\em mit} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classArrayIterator_abbbd89f94af592c09bc768d0f842bdb3}{}\index{Array\+Iterator@{Array\+Iterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{operator"!=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ bool {\bf Array\+Iterator}$<$ T $>$\+::operator!= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Array\+Iterator}$<$ T $>$ \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrayIterator_abbbd89f94af592c09bc768d0f842bdb3}
+non equality test 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & test $\ast$this with rhs. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrayIterator_a42889f9485e5477403155060a8686b44}{}\index{Array\+Iterator@{Array\+Iterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T\& {\bf Array\+Iterator}$<$ T $>$\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrayIterator_a42889f9485e5477403155060a8686b44}
+
+
+dereferentiation. 
+
+\hypertarget{classArrayIterator_a089ab3c97d0133fcd778b35086b9aa1c}{}\index{Array\+Iterator@{Array\+Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{operator++}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Array\+Iterator}\& {\bf Array\+Iterator}$<$ T $>$\+::operator++ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrayIterator_a089ab3c97d0133fcd778b35086b9aa1c}
+
+
+pre-\/instantiation (++\+I) 
+
+\hypertarget{classArrayIterator_aa63a6291ac8a3e20b6051b0f2fbad27a}{}\index{Array\+Iterator@{Array\+Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{operator++}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Array\+Iterator} {\bf Array\+Iterator}$<$ T $>$\+::operator++ (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrayIterator_aa63a6291ac8a3e20b6051b0f2fbad27a}
+
+
+post-\/instantiation (I++) 
+
+\hypertarget{classArrayIterator_a0dae7a77a39a0bd1799cc209775589bd}{}\index{Array\+Iterator@{Array\+Iterator}!operator==@{operator==}}
+\index{operator==@{operator==}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ bool {\bf Array\+Iterator}$<$ T $>$\+::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf Array\+Iterator}$<$ T $>$ \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrayIterator_a0dae7a77a39a0bd1799cc209775589bd}
+equality test 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & test $\ast$this with rhs. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classArrayIterator_abf1239e6b314c137b836beb0be217c60}{}\index{Array\+Iterator@{Array\+Iterator}!Tpointer@{Tpointer}}
+\index{Tpointer@{Tpointer}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{Tpointer}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ {\bf Array\+Iterator}$<$ T $>$\+::Tpointer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classArrayIterator_abf1239e6b314c137b836beb0be217c60}
+
+
+return the pointer. 
+
+
+
+\subsection{Field Documentation}
+\hypertarget{classArrayIterator_ad825113dc5353457965a54c3595aef26}{}\index{Array\+Iterator@{Array\+Iterator}!p@{p}}
+\index{p@{p}!Array\+Iterator@{Array\+Iterator}}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ {\bf Array\+Iterator}$<$ T $>$\+::p\hspace{0.3cm}{\ttfamily [private]}}\label{classArrayIterator_ad825113dc5353457965a54c3595aef26}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{Array__iterators_8hpp}{Array\+\_\+iterators.\+hpp}\end{DoxyCompactItemize}
