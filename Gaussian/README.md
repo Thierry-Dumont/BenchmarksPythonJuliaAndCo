@@ -8,12 +8,15 @@ should not code in the real life (except for pedagogical purpose) seems to be
 a good prototype of numerical algorithm an user would like to code (as it uses
 about n^3 floating point operations and array manipulations).
 
-* Realisation:
+* ## Realisation:
+
 Thierry Dumont   tdumont@math.univ-lyon1.fr
+
 Benoît Fabrèges  fabreges@math.univ-lyon1.fr
+
 Roland Denis     denis@math.univ-lyon1.fr
 
-* The directories contain:
+### The directories contain:
 
 C++/      pure C++, sequential.
 
@@ -38,9 +41,9 @@ Numba/    Python + Numba
 
 PLOT /    graphical material
 
-* --- Dependencies:
+### Dependencies:
 
-What you need to install:
+#### What you need to install:
 
 - julia
 
@@ -100,7 +103,7 @@ make
 
 It will create a file named RuningOn"your hostname".
 
-* --Ploting results:
+### Ploting results:
 
 cd PLOT/
 
