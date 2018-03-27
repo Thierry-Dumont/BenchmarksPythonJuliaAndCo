@@ -17,7 +17,7 @@ Roland Denis     denis@math.univ-lyon1.fr
 
 C++      pure C++, sequential.
 
-C++Lib   P++ and lapack + openblas.
+C++Lib   C++ and lapack + openblas.
 
 Ju       pure Julia
 
