@@ -84,12 +84,12 @@ Just install the with apt or the corresponding tool of your distribution.
 ### Running the benchmarks
 
 cd succesively in C++, Ju, Numba Py, Pythran, PyVec, C++Lib, JuLib,
-PyScipy PythranVec.
+PyScipy PythranVec. The:
 
-For Ju* diectories, as well as for Numba/ run  ./script
+- For Ju* directories, as well as for Numba/,  run  ./script
 
 
-For C++* directories:
+- For C++* directories:
 
 mkdir Build
 
@@ -101,7 +101,13 @@ make
 
 ./run
 
-It will create a file named RuningOn"your hostname".
+- For Py* directories:
+
+Look at the README file inside.
+
+#### Results:
+
+Running the codes  will create a file named RuningOn"your hostname".
 
 ### Ploting results:
 

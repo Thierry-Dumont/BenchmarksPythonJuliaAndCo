@@ -1,6 +1,6 @@
 Have a look at file script, to adapt it to your machine (can you use AVX
 instructions?).
 
-To ru the programme, just type:
+To run the programme, just type:
 
 ./script
