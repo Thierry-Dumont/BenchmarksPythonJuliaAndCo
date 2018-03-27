@@ -22,10 +22,10 @@ JuLib    Julia +  lapack + openblas.
 
 
 Py       pure Python
-PyVec    pure Python, vectorised.
+PyVec    pure Python, vectorized.
 PyScipy  Python + Scipy.
 Pythran  Pythran
-PythranVec Pythran vectorised
+PythranVec Pythran vectorized
 Numba    Python + Numba
 
 PLOT     graphical material

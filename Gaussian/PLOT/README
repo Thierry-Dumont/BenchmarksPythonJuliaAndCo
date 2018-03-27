@@ -7,7 +7,7 @@ Then
 >gnuplot
 gnuplot> load "gpc"
 
-will plot the results.
+will plot the results. We take C++ results as unit.
 
 
 An example of benchmark is Benchmarks/kepler.pdf which was run on a
