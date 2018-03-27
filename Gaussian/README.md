@@ -90,7 +90,7 @@ PyScipy PythranVec.
 
 Then:
 
-- For Ju* directories, as well as for Numba/:,  run  ./:script
+- For Ju* directories, as well as for Numba/,  run  ./script
 
 
 - For C++* directories:
