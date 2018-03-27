@@ -1,5 +1,5 @@
 set logscale 
-set key top right box
+set key top right
 set xlabel "matrix size"
 set ylabel "cpu time / cpu time C++"
 plot "./Results/C++" title "C++" with linespoint pointtype 7 
