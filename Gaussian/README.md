@@ -119,3 +119,10 @@ Running the codes  will create a file named RuningOn"your hostname".
 cd PLOT/
 
 Read README file in PLOT/ .
+
+### Note:
+
+Concerning C++Lib/,  JuLib/ and PyScipy/ all of them call lapack  material and
+blas which probably will be openblas. For large matrix sizes, with openblas, the
+called routines would possibly be multithreaded at least in some cases (see
+PLOT/Benchmark/kepler.pdf, for which C++Lib is multithreaded).
