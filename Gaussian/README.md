@@ -52,6 +52,8 @@ that the Ubuntu 17-10 version is older). Install the stable version from
 https://julialang.org
 
 
+
+
 - python3
 
 - pip
