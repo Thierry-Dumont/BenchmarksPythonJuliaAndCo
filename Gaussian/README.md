@@ -16,13 +16,16 @@ Roland Denis     denis@math.univ-lyon1.fr
 * The directories contain:
 
 C++      pure C++, sequential.
+
 C++Lib   P++ and lapack + openblas.
 
 Ju       pure Julia
+
 JuLib    Julia +  lapack + openblas.
 
 
 Py       pure Python
+
 PyVec    pure Python, vectorized.
 PyScipy  Python + Scipy.
 Pythran  Pythran
