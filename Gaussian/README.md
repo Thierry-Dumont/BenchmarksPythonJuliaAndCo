@@ -19,28 +19,28 @@ Roland Denis     denis@math.univ-lyon1.fr
 
 ### The directories contain:
 
-C++/:      pure C++, sequential.
+- C++/:      pure C++, sequential.
 
-C++Lib/:   C++ and lapack + openblas.
+- C++Lib/:   C++ and lapack + openblas.
 
-Ju/:       pure Julia
+- Ju/:       pure Julia
 
-JuLib/:    Julia +  lapack + openblas.
+- JuLib/:    Julia +  lapack + openblas.
 
 
-Py/:       pure Python
+- Py/:       pure Python
 
-PyVec/:    pure Python, vectorized.
+- PyVec/:    pure Python, vectorized.
 
-PyScipy/:  Python + Scipy.
+- PyScipy/:  Python + Scipy.
 
-Pythran/:  Pythran.
+- Pythran/:  Pythran.
 
-PythranVec/: Pythran vectorized
+- PythranVec/: Pythran vectorized
 
-Numba/:    Python + Numba
+- Numba/:    Python + Numba
 
-PLOT/:    graphical material
+- PLOT/:    graphical material
 
 ### Dependencies:
 
