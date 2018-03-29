@@ -40,7 +40,14 @@ Roland Denis     denis@math.univ-lyon1.fr
 
 - Numba/:    Python + Numba
 
-- PLOT/:    graphical material
+- PLOT/:    graphical material and an example of result.
+
+### Note:
+
+Concerning C++Lib/,  JuLib/ and PyScipy/ all of them call lapack  material and
+blas which probably will be openblas. For large matrix sizes, with openblas, the
+called routines would possibly be multithreaded at least in some cases (see
+PLOT/Benchmark/kepler.pdf, for which C++Lib is multithreaded).
 
 ### Dependencies:
 
@@ -120,9 +127,4 @@ cd PLOT/
 
 Read README file in PLOT/ .
 
-### Note:
 
-Concerning C++Lib/,  JuLib/ and PyScipy/ all of them call lapack  material and
-blas which probably will be openblas. For large matrix sizes, with openblas, the
-called routines would possibly be multithreaded at least in some cases (see
-PLOT/Benchmark/kepler.pdf, for which C++Lib is multithreaded).
