@@ -1,5 +1,5 @@
 
-## Numerical benchmark(s) for Julia, Python.
+# Numerical benchmarks for Julia, Python.
 
 Try to avoid trivial and non-sens benchmarks (for people doing numerics!)  like fibonacci, sorting and so on.
 
@@ -21,7 +21,7 @@ https:/:/:julialang.org
 - python3
 - pip
 
-You can nstall them with your distribution tool (apt...).
+You can install them with your distribution tool (apt...).
 
 - pythran
 - scipy
