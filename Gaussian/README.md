@@ -1,9 +1,9 @@
 ### Description:
 
-The programs perform a Gaussian elimination with partial pivoting, except those
+Perform a Gaussian elimination with partial pivoting, except those
 in 
 C++Lib/, PyScipy/ and JuLib/ which call the Lapack and blas libraries, to perform
-a LU factorization, but the cost, in term of operation counts is similar.
+a LU factorization, but the cost, in term of operation counts is similar in any case. 
 
 ### Motivation:
 
