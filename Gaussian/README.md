@@ -52,47 +52,7 @@ blas which probably will be openblas. For large matrix sizes, with openblas, the
 called routines would possibly be multithreaded at least in some cases (see
 PLOT/Benchmark/kepler.pdf, for which C++Lib is multithreaded).
 
-### Dependencies:
 
-#### What you need to install:
-
-- julia
-
-!ZZZ! Julia: runs with version Version 0.6.2 (stable version in March 2018; note
-that the Ubuntu 17-10 version is older). Install the stable version from
-https:/:/:julialang.org
-
-
-
-
-- python3
-
-- pip
-
-Install them with your distribution tool (apt...).
-
-- pythran
-
-- scipy
-
-- Numpy
-
-- numba
-
-for pythran, scipy, numpy numba you can just do:
-
-pip install pythran  and so on...
-
-You can also install them with conda.
-
-
-- g++ (or clang++)
-- lapack
-- openblas
-- cmake
-- gnuplot
-
-Just install the with apt or the corresponding tool of your distribution.
 
 ### Running the benchmarks
 
