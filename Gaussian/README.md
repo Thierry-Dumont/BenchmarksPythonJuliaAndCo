@@ -4,6 +4,8 @@ in
 C++Lib/, PyScipy/ and JuLib/ which call the Lapack and blas libraries, to perform
 a LU factorization, but the cost, in term of operation counts is similar.
 
+### Motivation:
+
 The  Gaussian elimination with partial pivoting, even if this is something one
 should not code in the real life (except for pedagogical purpose) seems to be
 a good prototype of numerical algorithm an user would like to code (as it uses
