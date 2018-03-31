@@ -18,28 +18,22 @@ that the Ubuntu 17-10 version is older). Install the stable version from
 https:/:/:julialang.org
 
 
-
-
 - python3
-
 - pip
 
-Install them with your distribution tool (apt...).
+You can nstall them with your distribution tool (apt...).
 
 - pythran
-
 - scipy
-
 - Numpy
-
 - numba
 
 for pythran, scipy, numpy numba you can just do:
 
-pip install pythran  and so on...
+pip install pythran
+and so on...
 
 You can also install them with conda.
-
 
 - g++ (or clang++)
 - lapack
@@ -47,4 +41,4 @@ You can also install them with conda.
 - cmake
 - gnuplot
 
-Just install the with apt or the corresponding tool of your distribution.
+Just install the with _apt_ or the corresponding tool of your distribution.
