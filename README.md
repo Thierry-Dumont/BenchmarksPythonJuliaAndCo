@@ -14,7 +14,7 @@ We will add other numerical significative benchmarks in the (near) future.
 - julia
 - python3
 - pip
-- g++ (or clang++)
+- g++ (and/or clang++)
 - lapack
 - openblas
 - cmake
