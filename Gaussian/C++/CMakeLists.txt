@@ -19,7 +19,6 @@ elseif(${CMAKE_CXX_COMPILER} MATCHES "clang.*$")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3  -DCLANG  -Wall -std=c++11")
 else ()
   set (USING_GNU TRUE)
-  #set(CMAKE_CXX_COMPILER "g++-4.8")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -DGCC -DALIGN_64 -ftree-vectorizer-verbose=2 -std=c++11 -march=native")
 
 endif ()
