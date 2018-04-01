@@ -54,7 +54,7 @@ end
 # Results:
 S=sort(collect(zip(keys(D),values(D))),rev=true)
 
-open("RuningOn"*gethostname(),"w") do f
+open("RunningOn"*gethostname(),"w") do f
     for k in S
         write(f,string(k[1])," ",string(k[2]),"\n")
     end

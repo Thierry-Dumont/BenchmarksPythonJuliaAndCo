@@ -61,12 +61,12 @@ PyScipy PythranVec; then look at README.
 
 #### Results:
 
-Running the codes  will create a file named RuningOn"your hostname".
+Running the codes  will create a file named RunningOn"your hostname".
 
 ### Ploting results:
 
 cd PLOT/
 
-Read README file in PLOT/ .
+Read README file.
 
 

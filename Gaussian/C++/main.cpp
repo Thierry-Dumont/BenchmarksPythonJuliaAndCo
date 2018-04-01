@@ -74,7 +74,7 @@ int main()
 	else
 	  loop*=8;
     }
-    ofstream f; f.open("../RuningOn"+hostname);
+    ofstream f; f.open("../RunningOn"+hostname);
     for(auto e : times)
       f<<e.first<<" "<<e.second<<endl;
     f.close();
