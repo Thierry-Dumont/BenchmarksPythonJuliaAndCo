@@ -50,7 +50,7 @@ while size>2:
     
     loop*=4
     
-    f=open("RuningOn"+socket.gethostname(),"w")   
+    f=open("RunningOn"+socket.gethostname(),"w")   
     for x in sorted(D.keys()):
         f.write(str(x)+" "+str(D[x])+"\n")
     f.close()

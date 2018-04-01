@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 #
-#comparison c++ and other computations
+#comparison between c++ and other computations
 #
 import socket
 
 def parsit(D,l):
-    # extract two numbers from a line.
+    # extract two numbers from a line, if this is possible.
     ll=l.split(" ")
     if len(ll) == 2:
         D[int(ll[0])]=float(ll[1].replace("\n",""))
 
         
-# directoies to explore ---------   
+# directories to explore ---------   
 files=[
     "../Py",
     "../Ju",
@@ -29,15 +29,15 @@ cpp="../C++"
 #-------------------------------------------
 # build a dict  n-> computing time for  C++
 C={}
-with open(cpp+"/RuningOn"+socket.gethostname(), 'r') as file:
+with open(cpp+"/RunningOn"+socket.gethostname(), 'r') as file:
     for line in file:
         parsit(C,line)
 
-#  build a dict  n-> computing time for all directories if files[]
+#  build a dict  n-> computing time for all directories in files[]
 T={}
 for n in files:
     T[n]={}
-    filename= n+"/RuningOn"+socket.gethostname()
+    filename= n+"/RunningOn"+socket.gethostname()
     with open(filename,"r") as file:
         for line in file:
             parsit(T[n],line)
