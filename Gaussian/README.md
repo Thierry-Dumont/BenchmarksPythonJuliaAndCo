@@ -22,28 +22,28 @@ Roland Denis     denis@math.univ-lyon1.fr
 
 ### The directories contain:
 
-- C++/:      pure C++, sequential.
+- **C++**:      pure C++, sequential.
 
-- C++Lib/:   C++ and lapack + openblas.
+- **C++Lib**:   C++ and lapack + openblas.
 
-- Ju/:       pure Julia
+- **Ju**:       pure Julia
 
-- JuLib/:    Julia +  lapack + openblas.
+- **JuLib**:    Julia +  lapack + openblas.
 
 
-- Py/:       pure Python
+- **Py**:       pure Python
 
-- PyVec/:    pure Python, vectorized.
+- **PyVec**:    pure Python, vectorized.
 
-- PyScipy/:  Python + Scipy.
+- **PyScipy**:  Python + Scipy.
 
-- Pythran/:  Pythran.
+- **Pythran**:  Pythran.
 
-- PythranVec/: Pythran vectorized
+- **PythranVec**: Pythran vectorized
 
-- Numba/:    Python + Numba
+- **Numba**:    Python + Numba
 
-- PLOT/:    graphical material and an example of result.
+- **PLOT**:    graphical material and an example of result.
 
 ### Note:
 
@@ -57,28 +57,7 @@ PLOT/Benchmark/kepler.pdf, for which C++Lib is multithreaded).
 ### Running the benchmarks
 
 cd succesively in C++, Ju, Numba Py, Pythran, PyVec, C++Lib, JuLib,
-PyScipy PythranVec.
-
-Then:
-
-- For Ju* directories, as well as for Numba/,  run  ./script
-
-
-- For C++* directories:
-
-mkdir Build
-
-cd Build/
-
-cmake ..
-
-make
-
-./run
-
-- For Py* directories:
-
-Look at the README file inside.
+PyScipy PythranVec; then look at README.
 
 #### Results:
 
