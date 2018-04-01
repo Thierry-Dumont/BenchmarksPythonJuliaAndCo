@@ -12,33 +12,32 @@ We will add other numerical significative benchmarks in the (near) future.
 #### What you need to install:
 
 - julia
-
-!ZZZ! Julia: runs with version Version 0.6.2 (stable version in March 2018; note
-that the Ubuntu 17-10 version is older). Install the stable version from
-https:/:/:julialang.org
-
-
 - python3
 - pip
-
-You can install them with your distribution tool (apt...).
-
-- pythran
-- scipy
-- Numpy
-- numba
-
-for pythran, scipy, numpy numba you can just do:
-
-pip install pythran
-and so on...
-
-You can also install them with conda.
-
 - g++ (or clang++)
 - lapack
 - openblas
 - cmake
 - gnuplot
 
-Just install the with _apt_ or the corresponding tool of your distribution.
+You can install them with your distribution tool (apt...).
+
+**Z!** for  Julia: programs  need at least  version Version 0.6.2 (stable
+version in March 2018; note 
+that the Ubuntu 17-10 version is older). Install the stable version from
+[here](https://julialang.org).
+
+
+You also need:
+
+- pythran
+- scipy
+- Numpy
+- numba
+
+to install them,  you can just do:
+
+pip install pythran
+and so on...
+
+You can also install them from [conda](https://conda.io/docs/).
