@@ -33,7 +33,6 @@ while size>=sizemin:
     for iter in range(0,loop):
         RandomFeedMatrix(M,R)
     t=(time.time()-t1)/loop
-    #print("size:",size," t: ",t)
     D[size] -= t 
     size//=2
     loop*=4
