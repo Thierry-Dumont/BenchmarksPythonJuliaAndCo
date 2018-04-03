@@ -11,7 +11,7 @@ We will add other numerical significative benchmarks in the (near) future.
 
 #### What you need to install:
 
-- julia
+
 - python3
 - pip
 - g++ (and/or clang++)
@@ -21,6 +21,8 @@ We will add other numerical significative benchmarks in the (near) future.
 - gnuplot
 
 You can install them with your distribution tool (apt...).
+
+- julia
 
 **Z!** for  Julia: programs  need at least  version Version 0.6.2 (stable
 version in March 2018; note 
@@ -37,7 +39,9 @@ You also need:
 
 to install them,  you can just do:
 
+```
 pip install pythran
+```
 and so on...
 
 You can also install them from [conda](https://conda.io/docs/).
