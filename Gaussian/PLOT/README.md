@@ -1,14 +1,16 @@
-> mkdir ./Results (if ./Results does not exists).
-> ./gr.py
-
+First, do:
+```
+mkdir ./Results (if ./Results does not exists).
+./gr.py
+```
 It will parse your results (aka RunningOn<<your hotsname>>) and populate
 Results/ with gnuplot plotable files.
 
 Then:
-
->gnuplot
+```
+gnuplot
 gnuplot> load "gpc"
-
+```
 will plot the results. We take C++ results as unit.
 
 
