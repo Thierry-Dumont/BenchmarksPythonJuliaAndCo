@@ -38,7 +38,6 @@ int main()
       cout<<size<<endl;
       rando R;
       Array<double,2>  M(size,size+1);
-      //cout<<loop<<endl;
       double t1=get_time();
       for(int iter=0;iter<loop;iter++)
         {

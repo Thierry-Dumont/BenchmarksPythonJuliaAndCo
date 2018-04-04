@@ -1,7 +1,7 @@
 #pragma once
 class rando{
     const long int a,c,m;
-    int long seed;
+    long int  seed;
     public:
     rando():a(1103515245),c(12345),m(4294967296)
     {
