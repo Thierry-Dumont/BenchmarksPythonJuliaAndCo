@@ -1,7 +1,18 @@
 
 # Numerical benchmarks for Julia, Python.
 
-Try to avoid trivial and non-sens benchmarks (for people doing numerics!)  like fibonacci, sorting and so on.
+We try to avoid trivial and non-sens benchmarks (for people doing
+numerics!) like fibonacci, sorting and so on.
+
+We try to put ourself in the shoes of a typical Matlab or Matlab-like
+programmer, writing quite short but numerically intensive
+programs. 
+
+How to write easily  efficient programs? Are Python
+and Julia easy to use and efficient? We compare them with a C++
+optimized implementation.
+
+The benchmark(s):
 
 * Gaussian:  Gaussian elimination with partial pivoting (see README inside).
 
@@ -20,7 +31,7 @@ We will add other numerical significative benchmarks in the (near) future.
 - cmake
 - gnuplot
 
-You can install them with your distribution tool (apt...).
+You can install them using your distribution tool (apt...).
 
 - julia
 
