@@ -3,7 +3,7 @@ First, do:
 mkdir ./Results (if ./Results does not exists).
 ./gr.py
 ```
-It will parse your results (aka RunningOn<<your hotsname>>) and populate
+It will parse your results (in the "RunningOn _your_ _hostname_" files) and populate
 Results/ with gnuplot plotable files.
 
 Then:
@@ -11,7 +11,7 @@ Then:
 gnuplot
 gnuplot> load "gpc"
 ```
-will plot the results. We take C++ results as unit.
+will plot the results. We take C++ computing time as unit.
 
 
 An example of benchmark is Benchmarks/kepler.pdf which was run on a

@@ -4,11 +4,11 @@
 We try to avoid trivial and non-sens benchmarks (for people doing
 numerics!) like fibonacci, sorting and so on.
 
-We try to put ourself in the shoes of a typical Matlab or Matlab-like
+We put ourself in the shoes of a typical Matlab or Matlab-like
 programmer, writing quite short but numerically intensive
 programs. 
 
-How to write easily  efficient programs? Are Python
+ Are Python
 and Julia easy to use and efficient? We compare them with a C++
 optimized implementation.
 
@@ -35,10 +35,10 @@ You can install them using your distribution tool (apt...).
 
 - julia
 
-:exclamation: Julia :exclamation:: programs  need at least  version Version 0.6.2 (stable
+:exclamation: Julia :exclamation: programs  need at least  version Version 0.6.2 (stable
 version in March 2018; note 
-that the Ubuntu 17-10 version is older). Install the stable version from
-[here](https://julialang.org). Note that Julia is evolving, and it is
+that the version packaged with  Ubuntu 17-10  is older). Install the stable version from
+[here](https://julialang.org). Note also that Julia is evolving, and it is
 possible that the codes need some adaptation to run with later
 versions of the language.
 

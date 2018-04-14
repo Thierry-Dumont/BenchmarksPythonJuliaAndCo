@@ -1,9 +1,9 @@
 ### Description:
 
-Perform a Gaussian elimination with partial pivoting, except those
+All programs perform a  _hand coded_ Gaussian elimination with partial pivoting, except those
 in 
-C++Lib/, PyScipy/ and JuLib/ which call the Lapack and blas libraries, to perform
-a LU factorization, but the cost, in term of operation counts is similar in any case. 
+C++Lib/, PyScipy/ and JuLib/ which call the Lapack and blas libraries  to perform
+a LU factorization; in any case, the cost is similar in term of operations counts. 
 
 ### Motivation:
 
@@ -57,16 +57,17 @@ PLOT/Benchmark/kepler.pdf, for which C++Lib is multithreaded).
 ### Running the benchmarks
 
 cd succesively in C++, Ju, Numba Py, Pythran, PyVec, C++Lib, JuLib,
-PyScipy PythranVec; then look at README.
+PyScipy PythranVec; then look at the documentation.
 
 #### Results:
 
-Running the codes  will create a file named RunningOn"your hostname".
+Running the codes  will create a file named:  RunningOn"your
+hostname".
 
 ### Ploting results:
 
 cd PLOT/
 
-Read README file.
+Read README.md file.
 
 
