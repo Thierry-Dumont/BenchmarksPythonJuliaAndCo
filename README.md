@@ -35,10 +35,12 @@ You can install them using your distribution tool (apt...).
 
 - julia
 
-**Z!** for  Julia: programs  need at least  version Version 0.6.2 (stable
+:exclamation: Julia :exclamation:: programs  need at least  version Version 0.6.2 (stable
 version in March 2018; note 
 that the Ubuntu 17-10 version is older). Install the stable version from
-[here](https://julialang.org).
+[here](https://julialang.org). Note that Julia is evolving, and it is
+possible that the codes need some adaptation to run with later
+versions of the language.
 
 
 You also need:
