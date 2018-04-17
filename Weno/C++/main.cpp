@@ -15,7 +15,7 @@
 #include <cmath>
 #include <ctime>
 #include <memory>
-//#define DO_GNUPLOT_FILES
+#define DO_GNUPLOT_FILES
 using namespace std;
 
 double get_time() {
@@ -45,10 +45,10 @@ int main()
   typedef Burghers Problem;
   //typedef Convection Problem;
   
-  const int size=5000;
+  const int size=1000;
   const double L=1.0;
   double dt=0.9/size;
-  double T=2.;
+  double T=3.;
 
 
   double fparam[1];
@@ -60,7 +60,7 @@ int main()
   
 #ifdef DO_GNUPLOT_FILES
   int nsteps=T/dt;
-  int ngp= max(1,nsteps/500);
+  int ngp= max(1,nsteps/100);
   cout<<"One plot every "<<ngp<<" steps. We will do about "<<nsteps<<
     " steps."<<endl;
   ofstream f,gpfile;
@@ -78,7 +78,7 @@ int main()
 #ifdef DO_GNUPLOT_FILES      
       if(step%ngp ==0)
 	{
-	  gpfile<<"plot "<<"\"results"+to_string(step)+"\""<<endl;
+	  gpfile<<"plot "<<"\"results"+to_string(step)+"\" with linespoints"<<endl;
 	  gpfile<<"pause 0.2"<<endl;
 	  f.open("results"+to_string(step));
 	  for(int i=0;i<size;i++)
