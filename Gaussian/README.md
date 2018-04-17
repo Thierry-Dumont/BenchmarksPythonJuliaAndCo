@@ -56,7 +56,7 @@ PLOT/Benchmark/kepler.pdf, for which C++Lib is multithreaded).
 
 ### Running the benchmarks
 
-cd succesively in C++, Ju, Numba Py, Pythran, PyVec, C++Lib, JuLib,
+cd succesively in C++, Ju, Py, Numba, Pythran, PyVec, C++Lib, JuLib,
 PyScipy PythranVec; then look at the documentation.
 
 #### Results:
