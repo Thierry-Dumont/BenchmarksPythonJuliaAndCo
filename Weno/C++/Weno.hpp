@@ -73,17 +73,11 @@ public:
 	double beta[3];
 	beta[0]= b0* std::pow(In[vol]-2.0*In[(vol+1)%size]+In[(vol+2)%size],2)+
 	  b1*std::pow(3.*In[vol]-4.*In[(vol+1)%size]+In[(vol+2)%size],2);
-	
-	// beta[1]=b0* std::pow(In[(vol-1)%size]-2.0*In[vol]+In[(vol+1)%size],2)+
-	//   b1*std::pow(In[(vol-1)%size]-In[(vol+1)%size],2);
-	
 	beta[1]=b0* std::pow(In[index(vol-1)]-2.0*In[vol]+In[(vol+1)%size],2)+
 	  b1*std::pow(In[index(vol-1)]-In[(vol+1)%size],2);
-	
-	// beta[2]=b0* std::pow(In[(vol-2)%size]-2.0*In[(vol-1)%size]+In[vol],2)+
-	//   b1*std::pow(In[(vol-2)%size]-4.*In[(vol-1)%size]+3*In[vol],2);
 	beta[2]=b0* std::pow(In[index(vol-2)]-2.0*In[index(vol-1)]+In[vol],2)+
 	  b1*std::pow(In[index(vol-2)]-4.*In[index(vol-1)]+3*In[vol],2);
+	
 	double alpharight[3],alphaleft[3],sright=0,sleft=0;
 	for(int r=0;r<3;r++)
 	  {
