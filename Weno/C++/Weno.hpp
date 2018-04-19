@@ -68,6 +68,7 @@ public:
 		right[r]+= c[r+1][j]*In[(vol-r+j)%size];
 		left[r]+=c[r][j]*In[(vol-r+j)%size];
 	      }
+	   
 	  }
 	// regularity coefficients:
 	double beta[3];
@@ -77,7 +78,7 @@ public:
 	  b1*std::pow(In[index(vol-1)]-In[(vol+1)%size],2);
 	beta[2]=b0* std::pow(In[index(vol-2)]-2.0*In[index(vol-1)]+In[vol],2)+
 	  b1*std::pow(In[index(vol-2)]-4.*In[index(vol-1)]+3*In[vol],2);
-	
+
 	double alpharight[3],alphaleft[3],sright=0,sleft=0;
 	for(int r=0;r<3;r++)
 	  {
@@ -92,6 +93,7 @@ public:
 	double recleft=0,recright=0;
 	for(int r=0;r<3;r++) recleft+= alphaleft[r]*left[r];
 	for(int r=0;r<3;r++) recright+= alpharight[r]*right[r];
+
 	// reconstructed values:
 	reconstructed[2*vol]  = recleft/sleft;
 	reconstructed[2*vol+1]= recright/sright;
@@ -100,11 +102,9 @@ public:
     for(int vol=0;vol<size;vol++)
       numflux[vol]=
 	F( reconstructed[2*vol+1], reconstructed[2*((vol+1)%size)]);
-
     // now, return RHS to solver:
     Out[0]= h1*(numflux[0]-numflux[size-1]);
     for(int vol=1;vol<size;vol++)
       Out[vol]=h1*(numflux[vol]-numflux[(vol-1)%size]);
-    
   }
 };

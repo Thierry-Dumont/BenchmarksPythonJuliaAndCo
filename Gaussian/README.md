@@ -47,12 +47,16 @@ Roland Denis     denis@math.univ-lyon1.fr
 
 ### Note:
 
-Concerning C++Lib/,  JuLib/ and PyScipy/ all of them call lapack  material and
+* Concerning C++Lib/,  JuLib/ and PyScipy/ all of them call lapack  material and
 blas which probably will be openblas. For large matrix sizes, with openblas, the
 called routines would possibly be multithreaded at least in some cases (see
 PLOT/Benchmark/kepler.pdf, for which C++Lib is multithreaded).
 
-
+* Concerning the random number generator: we use a very poor
+generator -and not a genarator provided by any language dependent
+library- only because we want to be sure (and we actually checked
+this) than the "random" sequences generated are identical in all
+languages. Actually, we are not interested in "good" random sequences. 
 
 ### Running the benchmarks
 

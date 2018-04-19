@@ -15,7 +15,7 @@
 #include <cmath>
 #include <ctime>
 #include <memory>
-#define DO_GNUPLOT_FILES
+//#define DO_GNUPLOT_FILES
 using namespace std;
 
 double get_time() {
@@ -44,10 +44,10 @@ int main()
 {
   typedef Burghers Problem;
   //typedef Convection Problem;
-  
-  const int size=1000;
+
+  const int size=500;
   const double L=1.0;
-  double dt=0.9/size;
+  double dt=0.8/size;
   double T=3.;
 
 
@@ -61,13 +61,15 @@ int main()
 #ifdef DO_GNUPLOT_FILES
   int nsteps=T/dt;
   int ngp= max(1,nsteps/100);
+  cout<<endl<<"We are going to create files to visualize the solution: ";
+  cout<<"DISABLE THiS FOR BENCHMARKING!"<<endl<<endl;
   cout<<"One plot every "<<ngp<<" steps. We will do about "<<nsteps<<
     " steps."<<endl;
   ofstream f,gpfile;
   gpfile.open("gpfile");
 #endif
-  RK3TVD<Weno<LaxFriedrichsFlux<Problem> > > RFL(size,L,fparam);
-  //RK3TVD<Weno<GodunovFlux<Problem> > > RFL(size,L,fparam);
+  //RK3TVD<Weno<LaxFriedrichsFlux<Problem> > > RFL(size,L,fparam);
+  RK3TVD<Weno<GodunovFlux<Problem> > > RFL(size,L,fparam);
   Init(InOut,L,size);
 
   double t=0.;
@@ -78,8 +80,8 @@ int main()
 #ifdef DO_GNUPLOT_FILES      
       if(step%ngp ==0)
 	{
-	  gpfile<<"plot "<<"\"results"+to_string(step)+"\" with linespoints"<<endl;
-	  gpfile<<"pause 0.2"<<endl;
+	  gpfile<<"plot "<<"\"results"+to_string(step)+"\" with lines"<<endl;
+	  gpfile<<"pause 0.1"<<endl;
 	  f.open("results"+to_string(step));
 	  for(int i=0;i<size;i++)
 	    f<<InOut[i]<<endl;

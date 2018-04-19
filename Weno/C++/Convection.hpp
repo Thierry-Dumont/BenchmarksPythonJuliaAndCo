@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <string>
 struct  Convection
 {
   //! the flux.

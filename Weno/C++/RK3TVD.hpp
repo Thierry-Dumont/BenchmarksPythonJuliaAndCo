@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+#include <iostream>
+#include "print.hpp"
 //
 // Explicit TVD Runge-Kutta method of order 3.
 //
