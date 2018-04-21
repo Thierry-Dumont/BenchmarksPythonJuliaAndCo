@@ -1,6 +1,6 @@
 ### Description:
 
-These programs perform a numerical solution of somme hyperbolic
+These programs perform a numerical solution of some hyperbolic
  equations in a 1 dimensional periodic domain, using Weno 
  finite element spatial discretization and the classical TVD
  Runge-Kutta of order 3.
@@ -67,5 +67,5 @@ cd succesively in C++, Ju, Numba Py, Pythran, PyVec,
 * Running the codes  will create a file named:  RunningOn"your
 hostname".
 
-* Codes can produce files to visualize the solution with
+* The C++ code can produce files to visualize the solution with
 gnuplot. _Deactivate this for benchmarking!_ 

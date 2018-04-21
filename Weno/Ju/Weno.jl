@@ -7,9 +7,9 @@ struct WenoData
     c
     dright
     dleft
-    b0
-    b1
-    epsilon
+    b0::Float64
+    b1::Float64
+    epsilon::Float64
 WenoData()=new(Array([
     [11./6.,-7./6.,1./3.],
     [1./3.,5./6.,-1./6.],
@@ -25,7 +25,7 @@ WenoData()=new(Array([
 
 end
 
-function weno!(NumFlux,flux,L,In,Out)
+function weno!(NumFlux,flux,L,In::Array{Float64},Out::Array{Float64})
     #
     F(x,y)=  NumFlux.NumFlux(flux,x,y)
     #
@@ -47,11 +47,15 @@ function weno!(NumFlux,flux,L,In,Out)
     beta=Array{Float64}(3)
     reconstructed=Array{Float64}(2*size4)
     numflux=Array{Float64}(size1)
+    alpharight=Array{Float64}(3)
+    alphaleft=Array{Float64}(3)
     # lets's start computation: 
     for vol= 3:2+size
-        @simd for r= 0:2
-            right[r+1]=dot(W.c[r+2],InC[vol-r:vol-r+2])
+        for r= 0:2
             left[r+1] =dot(W.c[r+1],InC[vol-r:vol-r+2])
+            right[r+1]=dot(W.c[r+2],InC[vol-r:vol-r+2])
+            #left[r+1] = sum(W.c[r+1].*InC[vol-r:vol-r+2])
+            #right[r+1]= sum(W.c[r+2].*InC[vol-r:vol-r+2])
         end
         # regularity coefficients
         beta[1]=W.b0* (InC[vol]-2.0*InC[vol+1]+InC[vol+2])^2+ 
@@ -63,11 +67,19 @@ function weno!(NumFlux,flux,L,In,Out)
         beta[3]=W.b0*(InC[vol-2]-2.0*InC[vol-1]+InC[vol])^2+ 
 	W.b1*(InC[vol-2]-4.*InC[vol-1]+3*InC[vol])^2
 
-        alpharight=Array{Float64}([W.dright[r]/(W.epsilon+beta[r])^2 for r=1:3])
-        alphaleft=Array{Float64}([W.dleft[r]/(W.epsilon+beta[r])^2 for r=1:3])
+        #alpharight=Array{Float64}([W.dright[r]/(W.epsilon+beta[r])^2 for r=1:3])
+        #alphaleft=Array{Float64}([W.dleft[r]/(W.epsilon+beta[r])^2 for r=1:3])
+        sleft=0.0
+        sright=0.0
+        @simd for r=1:3
+            alphaleft[r]=W.dleft[r]/(W.epsilon+beta[r])^2
+            alpharight[r]=W.dright[r]/(W.epsilon+beta[r])^2
+            sleft+=alphaleft[r]
+            sright+=alpharight[r]
+        end
 
-        sright=sum(alpharight)
-        sleft=sum(alphaleft)
+        #sright=sum(alpharight)
+        #sleft=sum(alphaleft)
         
         recleft=dot(alphaleft,left)
         recright=dot(alpharight,right)

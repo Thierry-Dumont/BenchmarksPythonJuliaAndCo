@@ -1,7 +1,7 @@
 push!(LOAD_PATH, "./")
 using Weno
 using Burghers
-using Convection
+#using Convection
 using Godunov
 using RK3TVD
 function Init!(X,L)
@@ -17,9 +17,9 @@ function Init!(X,L)
 end
 
 size=400
-L=1.
-T=3.
-dt=0.8/size
+const L=1.
+const T=0.5
+const dt=0.8/size
 println("dt= ",dt, " nteps= ",floor(T/dt))
 In=Array{Float64}(size)
 Init!(In,L)
@@ -28,17 +28,28 @@ println("start computation")
 
 S(X,Y)=weno!(Godunov,Burghers,L,X,Y)
 
-f=open("gp0","w")
-writedlm(f, In)
-close(f)
+#S(In,Out)
+#X=Rk3tvd(S,dt,In)
+#@profile S(In,Out)
+#@profile (for i = 1:100; S(In,Out);In,Out=Out,In; end)
+#Profile.print(format=:flat)
+# f=open("gp0","w")
+# writedlm(f, In)
+# close(f)
 
 t=0.
+t1 = time_ns()
+#@profile
 while t<T
     X=Rk3tvd(S,dt,In)
     X,In=In,X
     t+=dt
 end
+#Profile.print(format=:flat)
+tcomp = (time_ns() - t1)*1.e-9 
 
-f=open("gp","w")
-writedlm(f, In)
-close(f)
+println("computing time: ",tcomp," seconds.")
+
+# f=open("gp","w")
+# writedlm(f, In)
+# close(f)

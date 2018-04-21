@@ -14,7 +14,11 @@ optimized implementation.
 
 The benchmark(s):
 
-* Gaussian:  Gaussian elimination with partial pivoting (see README inside).
+* Gaussian:  Gaussian elimination with partial pivoting (see README
+  inside).
+  
+* Weno: a classical computation in hyperbolic PDES (see README
+  inside).
 
 We will add other numerical significative benchmarks in the (near) future.
 
