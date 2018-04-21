@@ -34,6 +34,7 @@ function weno!(NumFlux,flux,L,In,Out)
     size1=size+1
     size4=size+4
     h1= -1./(L/size)
+    
     # build an extended array with phantom cells to deal with periodicity:
     InC=Array{Float64}(size4)
     InC[1]=In[size-1]
@@ -48,7 +49,7 @@ function weno!(NumFlux,flux,L,In,Out)
     numflux=Array{Float64}(size1)
     # lets's start computation: 
     for vol= 3:2+size
-        for r= 0:2
+        @simd for r= 0:2
             right[r+1]=dot(W.c[r+2],InC[vol-r:vol-r+2])
             left[r+1] =dot(W.c[r+1],InC[vol-r:vol-r+2])
         end
@@ -75,14 +76,17 @@ function weno!(NumFlux,flux,L,In,Out)
     end
     reconstructed[1:4]=reconstructed[2*size+1:2*size+4]
     reconstructed[2*size+5:2*size+8]=reconstructed[5:8]
-
+    
     #Numerical flux at boundaries:
-    for vol in 1:size
+    @simd for vol in 1:size
         numflux[vol+1]=F(reconstructed[2*vol+4], reconstructed[2*(vol+1)+3])
     end
     numflux[1]=numflux[size+1]
+
     # result:
-    Out=[h1*(numflux[vol]-numflux[(vol-1)]) for vol=2:1+size]
+    @simd for vol in 1:size
+        Out[vol]=h1*(numflux[vol+1]-numflux[vol])
+    end
 end
 
 end

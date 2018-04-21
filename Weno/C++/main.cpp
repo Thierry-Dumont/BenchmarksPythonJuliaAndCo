@@ -45,7 +45,7 @@ int main()
   typedef Burghers Problem;
   //typedef Convection Problem;
 
-  const int size=500;
+  const int size=400;
   const double L=1.0;
   double dt=0.8/size;
   double T=3.;
@@ -74,7 +74,8 @@ int main()
 
   double t=0.;
   double t1=get_time();
-  for(int step=0;; step++)
+  int step;
+  for(step=0;; step++)
     {
       RFL.step(InOut,dt);
 #ifdef DO_GNUPLOT_FILES      
@@ -93,6 +94,7 @@ int main()
     }
   double t2=get_time();
   cout<<"Computing time: "<<t2-t1<<" seconds."<<endl;
+  cout<<"nsteps: "<<step<<endl;
 #ifdef DO_GNUPLOT_FILES 
   gpfile.close();
 #endif
