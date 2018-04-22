@@ -42,9 +42,14 @@ void Init(std::unique_ptr<double[]>&  X,double L,int size)
 }
 int main()
 {
+  // define problem:
   typedef Burghers Problem;
   //typedef Convection Problem;
 
+  // define numerical flux:
+  typedef GodunovFlux<Problem> NumFlux;
+  //typedef LaxFriedrichsFlux<Problem> NumFlux;
+  
   const int size=400;
   const double L=1.0;
   double dt=0.8/size;
@@ -68,8 +73,9 @@ int main()
   ofstream f,gpfile;
   gpfile.open("gpfile");
 #endif
-  //RK3TVD<Weno<LaxFriedrichsFlux<Problem> > > RFL(size,L,fparam);
-  RK3TVD<Weno<GodunovFlux<Problem> > > RFL(size,L,fparam);
+
+  RK3TVD<Weno<NumFlux> > RFL(size,L,fparam);
+  
   Init(InOut,L,size);
 
   double t=0.;
