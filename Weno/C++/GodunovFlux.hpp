@@ -10,9 +10,6 @@ template<class F> struct GodunovFlux{
   GodunovFlux& operator=(GodunovFlux<F>&& G){return *this;}
   double operator() (double a, double b)
   {
-    if(a<=b)
-      return F::min(a,b);
-    else
-      return F::max(b,a);
+    return a<=b ?  F::min(a,b):F::max(b,a);
   }
 };

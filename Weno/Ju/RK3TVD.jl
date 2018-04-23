@@ -1,10 +1,10 @@
 module RK3TVD
 export Rk3tvd!,RK3TVDData
 struct RK3TVDData
-    c21
-    c22
-    c31
-    c32
+    c21::Float64
+    c22::Float64
+    c31::Float64
+    c32::Float64
 RK3TVDData()=new(3./4.,1./4,1./3.,2./3.)
 end
 function Rk3tvd!(W,dt,In,Out)

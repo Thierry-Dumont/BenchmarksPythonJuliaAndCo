@@ -1,7 +1,7 @@
 push!(LOAD_PATH, "./")
 using Weno
 using Burghers
-#using Convection
+using Convection
 using Godunov
 using RK3TVD
 function Init!(X,L)
@@ -16,7 +16,7 @@ function Init!(X,L)
     end
 end
 
-const size=400
+const size=4000
 const L=1.
 const T=0.5
 const dt=0.8/size
@@ -37,12 +37,13 @@ S(X,Y)=weno!(Godunov,Burghers,L,X,Y)
 f=open("gp0","w")
 writedlm(f, In)
 close(f)
-set_zero_subnormals(true)
+#set_zero_subnormals(true)
 t=0.
 t1 = time_ns()
-
+#Profile.clear_malloc_data()
 #@profile
-while t<T
+#while t<T
+for iter = 1:1
     Rk3tvd!(S,dt,In,Out)
     Out,In=In,Out
     t+=dt
