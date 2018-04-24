@@ -7,7 +7,7 @@ import Burghers as Burg
 from  RK3TVD import *
 import time
 
-size=400
+size=500
 L=1.0
 dt=0.8/size
 T=3.
@@ -19,13 +19,13 @@ def init(X):
          else:
              X[i]=0.0
 
-# Checking algo
+#
 In = np.empty(size)
 init(In)
 #print(In)
 np.savetxt("gp0",In)
 
-print("dt= ",dt," nteps=", T/dt)
+print("size= ",size," dt= ",dt," nteps=", T/dt)
 
 Meth=lambda x,y: Weno(Godunov,Burg,L,x,y)
 t=0
@@ -33,7 +33,6 @@ t=0
 t1 = time.time()
 while t<T:
      Out=RK3TVD(Meth,In,dt)
-     #print(Out)
      In,Out=Out,In
      #print(In-Out)
      t+=dt

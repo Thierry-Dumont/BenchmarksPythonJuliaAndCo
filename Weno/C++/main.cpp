@@ -50,7 +50,7 @@ int main()
   typedef GodunovFlux<Problem> NumFlux;
   //typedef LaxFriedrichsFlux<Problem> NumFlux;
   
-  const int size=400;
+  const int size=500;
   const double L=1.0;
   double dt=0.8/size;
   double T=3.;
@@ -60,11 +60,12 @@ int main()
   fparam[0]=1.;
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
-
+  int nsteps=T/dt;
+  cout<<"size= "<<size<<" dt= "<<dt<<" nsteps= "<<nsteps<<endl;
   auto InOut=make_unique<double[]>(size);
   
 #ifdef DO_GNUPLOT_FILES
-  int nsteps=T/dt;
+ 
   int ngp= max(1,nsteps/100);
   cout<<endl<<"We are going to create files to visualize the solution: ";
   cout<<"DISABLE THiS FOR BENCHMARKING!"<<endl<<endl;
@@ -80,8 +81,8 @@ int main()
 
   double t=0.;
   double t1=get_time();
-  int step;
-  for(step=0;; step++)
+  int step=0;
+  while(t<T)
     {
       RFL.step(InOut,dt);
 #ifdef DO_GNUPLOT_FILES      
@@ -94,7 +95,9 @@ int main()
 	    f<<InOut[i]<<endl;
 	  f.close();
 	}
-#endif      
+      
+ #endif
+      ++step;
       t+=dt;
       if(t>T) break;
     }

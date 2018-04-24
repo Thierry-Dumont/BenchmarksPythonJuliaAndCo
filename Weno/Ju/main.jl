@@ -3,6 +3,7 @@ using Weno
 using Burghers
 using Convection
 using Godunov
+using LaxFriedrichs
 using RK3TVD
 function Init!(X,L)
     size=length(X)
@@ -16,18 +17,22 @@ function Init!(X,L)
     end
 end
 
-const size=4000
+const size=500
 const L=1.
-const T=0.5
+const T=3.0
 const dt=0.8/size
-println("dt= ",dt, " nteps= ",floor(T/dt))
+println("size= ",size," dt= ",dt, " nteps= ",floor(T/dt))
 In=Array{Float64}(size)
 Init!(In,L)
 Out=Array{Float64}(size)
 println("start computation")
 
-S(X,Y)=weno!(Godunov,Burghers,L,X,Y)
-
+W=WenoData(size)
+#NumFlux(X,Y)=Godunov.NumFlux(Convection,X,Y)
+NumFlux(X,Y)=LaxFriedrichs.NumFlux(Convection,X,Y,1.)
+#NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
+#NumFlux(X,Y)=LaxFriedrichs.NumFlux(Burghers,X,Y,1.0)
+S(X,Y)=weno!(W,NumFlux,L,X,Y)
 #S(In,Out)
 #Rk3tvd!(S,dt,In,Out)
 #@time Rk3tvd!(S,dt,In,Out)
@@ -41,9 +46,8 @@ close(f)
 t=0.
 t1 = time_ns()
 #Profile.clear_malloc_data()
-#@profile
-#while t<T
-for iter = 1:1
+#@profile *
+while t<T
     Rk3tvd!(S,dt,In,Out)
     Out,In=In,Out
     t+=dt
