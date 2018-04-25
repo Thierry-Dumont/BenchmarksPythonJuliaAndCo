@@ -1,5 +1,6 @@
 import numpy as np
 from Weno import *
+
 import time
 import socket
 import GodunovFlux as Godunov
@@ -7,10 +8,10 @@ import Burghers as Burg
 from  RK3TVD import *
 import time
 
-size=500
+size=200
 L=1.0
 dt=0.8/size
-T=3.
+T=1.
 def init(X):
      h=L/size
      for i in range(0,size):
@@ -21,29 +22,33 @@ def init(X):
 
 #
 In = np.empty(size)
+Out = np.empty(size)
 init(In)
-#print(In)
+
 np.savetxt("gp0",In)
 
 print("size= ",size," dt= ",dt," nteps=", T/dt)
 
-Meth=lambda x,y: Weno(Godunov,Burg,L,x,y)
+
+W=Weno(size)
+Meth=lambda x,y: W.weno(Godunov,Burg,L,x,y)
+R=RK3TVD(size)
+
+
 t=0
 
 t1 = time.time()
 while t<T:
-     Out=RK3TVD(Meth,In,dt)
+     Out=R.op(Meth,In,dt)
      In,Out=Out,In
-     #print(In-Out)
      t+=dt
-     #print("t",t,T)
+
 t=(time.time()-t1)
 print("computing time: ",t)
-# fi=open("gp","w")
+fi=open("gp","w")
 np.savetxt("gp",In)
-# fi.close()
-#print(M)
-#weno.Weno(Godunov,Burg,L,In,Out)
+fi.close()
+
 # f=open("RunningOn"+socket.gethostname(),"w")   
 # for x in sorted(D.keys()):
 #     f.write(str(x)+" "+str(D[x])+"\n")

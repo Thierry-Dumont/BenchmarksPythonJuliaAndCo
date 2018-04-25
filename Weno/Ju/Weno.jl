@@ -42,11 +42,9 @@ WenoData(size)=new(Array([
 end
 
 function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
-    #
-    #F(x,y)=  NumFlux.NumFlux(flux,x,y)
-    #
+
     const size=length(In)
-    #W=WenoData(size)
+
     size1=size+1
     size4=size+4
     const h1 = -1./(L/size)
@@ -69,8 +67,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
             #W.left[r+1] = sum(W.c[r+1].*W.InC[vol-r:vol-r+2])
             #W.right[r+1]= sum(W.c[r+2].*W.InC[vol-r:vol-r+2])
         end
-        
-        # regularity coefficients
+         # regularity coefficients
         W.beta[1]=W.b0* (W.InC[vol]-2.0*W.InC[vol+1]+W.InC[vol+2])^2+ 
 	W.b1*(3.*W.InC[vol]-4.*W.InC[vol+1]+W.InC[vol+2])^2
         
@@ -80,6 +77,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
         W.beta[3]=W.b0*(W.InC[vol-2]-2.0*W.InC[vol-1]+W.InC[vol])^2+ 
 	W.b1*(W.InC[vol-2]-4.*W.InC[vol-1]+3*W.InC[vol])^2
 
+        
         sleft=0.0
         sright=0.0
         @simd for r=1:3
@@ -104,7 +102,6 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
         W.numflux[vol+1]=F(W.reconstructed[2*vol+4], W.reconstructed[2*(vol+1)+3])
     end
     W.numflux[1]=W.numflux[size+1]
-
     # result:
     @simd for vol in 1:size
         Out[vol]=h1*(W.numflux[vol+1]-W.numflux[vol])

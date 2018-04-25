@@ -17,7 +17,7 @@ function Init!(X,L)
     end
 end
 
-const size=500
+const size=20
 const L=1.
 const T=3.0
 const dt=0.8/size
@@ -29,8 +29,8 @@ println("start computation")
 
 W=WenoData(size)
 #NumFlux(X,Y)=Godunov.NumFlux(Convection,X,Y)
-NumFlux(X,Y)=LaxFriedrichs.NumFlux(Convection,X,Y,1.)
-#NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
+#NumFlux(X,Y)=LaxFriedrichs.NumFlux(Convection,X,Y,1.)
+NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
 #NumFlux(X,Y)=LaxFriedrichs.NumFlux(Burghers,X,Y,1.0)
 S(X,Y)=weno!(W,NumFlux,L,X,Y)
 #S(In,Out)
