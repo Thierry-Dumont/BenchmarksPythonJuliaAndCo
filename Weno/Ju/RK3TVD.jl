@@ -14,7 +14,6 @@ function Rk3tvd!(W,dt,In::Array{Float64},Out::Array{Float64})
     u2=Array{Float64}(size)
 
     W(In,u1)
-    println(u1)
     #u1=In + dt*u1
     @simd for i=1:size
         u1[i]=In[i] + dt*u1[i]

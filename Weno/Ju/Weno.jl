@@ -87,8 +87,6 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
             sleft+=W.alphaleft[r]
             sright+=W.alpharight[r]
         end
-        #sright=sum(W.alpharight)
-        #sleft=sum(W.alphaleft)
         
         recleft=dot(W.alphaleft,W.left)
         recright=dot(W.alpharight,W.right)

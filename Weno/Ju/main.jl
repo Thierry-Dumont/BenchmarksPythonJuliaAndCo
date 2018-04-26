@@ -17,9 +17,9 @@ function Init!(X,L)
     end
 end
 
-const size=20
+const size=200
 const L=1.
-const T=3.0
+const T=1.0
 const dt=0.8/size
 println("size= ",size," dt= ",dt, " nteps= ",floor(T/dt))
 In=Array{Float64}(size)
