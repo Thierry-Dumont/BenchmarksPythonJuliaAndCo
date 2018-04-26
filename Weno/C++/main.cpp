@@ -50,10 +50,10 @@ int main()
   typedef GodunovFlux<Problem> NumFlux;
   //typedef LaxFriedrichsFlux<Problem> NumFlux;
   
-  const int size=500;
+  const int size=200;
   const double L=1.0;
   double dt=0.8/size;
-  double T=3.;
+  double T=1.;
 
 
   double fparam[1];
