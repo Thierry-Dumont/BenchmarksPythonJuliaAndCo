@@ -2,7 +2,7 @@
 
 These programs perform a numerical solution of some hyperbolic
  equations in a 1 dimensional periodic domain, using Weno 
- finite element spatial discretization and the classical TVD
+ finite volume spatial discretization and the classical TVD
  Runge-Kutta of order 3.
  
 See:
@@ -23,7 +23,7 @@ arrays are not so trivial.
 One can chose between two problems:
 
 * A simple linear convection by a constant field: du/dt = du/dx.
-* The Burghers equation:  du/dt = d/dx f(u)  with f(u)= u^2/2.
+* The Burghers equation:  du/dt = d/dx f(u)  with f(u)= (1/2) u^2/2.
 
 And one can choose between two different fluxes:
 
