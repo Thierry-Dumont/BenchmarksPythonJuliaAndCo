@@ -33,12 +33,7 @@ W=WenoData(size)
 NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
 #NumFlux(X,Y)=LaxFriedrichs.NumFlux(Burghers,X,Y,1.0)
 S(X,Y)=weno!(W,NumFlux,L,X,Y)
-#S(In,Out)
-#Rk3tvd!(S,dt,In,Out)
-#@time Rk3tvd!(S,dt,In,Out)
-#@profile S(In,Out)
-#@profile (for i = 1:100; S(In,Out);In,Out=Out,In; end)
-#Profile.print(format=:flat)
+
 f=open("gp0","w")
 writedlm(f, In)
 close(f)
@@ -46,7 +41,7 @@ close(f)
 t=0.
 t1 = time_ns()
 #Profile.clear_malloc_data()
-#@profile *
+#@profile 
 while t<T
     Rk3tvd!(S,dt,In,Out)
     Out,In=In,Out

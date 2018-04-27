@@ -79,6 +79,6 @@ class Weno:
             self.numflux[vol]=F(self.reconstructed[2*vol+3],
                                 self.reconstructed[2*(vol+1)+2])
         self.numflux[0]=self.numflux[size]
-        # #now, return RHS to solver:
+        #now, return RHS to solver:
         for vol  in range(0,size):
             Out[vol]=h1*(self.numflux[vol+1]-self.numflux[vol])
