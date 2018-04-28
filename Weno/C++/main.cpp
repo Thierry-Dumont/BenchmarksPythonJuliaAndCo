@@ -73,11 +73,12 @@ int main()
     " steps."<<endl;
   ofstream f,gpfile;
   gpfile.open("gpfile");
+  
 #endif
 
   RK3TVD<Weno<NumFlux> > RFL(size,L,fparam);
   
-  Init(InOut,L,size);
+  Init(InOut,L,size);// initial condition.
 
   double t=0.;
   double t1=get_time();
@@ -85,7 +86,9 @@ int main()
   while(t<T)
     {
       RFL.step(InOut,dt);
-#ifdef DO_GNUPLOT_FILES      
+      
+#ifdef DO_GNUPLOT_FILES
+      
       if(step%ngp ==0)
 	{
 	  gpfile<<"plot "<<"\"results"+to_string(step)+"\" with lines"<<endl;
@@ -102,10 +105,20 @@ int main()
       if(t>T) break;
     }
   double t2=get_time();
+
+  
   cout<<"Computing time: "<<t2-t1<<" seconds."<<endl;
   cout<<"nsteps: "<<step<<endl;
 #ifdef DO_GNUPLOT_FILES 
   gpfile.close();
+#else
+  // make one file, with the final computation
+  ofstream f;
+  f.open("gp");
+  for(int i=0;i<size;i++)
+    f<<InOut[i]<<endl;
+  f.close();
+  cout<<"A file 'gp' with the final solution was created."<<endl; 
 #endif
   cout<<"end"<<endl;
 }

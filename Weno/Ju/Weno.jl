@@ -2,7 +2,7 @@ module Weno
 export weno!,WenoData
 #using Devectorize
 #===================================================
-Weno 3 (5) method in 1d.
+Weno 5  method in 1d.
 ===================================================#
 struct WenoData
     c
@@ -55,9 +55,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     W.InC[3:2+size]=In
     W.InC[size+3]=In[1]
     W.InC[size+4]=In[2]
-    # usefull arrays:
-    #t1 = time_ns()
-    #println("tps: ",time_ns() - t1)
+ 
     # lets's start computation: 
     for vol= 3:2+size
         @simd for r= 0:2
@@ -104,6 +102,8 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     @simd for vol in 1:size
         Out[vol]=h1*(W.numflux[vol+1]-W.numflux[vol])
     end
+    #@. Out[1:size] = h1*(W.numflux[2:size+1]-W.numflux[1:size])
+    nothing
 end
 
 end
