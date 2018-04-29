@@ -20,7 +20,10 @@ The benchmark(s):
 * :new: Weno: a classical computation in hyperbolic PDES (see README
   inside).
   
-* :new: MicroBenchmarks: 
+* :new: MicroBenchmarks: very simple benchmarks to show the importance
+  of different programing styles. 
+
+
 We will add other numerical significative benchmarks in the (near) future.
 
 ### Dependencies:
