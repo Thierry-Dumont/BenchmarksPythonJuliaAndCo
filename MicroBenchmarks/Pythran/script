@@ -1,0 +1,3 @@
+#!/bin/bash
+pythran -march=native -O3 lapl1d_1.py
+pythran -march=native -O3 lapl1d_2.py
