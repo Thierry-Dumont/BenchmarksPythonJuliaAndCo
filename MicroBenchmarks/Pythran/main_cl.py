@@ -41,7 +41,7 @@ def test(p,A,B,C,D,nit):
 size=16
 sizemax=100000
 niter=10
-parsef= lambda  f: str(f).split(" ")[1] #parse function name
+parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
 while size<sizemax:
     print("size: ",size)
     A= np.empty(size)
