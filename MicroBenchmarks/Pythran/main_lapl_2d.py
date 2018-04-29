@@ -1,31 +1,18 @@
 import numpy as np
 import time
+from lapl2d_1 import *
+from lapl2d_2 import *
 
 def Init(X,L):
-    size=X.size
+    size=X.shape[0]
     h=L/size
     for i in range(0,size):
-        if i>size//8 and i<size//2+size//8:
-            X[i]=1.-2*(i-size//8)*h/L;
-        else:
-            X[i]=0.0
+        for j in range(0,size):
+            if i>size//8 and i<size//2+size//8:
+                X[i]=1.-2*(i-size//8)*h/L;
+            else:
+                X[i]=0.0
 
-
-def lapl1d_1(In,Out,niter):
-    size=In.size
-    h2= (1./size)**2
-    for it in range(0,niter):
-        Out[1:size-1]= h2*(In[0:size-2]- 2.0*In[1:size-1]+ In[2:size])
-        In,Out=Out,In
-
-def lapl1d_2(In,Out,niter):
-    size=In.size
-    h2= (1./size)**2
-    for it in range(0,niter):
-        for i in range(1,size-1):
-            Out[i]=h2*(In[i-1]- 2.0*In[i]+ In[i+1])
-        In,Out=Out,In  
-      
 def test(p,In,Out,nit):
    
     niter=nit
@@ -50,23 +37,23 @@ def test(p,In,Out,nit):
     return T,niter
 
 size=16
-sizemax=100000
+sizemax=513
 niter=10
 parsef= lambda  f: str(f).split(" ")[1] #parse function name
 while size<sizemax:
     print("size: ",size)
-    In= np.empty(size)
-    Out= np.empty(size)
+    In= np.empty((size,size))
+    Out= np.empty((size,size))
     tbest=10.**20
     best=0
     t=0.0
-    for p in  [lapl1d_1,lapl1d_2]:
+    for p in  [lapl2d_1,lapl2d_2]:
         t,it=test(p,In,Out,niter)
         if t<tbest:
             tbest=t
             best=p
         print(parsef(p)," : t= ",t," seconds ")
-    nflops= 4*(size-2)
+    nflops=6*(size-2)**2
     flops=nflops/tbest
     print("\nbest: ",parsef(best))
     print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))

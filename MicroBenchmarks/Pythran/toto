@@ -1,0 +1,28 @@
+[33mWARNING [0m [34mCompilation error, trying hard to find its origin...[0m
+[33mWARNING [0m [34mNop, I'm going to flood you with C++ errors![0m
+[31mCRITICAL[0m [34mCover me Jack. Jack? Jaaaaack!!!!
+E: error: Command "x86_64-linux-gnu-g++ -pthread -DNDEBUG -g -fwrapv -O2 -Wall -g -fdebug-prefix-map=/build/python3.6-sXpGnM/python3.6-3.6.3=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DUSE_GMP -DENABLE_PYTHON_MODULE -D__PYTHRAN__=3 -DPYTHRAN_BLAS_OPENBLAS -I/usr/local/lib/python3.6/dist-packages/pythran -I/home/moi/.local/lib/python3.6/site-packages/numpy/core/include -I/home/moi/.local/lib/python3.6/site-packages/numpy/core/include -I/usr/include/python3.6m -c /tmp/tmp318tlqwd.cpp -o /tmp/tmposwa1qq5/tmp/tmp318tlqwd.o -std=c++11 -fno-math-errno -w -fvisibility=hidden -fno-wrapv -march=native -O3" failed with exit status 1[0m
+/tmp/tmp318tlqwd.cpp: In instantiation of ‘typename __pythran_lapl2d_1::lapl2d1::type<argument_type0, argument_type1, argument_type2>::result_type __pythran_lapl2d_1::lapl2d1::operator()(argument_type0&&, argument_type1&&, argument_type2&&) const [with argument_type0 = {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&; argument_type1 = {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&; argument_type2 = long int&; typename __pythran_lapl2d_1::lapl2d1::type<argument_type0, argument_type1, argument_type2>::result_type = {anonymous}::pythonic::types::none_type]’:
+/tmp/tmp318tlqwd.cpp:148:88:   required from here
+/tmp/tmp318tlqwd.cpp:89:13: error: use of deleted function ‘{anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >& {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >::operator=(const {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&)’
+         In_ = std::get<0>(__tuple0);
+         ~~~~^~~~~~~~~~~~~~~~~~~~~~~
+In file included from /tmp/tmp318tlqwd.cpp:10:0:
+/usr/local/lib/python3.6/dist-packages/pythran/pythonic/include/types/numpy_texpr.hpp:187:10: note: ‘{anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >& {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >::operator=(const {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&)’ is implicitly declared as deleted because ‘{anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >’ declares a move constructor or move assignment operator
+   struct numpy_texpr<ndarray<T, 2>> : numpy_texpr_2<ndarray<T, 2>> {
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/tmp318tlqwd.cpp:90:14: error: use of deleted function ‘{anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >& {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >::operator=(const {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&)’
+         Out_ = std::get<1>(__tuple0);
+         ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+/tmp/tmp318tlqwd.cpp: In instantiation of ‘typename __pythran_lapl2d_1::lapl2d1::type<argument_type0, argument_type1, argument_type2>::result_type __pythran_lapl2d_1::lapl2d1::operator()(argument_type0&&, argument_type1&&, argument_type2&&) const [with argument_type0 = {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&; argument_type1 = {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&; argument_type2 = long int&; typename __pythran_lapl2d_1::lapl2d1::type<argument_type0, argument_type1, argument_type2>::result_type = {anonymous}::pythonic::types::none_type]’:
+/tmp/tmp318tlqwd.cpp:148:88:   required from here
+/tmp/tmp318tlqwd.cpp:89:13: error: use of deleted function ‘{anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >& {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >::operator=(const {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&)’
+         In_ = std::get<0>(__tuple0);
+         ~~~~^~~~~~~~~~~~~~~~~~~~~~~
+In file included from /tmp/tmp318tlqwd.cpp:10:0:
+/usr/local/lib/python3.6/dist-packages/pythran/pythonic/include/types/numpy_texpr.hpp:187:10: note: ‘{anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >& {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >::operator=(const {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&)’ is implicitly declared as deleted because ‘{anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >’ declares a move constructor or move assignment operator
+   struct numpy_texpr<ndarray<T, 2>> : numpy_texpr_2<ndarray<T, 2>> {
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/tmp318tlqwd.cpp:90:14: error: use of deleted function ‘{anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >& {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >::operator=(const {anonymous}::pythonic::types::numpy_texpr<{anonymous}::pythonic::types::ndarray<double, 2> >&)’
+         Out_ = std::get<1>(__tuple0);
+         ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
