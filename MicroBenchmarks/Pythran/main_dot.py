@@ -1,7 +1,7 @@
 import numpy as np
 import time
-from dotd_1 import *
-from dotd_2 import *
+import dotd_1
+import dotd_2
 def Init(X,L):
     size=X.size
     h=L/size
@@ -38,7 +38,7 @@ def test(p,X,Y,nit):
 size=16
 sizemax=10**6
 niter=10
-parsef= lambda  f: str(f).split(" ")[1] #parse function name
+parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
 while size<sizemax:
     print("size: ",size)
     X= np.empty(size)
@@ -46,7 +46,7 @@ while size<sizemax:
     tbest=10.**20
     best=0
     t=0.0
-    for p in  [dotd_1,dotd_2]:
+    for p in  [dotd_1.dotd_1,dotd_2.dotd_2]:
         t,it=test(p,X,Y,niter)
         if t<tbest:
             tbest=t
