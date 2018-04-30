@@ -64,7 +64,7 @@ while size<sizemax:
             tbest=t
             best=p
         print(parsef(p)," : t= ",t," seconds ")
-    nflops=size*4
+    nflops=size*2
     flops=nflops/tbest
     print("\nbest: ",parsef(best))
     print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))

@@ -37,7 +37,7 @@ def test(p,X,Y,nit):
 
 size=16
 sizemax=10**6
-niter=10
+niter=25
 parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
 while size<sizemax:
     print("size: ",size)
@@ -56,6 +56,6 @@ while size<sizemax:
     flops=nflops/tbest
     print("\nbest: ",parsef(best))
     print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))
-    print("-------")
+    print("-------") 
     size*=2
     print(" ")

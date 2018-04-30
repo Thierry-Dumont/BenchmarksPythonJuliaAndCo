@@ -30,16 +30,16 @@ def test(p,A,B,C,D,nit):
         p(A,B,C,D,niter)
         treal=time.time() -t1
         t = treal/niter
-        if treal>0.0001 and abs(t-T)/t<0.025:
-            break
+        if treal>0.001 and abs(t-T)/t<0.025:
+            break 
         else:
             T=t
             niter*=2
 
     return T,niter
 
-size=16
-sizemax=100000
+size=1
+sizemax=1000000
 niter=10
 parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
 while size<sizemax:
@@ -57,10 +57,10 @@ while size<sizemax:
             tbest=t
             best=p
         print(parsef(p)," : t= ",t," seconds ")
-    nflops= 4*(size-2)
+    nflops= size*2
     flops=nflops/tbest
     print("\nbest: ",parsef(best))
     print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))
     print("-------")
-    size*=2
+    size*=10
     print(" ")

@@ -115,12 +115,13 @@ while size<sizemax
             tbest=t
             best=p
         end
-        println(p," : t= ",t," nano-seconds")
+        t*=10.0^(-9)
+        println(p," : t= ",t," seconds")
     end
     nflops=size*5
-    flops=10^9*nflops/tbest
+    flops=nflops/tbest
     println("\nbest: ",best)
-    println("nb. flops (best): ",nflops, ", Gflops/s: ",flops/10^9)
+    println("nb. flops (best): ",nflops, ", Gflops/s: ",flops)
     println("-------")
     
     size*=10
