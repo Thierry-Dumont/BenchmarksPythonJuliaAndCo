@@ -15,7 +15,7 @@ class Weno:
         self.dright=np.array([3./10.,3./5.,1./10.])
         self.dleft=np.array([1./10.,3./5.,3.10])
         self.reconstructed=np.empty(2*size+8)
-        self.numflux=np.empty(size+1)
+        self.numflux=np.empty(size+2)
         self.beta=np.empty(3)
         self.right=np.empty(3)
         self.left=np.empty(3)
@@ -26,12 +26,20 @@ class Weno:
         F=lambda x,y: NumFl.NumFlux(Fl,x,y)
         size=self.size
         h1= -1./(L/size)
+        
         # build an extended array with phantom cells to deal with periodicity:
         self.InC[0]=In[size-2]
         self.InC[1]=In[size-1]
         self.InC[2:2+size]=In
         self.InC[size+2]=In[0]
         self.InC[size+3]=In[1]
+        
+        # precompute for regularity coefficients (use numflux as auxiliary
+        # array).
+        Reg=self.numflux
+        Reg[0:size+2]=self.b0*np.power(
+            self.InC[0:size+2]-2.0*self.InC[1:size+3]+self.InC[2:size+4],2)
+ 
         for vol in range(2,size+2):
             #reconstructions right & left:
  
@@ -44,28 +52,28 @@ class Weno:
                     self.right[r]+= cr[j]*self.InC[vol-r+j]
                     self.left[r]+=cl[j]*self.InC[vol-r+j]
 
+                    
             # regularity coefficients
-            self.beta[0]= self.b0*pow(self.InC[vol]-2.0*self.InC[vol+1]+\
-                                      self.InC[vol+2],2)+ self.b1* \
+            self.beta[0]= Reg[vol]+ self.b1* \
                                       pow(3.*self.InC[vol]-4.*self.InC[vol+1]+\
                                           self.InC[vol+2],2)
 
-            self.beta[1]=self.b0*pow(self.InC[vol-1]-2.0*self.InC[vol]+\
-                                     self.InC[vol+1],2)+ self.b1*\
+            self.beta[1]= Reg[vol-1]+ self.b1*\
                                      pow(self.InC[vol-1]-self.InC[vol+1],2)
             
-            self.beta[2]=self.b0*pow(self.InC[vol-2]-2.0*self.InC[vol-1]+\
-                                     self.InC[vol],2)+ self.b1*\
+            self.beta[2]= Reg[vol-2]+ self.b1*\
                                      pow(self.InC[vol-2]-4.*self.InC[vol-1]+\
-                                         3*self.InC[vol],2)
-            
+                                         3*self.InC[vol],2) 
+
+            sright =0.0
+            sleft=  0.0
             for r in range(0,3):
-                self.alpharight[r]=self.dright[r]/pow(self.epsilon+\
-                                                      self.beta[r],2)
-                self.alphaleft[r]=self.dleft[r]/pow(self.epsilon+\
-                                                    self.beta[r],2)
-            sright=self.alpharight.sum()
-            sleft=self.alphaleft.sum()
+                s=pow(self.epsilon+self.beta[r],2)
+                self.alpharight[r]=self.dright[r]/s
+                self.alphaleft[r]=self.dleft[r]/s
+                sright+=self.alpharight[r]
+                sleft+=self.alphaleft[r]
+  
 
             recleft=self.alphaleft.dot(self.left)
             recright=self.alpharight.dot(self.right)
@@ -74,11 +82,13 @@ class Weno:
             self.reconstructed[2*vol]  = recleft/sleft
             self.reconstructed[2*vol+1]= recright/sright
         self.reconstructed[2*size+4:2*size+8]=self.reconstructed[4:8]
+        
         #compute the numerical fluxes at boundaries:
         for vol in range(1,size+1):
             self.numflux[vol]=F(self.reconstructed[2*vol+3],
-                                self.reconstructed[2*(vol+1)+2])
+                                self.reconstructed[2*vol+4])
         self.numflux[0]=self.numflux[size]
         #now, return RHS to solver:
-        for vol  in range(0,size):
-            Out[vol]=h1*(self.numflux[vol+1]-self.numflux[vol])
+        Out[0:size]=h1*self.numflux[1:size+1]-h1*self.numflux[0:size]
+        # note: faster than Out[0:size]=h1*(........)
+ 

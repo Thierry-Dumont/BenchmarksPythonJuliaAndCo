@@ -1,6 +1,6 @@
 import numpy as np
 from Weno import *
-
+import cProfile
 import time
 import socket
 import GodunovFlux as Godunov

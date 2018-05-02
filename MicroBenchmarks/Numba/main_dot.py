@@ -24,33 +24,40 @@ def dotd_2(X,Y,niter):
     for it in range(0,niter):
         s= X.dot(Y)
         X,Y=Y,X  
-@jit     
+@jit
+def addv(X,Y,niter):
+    for it in range(0,niter):
+        X,Y=Y,X
 def test(p,X,Y,nit):
    
     niter=nit
-    Init(X,1.)
-    Init(Y,1.)
     
-    p(X,Y,niter)
     T=0.
     while True:
-        print(niter)
+        
         Init(X,1.)
         Init(Y,1.)
         t1 = time.time()
         p(X,Y,niter)
         treal=time.time() -t1
+        Init(X,1.)
+        Init(Y,1.)
+        tq= time.time()
+        addv(X,Y,niter)
+        tadd=time.time() -tq
+        treal-=tadd
         t = treal/niter
-        if treal>0.0001 and abs(t-T)/t<0.025:
+        
+        if abs(t)> 0 and abs(t-T)/t<0.025:
             break
         else:
             T=t
             niter*=2
-    return T,it
+    return t,niter
 
-size=16
+size=100
 sizemax=10**6
-niter=10
+niter=400
 parsef= lambda  f: str(f).split(" ")[1] #parse function name
 while size<sizemax:
     print("size: ",size)
@@ -66,6 +73,7 @@ while size<sizemax:
             best=p
         print(parsef(p)," : t= ",t," seconds ")
     nflops=size*2
+    print("tbest",tbest,X.size)
     flops=nflops/tbest
     print("\nbest: ",parsef(best))
     print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))

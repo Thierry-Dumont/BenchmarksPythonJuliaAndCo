@@ -37,7 +37,7 @@ def test(p,In,Out,nit):
     return T,niter
 
 size=16
-sizemax=513
+sizemax=1025
 niter=10
 parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
 while size<sizemax:
