@@ -1,0 +1,77 @@
+size=  200  dt=  0.004  nteps= 250.0
+Traceback (most recent call last):
+  File "main.py", line 35, in <module>
+    R=RK3TVD(size)
+  File "/usr/local/lib/python3.6/dist-packages/numba/jitclass/base.py", line 114, in __call__
+    return cls._ctor(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/numba/dispatcher.py", line 344, in _compile_for_args
+    reraise(type(e), e, None)
+  File "/usr/local/lib/python3.6/dist-packages/numba/six.py", line 658, in reraise
+    raise value.with_traceback(tb)
+numba.errors.TypingError: Failed at nopython (nopython mode backend)
+Failed at nopython (nopython frontend)
+Internal error at resolving type of attribute "op" of "__numba_self_":
+--%<----------------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/numba/errors.py", line 491, in new_error_context
+    yield
+  File "/usr/local/lib/python3.6/dist-packages/numba/typeinfer.py", line 525, in __call__
+    attrty = typeinfer.context.resolve_getattr(ty, self.attr)
+  File "/usr/local/lib/python3.6/dist-packages/numba/typing/context.py", line 225, in resolve_getattr
+    ret = attrinfo.resolve(typ, attr)
+  File "/usr/local/lib/python3.6/dist-packages/numba/typing/templates.py", line 406, in resolve
+    return self._resolve(value, attr)
+  File "/usr/local/lib/python3.6/dist-packages/numba/typing/templates.py", line 431, in _resolve
+    return fn(value, attr)
+  File "/usr/local/lib/python3.6/dist-packages/numba/jitclass/base.py", line 332, in generic_resolve
+    sig = disp_type.get_call_type(self.context, (instance,), {})
+  File "/usr/local/lib/python3.6/dist-packages/numba/types/functions.py", line 253, in get_call_type
+    template, pysig, args, kws = self.dispatcher.get_call_template(args, kws)
+  File "/usr/local/lib/python3.6/dist-packages/numba/dispatcher.py", line 269, in get_call_template
+    pysig, args = self._compiler.fold_argument_types(args, kws)
+  File "/usr/local/lib/python3.6/dist-packages/numba/dispatcher.py", line 69, in fold_argument_types
+    stararg_handler)
+  File "/usr/local/lib/python3.6/dist-packages/numba/typing/templates.py", line 137, in fold_arguments
+    ba = pysig.bind(*args, **kws)
+  File "/usr/lib/python3.6/inspect.py", line 2969, in bind
+    return args[0]._bind(args[1:], kwargs)
+  File "/usr/lib/python3.6/inspect.py", line 2884, in _bind
+    raise TypeError(msg) from None
+TypeError: missing a required argument: 'Meth'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/numba/typeinfer.py", line 138, in propagate
+    constraint(typeinfer)
+  File "/usr/local/lib/python3.6/dist-packages/numba/typeinfer.py", line 531, in __call__
+    typeinfer.refine_map[self.target] = self
+  File "/usr/lib/python3.6/contextlib.py", line 99, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/usr/local/lib/python3.6/dist-packages/numba/errors.py", line 499, in new_error_context
+    six.reraise(type(newerr), newerr, tb)
+  File "/usr/local/lib/python3.6/dist-packages/numba/six.py", line 659, in reraise
+    raise value
+numba.errors.InternalError: missing a required argument: 'Meth'
+[1] During: typing of get attribute at <string> (3)
+--%<----------------------------------------------------------------------------
+
+
+File "<string>", line 3:
+
+
+This is not usually a problem with Numba itself but instead often caused by
+the use of unsupported features or an issue in resolving types.
+
+To see Python/NumPy features supported by the latest release of Numba visit:
+http://numba.pydata.org/numba-doc/dev/reference/pysupported.html
+and
+http://numba.pydata.org/numba-doc/dev/reference/numpysupported.html
+
+For more information about typing errors and how to debug them visit:
+http://numba.pydata.org/numba-doc/latest/user/troubleshoot.html#my-code-doesn-t-compile
+
+If you think your code should work with Numba, please report the error message
+and traceback, along with a minimal reproducer at:
+https://github.com/numba/numba/issues/new
+
