@@ -17,6 +17,9 @@ The benchmark(s):
 * Gaussian:  Gaussian elimination with partial pivoting (see README
   inside).
   
+* :new: FeStiff: compute the stiffness matrix, for the Poisson equation,
+  discretized with P2 finite elements on triangles.
+
 * :new: Weno: a classical computation in hyperbolic PDES (see README
   inside).
   
