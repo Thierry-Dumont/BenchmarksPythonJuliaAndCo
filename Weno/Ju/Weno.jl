@@ -16,7 +16,7 @@ struct WenoData
     right::Array{Float64}
     left::Array{Float64}
     reconstructed::Array{Float64}
-    numflux::Array{Float64}
+    work::Array{Float64}
     alpharight::Array{Float64}
     alphaleft::Array{Float64}
     beta::Array{Float64}
@@ -34,7 +34,7 @@ WenoData(size)=new(Array([
                    Array{Float64}(size+4),
                    Array{Float64}(3),Array{Float64}(3),
                    Array{Float64}(2*size+8),
-                   Array{Float64}(size+1),
+                   Array{Float64}(size+2),
                    Array{Float64}(3),Array{Float64}(3),
                    Array{Float64}(3)
                )
@@ -43,7 +43,7 @@ end
 
 function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
 
-    const size=length(In)
+    size=W.size
 
     size1=size+1
     size4=size+4
@@ -52,10 +52,13 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     # build an extended array with phantom cells to deal with periodicity:
     W.InC[1]=In[size-1]
     W.InC[2]=In[size]
-    W.InC[3:2+size]=In
+    W.InC[3:2+size]=In[:]
     W.InC[size+3]=In[1]
     W.InC[size+4]=In[2]
- 
+    # precompute for regularity coefficients:
+    @simd for vol=1:size+2
+        W.work[vol]= (W.InC[vol]-2.0*W.InC[vol+1]+W.InC[vol+2])^2
+    end
     # lets's start computation: 
     for vol= 3:2+size
         @simd for r= 0:2
@@ -66,13 +69,13 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
             #W.right[r+1]= sum(W.c[r+2].*W.InC[vol-r:vol-r+2])
         end
          # regularity coefficients
-        W.beta[1]=W.b0* (W.InC[vol]-2.0*W.InC[vol+1]+W.InC[vol+2])^2+ 
+        W.beta[1]=W.b0* W.work[vol]+ 
 	W.b1*(3.*W.InC[vol]-4.*W.InC[vol+1]+W.InC[vol+2])^2
         
-        W.beta[2]=W.b0*(W.InC[vol-1]-2.0*W.InC[vol]+W.InC[vol+1])^2+ 
+        W.beta[2]=W.b0* W.work[vol-1]+ 
         W.b1*(W.InC[vol-1]-W.InC[vol+1])^2
         
-        W.beta[3]=W.b0*(W.InC[vol-2]-2.0*W.InC[vol-1]+W.InC[vol])^2+ 
+        W.beta[3]=W.b0*W.work[vol-2]+ 
 	W.b1*(W.InC[vol-2]-4.*W.InC[vol-1]+3*W.InC[vol])^2
 
         
@@ -95,14 +98,14 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     W.reconstructed[2*size+5:2*size+8]=W.reconstructed[5:8]
     #Numerical flux at boundaries of volumes:
     @simd for vol in 1:size
-        W.numflux[vol+1]=F(W.reconstructed[2*vol+4], W.reconstructed[2*(vol+1)+3])
+        W.work[vol+1]=F(W.reconstructed[2*vol+4], W.reconstructed[2*(vol+1)+3])
     end
-    W.numflux[1]=W.numflux[size+1]
+    W.work[1]=W.work[size+1]
     # result:
     @simd for vol in 1:size
-        Out[vol]=h1*(W.numflux[vol+1]-W.numflux[vol])
+        Out[vol]=h1*(W.work[vol+1]-W.work[vol])
     end
-    #@. Out[1:size] = h1*(W.numflux[2:size+1]-W.numflux[1:size])
+    #@. Out[1:size] = h1*(W.work[2:size+1]-W.work[1:size])
     nothing
 end
 

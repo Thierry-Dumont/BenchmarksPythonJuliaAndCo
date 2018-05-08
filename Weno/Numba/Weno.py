@@ -1,6 +1,5 @@
 import numpy as np
-from numba import jitclass
-from numba import int32, float64,void
+from numba import jitclass,int32, float64,void
 spec = [
     ('c', float64[:,:]),
     ('b0', float64),

@@ -15,11 +15,6 @@ def Init(X,L):
 def test(p,A,B,C,D,nit):
    
     niter=nit
-    Init(A,1.)
-    Init(B,1.)
-    Init(C,1.)
-    Init(D,1.)
-    p(A,B,C,D,niter)
     T=0.
     while True:
         Init(A,1.)

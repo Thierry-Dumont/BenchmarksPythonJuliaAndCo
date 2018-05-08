@@ -30,14 +30,14 @@ println("start computation")
 W=WenoData(size)
 #NumFlux(X,Y)=Godunov.NumFlux(Convection,X,Y)
 #NumFlux(X,Y)=LaxFriedrichs.NumFlux(Convection,X,Y,1.)
-#NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
-NumFlux(X,Y)=LaxFriedrichs.NumFlux(Burghers,X,Y,1.0)
+NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
+#NumFlux(X,Y)=LaxFriedrichs.NumFlux(Burghers,X,Y,1.0)
 S(X,Y)=weno!(W,NumFlux,L,X,Y)
 
 f=open("gp0","w")
 writedlm(f, In)
 close(f)
-#set_zero_subnormals(true)
+
 t=0.
 t1 = time_ns()
 #Profile.clear_malloc_data()

@@ -16,18 +16,17 @@ def dotd_1(X,Y,niter):
     size=X.size
     for it in range(0,niter):
         s=0.0
+        X[1]=it
         for i in range(0,size):
             s+=X[i]*Y[i]
-        X,Y=Y,X
+        #X*=0.8
 @jit
 def dotd_2(X,Y,niter):
     for it in range(0,niter):
+        X[1]=it
         s= X.dot(Y)
-        X,Y=Y,X  
-@jit
-def addv(X,Y,niter):
-    for it in range(0,niter):
-        X,Y=Y,X
+        #X*=0.8
+
 def test(p,X,Y,nit):
    
     niter=nit
@@ -39,25 +38,18 @@ def test(p,X,Y,nit):
         Init(Y,1.)
         t1 = time.time()
         p(X,Y,niter)
-        treal=time.time() -t1
-        Init(X,1.)
-        Init(Y,1.)
-        tq= time.time()
-        addv(X,Y,niter)
-        tadd=time.time() -tq
-        treal-=tadd
-        t = treal/niter
-        
-        if abs(t)> 0 and abs(t-T)/t<0.025:
+        t=time.time() -t1
+        if abs(t-2.*T)/t<0.01:
             break
         else:
             T=t
             niter*=2
-    return t,niter
+    #print(T,niter,T/niter)
+    return T/niter,niter
 
 size=100
 sizemax=10**6
-niter=400
+niter=4
 parsef= lambda  f: str(f).split(" ")[1] #parse function name
 while size<sizemax:
     print("size: ",size)

@@ -27,10 +27,6 @@ def dotd_2(X,Y,niter):
 def test(p,X,Y,nit):
    
     niter=nit
-    Init(X,1.)
-    Init(Y,1.)
- 
-    p(X,Y,niter)
     T=0.
     while True:
         Init(X,1.)

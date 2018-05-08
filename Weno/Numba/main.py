@@ -7,6 +7,7 @@ import GodunovFlux as Godunov
 import Burghers as Burg
 import GB as GodBu
 from  RK3TVD import *
+import numba as nb
 import time
 
 size=200
@@ -36,10 +37,16 @@ W=Weno(size)
 #Meth(In,Out)
 #W.weno(Godunov,Burg,L,In,Out)
 x=W.weno(GodBu.gb,In,Out)
-print(x)
-#f=lambda x,y : W.weno(GodBu.gb,x,y)
-#R=RK3TVD(size)
 
+@jit
+def f(x,y):
+     return x+y
+     #return W.weno(GodBu.gb,x,y)
+
+#f_opt = nb.jit(nopython=True)(f)
+R=RK3TVD(size)
+R.op(f,In,0.1)
+#R.op(GodBu.gb,In,0.1)
 
 t=0
 

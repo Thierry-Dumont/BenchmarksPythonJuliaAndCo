@@ -45,7 +45,9 @@ Thierry Dumont   tdumont@math.univ-lyon1.fr
 
 - **C++**:      pure C++, sequential.
 - **Py**:       pure Python.
+- **Pytran**:   Python/Pythran version.
 - **Ju**:       Ĵulia.
+- **Numba**:    Python/Numba version.
 
 
 ### Note:
