@@ -30,7 +30,7 @@ for i in range(0,6):
     print([mat[i*(i+1)//2+j] for j in range(0,i+1)])
 
 print("\nNow, start the benchmark:")
-ntri=100000
+ntri=10000
 print(ntri," triangles.")
 R = rando()
 t1 = time.time()
