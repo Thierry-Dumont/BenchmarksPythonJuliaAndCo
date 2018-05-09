@@ -1,11 +1,9 @@
-First compile factorMatrix.py; just type:
+First compile what should be  just _pythranized_;  type:
+```
 ./script
-
+```
 Then run the code:
 
+```
 python3 main.py
-
-!ZZZ! if you are using OpenBlas, you probably must create  a .pythranrc in your home directory like this:
-
-[compiler]
-blas=openblas
+```
