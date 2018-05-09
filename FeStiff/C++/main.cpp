@@ -1,22 +1,12 @@
 #include "rando.hpp"
 #include "Stiffness.hpp"
 #include <iostream>
-#include <algorithm>
-#include <map>
-#include <string>
-#include <sys/time.h>
+#include <iomanip>
 #include <unistd.h>
 #include <limits.h>
-#include <fstream>
 #include <cmath>
-#include <ctime>
 using namespace std;
 
-double get_time() {
-    struct timeval tv;
-    gettimeofday(&tv,0);
-    return (double) tv.tv_sec+tv.tv_usec*1e-6;
-}
 clock_t ck() {return clock();}
 string host()
 {
@@ -38,16 +28,42 @@ int main()
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
   
-  map<int,double> times;
-
-  const long int ntri=std::pow(10,7);
+  const long int ntri=std::pow(10,8);
   
   double x[3],y[3]; // triangle summits.
-  double mat[36];
+  double mat[21];
   rando R;
 
   Stiffness S;
-  //auto t1= get_time();
+
+  //
+  cout<<"\nVerify that, on the reference element, we are coherent with sage"
+      <<endl<<"(see ../sage/):"<<endl;
+
+  x[0]=0.0; x[1]=1.0; x[2]=0.0;
+  y[0]=0.0; y[1]=0.0; y[2]=1.0;
+  S(x,y,mat);
+  for(int i=0;i<6;i++)
+    {
+      for(int j=0;j<=i;j++)
+	cout<<std::setw(10) <<mat[ i*(i+1)/2+j ]<<" ";
+      cout<<endl;
+    }
+  cout<<"\nAlso, nothing should change when dilating the element:"<<endl;
+  for(int i=0;i<3;i++)
+    {
+      x[i]*=2;
+      y[i]*=2;
+    }
+  S(x,y,mat);
+  for(int i=0;i<6;i++)
+    {
+      for(int j=0;j<=i;j++)
+	cout<<std::setw(10) <<mat[ i*(i+1)/2+j ]<<" ";
+      cout<<endl;
+    }
+  cout<<"\nNow, start the benchmark:"<<endl;
+  
   auto t1=ck();
   for(long int tri=0;tri<ntri;tri++)
     {
@@ -55,20 +71,24 @@ int main()
       S(x,y,mat);
     }
   auto T= ck()- -t1;
-  cout<<"first phase: "<<(double) T/ CLOCKS_PER_SEC<<endl;
+  cout<<"first phase: "<<static_cast<double>(T)/ CLOCKS_PER_SEC<<" seconds."
+      <<endl;
  
-  t1= ck();//get_time();
+  t1= ck();
 
   for(long int tri=0;tri<ntri;tri++)
     {
       RandomTriangle(R,x,y);
     }
-  auto t2= ck()-t1;//get_time()-t1;
-  cout<<"second phase: "<<(double) t2/ CLOCKS_PER_SEC <<endl;
+  auto t2= ck()-t1;
+  cout<<"second phase: "<<static_cast<double>(t2)/ CLOCKS_PER_SEC <<" seconds"
+      <<endl;
  
-  //cout<<tri<<" "<<ntri<<endl;
   T-=t2;
-  cout<<"T: "<<(double) T/ CLOCKS_PER_SEC <<endl;
+  cout<<"Total time: "<<static_cast<double>(T)/ CLOCKS_PER_SEC <<" seconds."<<
+    endl;
+  cout<<"Time by triangle: "<<static_cast<double>(T)/ CLOCKS_PER_SEC /ntri<<
+    " second."<<endl;
   cout<<endl;
-  cout<<"end"<<endl;
+  cout<<"end."<<endl;
 }

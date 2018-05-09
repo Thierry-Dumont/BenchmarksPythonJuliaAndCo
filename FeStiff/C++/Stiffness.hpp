@@ -31,14 +31,14 @@ public:
 	}
     double det= -(x[1] - x[2])*y[0] + (x[0] - x[2])*y[1] - (x[0] - x[1])*y[2];
     for(int i=0;i<6;i++)
-      for(int j=0;j<i;j++)
+      for(int j=0;j<=i;j++)
 	{
 	  double s=0;
 	  for(int k=0;k<3;k++)
 	    s+=grads[6*i+2*k]*grads[6*j+2*k]+grads[6*i+2*k+1]*grads[6*j+2*k+1];
 	  m[ind(i,j)]=s;
 	}
-    double dv=det*det/6.0;
+    double dv=1.0/(6.0*det);
     for(int i=0;i<21;i++) m[i]*=dv;
  
   }
