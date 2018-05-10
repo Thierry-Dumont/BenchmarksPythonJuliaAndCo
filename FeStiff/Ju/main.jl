@@ -1,6 +1,7 @@
 push!(LOAD_PATH, "./")
 using Rando
 using Stiffness
+using Rotation
 function prSubDiag(m)
     
     for i = 0:5
@@ -10,12 +11,12 @@ function prSubDiag(m)
         println()
     end
 end
-function RandomTriangle!(R,x,y)
+function RandomTriangle!(R::RandoData,x::Array{Float64,1},y::Array{Float64,1})
     for i in 1:3
-        x[i]=Rando.fv(R,10.)
+        x[i]=Rando.fv!(R,10.)
     end
     for i in 1:3
-        y[i]=Rando.fv(R,10.)
+        y[i]=Rando.fv!(R,10.)
     end
 end
 S=StiffnessData()
@@ -25,28 +26,32 @@ m=zeros(21)
 print("\nVerify that, on the reference element, we are coherent with sage ")
 println("(see ../sage/):\n")
 Stiffness.op!(S,x,y,m)
-prSubDiag(m)
+#prSubDiag(m)
 print("\nWe must get the same result if we dilate the triangle:\n")
 x*=2.0
 y*=2.0
 Stiffness.op!(S,x,y,m)
-prSubDiag(m)
+#prSubDiag(m)
 #Profile.print()
 
 println("\nNow, start the benchmark:")
-ntri=1000000
+const ntri=10000
 println(ntri," triangles.")
 R=RandoData()
+Rot=Rotation_data(0.02)
 t1 = time_ns()
 for t=1:ntri
-    RandomTriangle!(R,x,y)
+    #RandomTriangle!(R,x,y)
+    Rotate_triangle!(Rot,x,y)
     Stiffness.op!(S,x,y,m)
 end
 t1 = time_ns()-t1
 println("first phase: ",float(t1)*10.0^(-9)," seconds.")
+
 t11 = time_ns()
 for t=1:ntri
-    RandomTriangle!(R,x,y)
+    #RandomTriangle!(R,x,y)
+    Rotate_triangle!(Rot,x,y)
 end
 t11 = time_ns()-t11
 println("second phase: ",float(t11)*10.0^(-9)," seconds.")
@@ -56,3 +61,10 @@ println("Total time: ",Tsecond)
 byTr=Tsecond/ntri
 println("Time by triangle: ",byTr," seconds.")
 println("end.")
+
+ntri1=100000
+@profile for t=1:ntri1
+    Rotate_triangle!(Rot,x,y)  
+    Stiffness.op!(S,x,y,m)
+ end
+ Profile.print(format=:flat)

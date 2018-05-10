@@ -13,6 +13,7 @@ class Stiffness
   {
     ji[0]=-y[0] + y[2] ; ji[1]= y[0] - y[1];
     ji[2] = x[0] - x[2]; ji[3]= -x[0] + x[1];
+    // 4 flops
   }
 public:
   Stiffness()
@@ -31,8 +32,9 @@ public:
 	  int d=6*f+2*p;
 	  grads[d]  = ji[0]*gq[d]+ji[1]*gq[d+1];
 	  grads[d+1]= ji[2]*gq[d]+ji[3]*gq[d+1];
-	}
+	} //18 * 6 = 108 flops.
     double det= -(x[1] - x[2])*y[0] + (x[0] - x[2])*y[1] - (x[0] - x[1])*y[2];
+    // det: 8 flops.
     for(int i=0;i<6;i++)
       for(int j=0;j<=i;j++)
 	{
@@ -40,9 +42,12 @@ public:
 	  for(int k=0;k<3;k++)
 	    s+=grads[6*i+2*k]*grads[6*j+2*k]+grads[6*i+2*k+1]*grads[6*j+2*k+1];
 	  m[ind(i,j)]=s;
-	}
-    double dv=1.0/(6.0*det);
-    for(int i=0;i<21;i++) m[i]*=dv;
+	}// 21* 4 = 84 flops.
+    double dv=1.0/(6.0*det); // 1 flop
+    for(int i=0;i<21;i++) m[i]*=dv; //21 flops
+
+    //total:  4+18*6+ 8 + 84 +1+21 = 226 flops.
  
   }
+  int nflops() const {return 226;}
 };

@@ -87,8 +87,10 @@ int main()
   T-=t2;
   cout<<"Total time: "<<static_cast<double>(T)/ CLOCKS_PER_SEC <<" seconds."<<
     endl;
-  cout<<"Time by triangle: "<<static_cast<double>(T)/ CLOCKS_PER_SEC /ntri<<
-    " second."<<endl;
+  double ttri=static_cast<double>(T)/ CLOCKS_PER_SEC /ntri;
+  cout<<"Time by triangle: "<<ttri<<" second."<<endl;
+
+  cout<<S.nflops()/ttri<<" Gflops/s."<<endl;
   cout<<endl;
   cout<<"end."<<endl;
 }

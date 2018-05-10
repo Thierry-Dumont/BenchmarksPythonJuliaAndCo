@@ -13,7 +13,7 @@ end
 #=
 return a random float in [0,vmax]
 =#
-function fv(R::RandoData,vmax=1.)
+function fv!(R::RandoData,vmax=1.)
     R.seed= (R.a * R.seed + R.c) % R.m
     vmax*Float64(R.seed)/R.m
 end

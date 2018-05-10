@@ -1,2 +1,2 @@
 #!/bin/bash
-pythran -march=native -O3 StiffOut.py
+pythran -march=native -O3 -DNDEBUG  StiffOut.py
