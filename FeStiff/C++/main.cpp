@@ -63,7 +63,7 @@ int main()
       cout<<endl;
     }
   cout<<"\nNow, start the benchmark:"<<endl;
-  
+  cout<<ntri<<" triangles."<<endl;
   auto t1=ck();
   for(long int tri=0;tri<ntri;tri++)
     {

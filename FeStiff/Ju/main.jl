@@ -43,16 +43,16 @@ for t=1:ntri
     Stiffness.op!(S,x,y,m)
 end
 t1 = time_ns()-t1
-println(t1)
+println("first phase: ",float(t1)*10.0^(-9)," seconds.")
 t11 = time_ns()
 for t=1:ntri
     RandomTriangle!(R,x,y)
 end
 t11 = time_ns()-t11
-println(t11)
+println("second phase: ",float(t11)*10.0^(-9)," seconds.")
 T=t1-t11
 Tsecond=float(T)*10.0^(-9)
-println(Tsecond)
+println("Total time: ",Tsecond)
 byTr=Tsecond/ntri
-println(byTr)
+println("Time by triangle: ",byTr," seconds.")
 println("end.")

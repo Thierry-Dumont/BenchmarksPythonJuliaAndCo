@@ -9,19 +9,22 @@ class Stiffness
 		 0, 1, 0, 1, 0, -2, -2, -2, 2, 0, 0, 2, 2, 2, 2,
 		 0, 0, 2, -2, -2, -2, 0};
   inline int ind(int i,int j){return i*(i+1)/2+j;}
-  inline void JinvDetTrans(double x[],double y[],double J[])
+  inline void JinvDetTrans(double x[],double y[])
   {
-    J[0]=-y[0] + y[2] ; J[1]= y[0] - y[1];
-    J[2] = x[0] - x[2]; J[3]= -x[0] + x[1];
+    ji[0]=-y[0] + y[2] ; ji[1]= y[0] - y[1];
+    ji[2] = x[0] - x[2]; ji[3]= -x[0] + x[1];
   }
 public:
   Stiffness()
   {
   }
+  ~Stiffness()
+  {
+  }
   void operator()(double x[],double y[],double m[])
   {
     
-    JinvDetTrans(x,y,ji);
+    JinvDetTrans(x,y);
     for(int f=0;f<6;f++)
       for(int p=0;p<3;p++)
 	{

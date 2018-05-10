@@ -12,7 +12,7 @@ class Stiffness:
                           0., 0., 2., -2., -2., -2., 0])
 
         #this causes an error "Invalid call to pythranized function",
-        #probably because the array is seen as an arary of integers.
+        #probably because the array is seen as an array of integers.
         # self.gq=np.array([-1, -1, 1, 1, -1, -1, 1, 0, 1, 0,
         #                   -1, 0, 0, -1,
         #                   0, 1, 0, 1, 0, -2, -2, -2, 2, 0, 0,
