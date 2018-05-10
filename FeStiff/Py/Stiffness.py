@@ -23,9 +23,10 @@ class Stiffness:
         det= -(x[1] - x[2])*y[0] + (x[0] - x[2])*y[1] - (x[0] - x[1])*y[2]
         dv=1.0/(6.0*det)
         for i in range(0,6):
-            for j in range(0,6):
+            for j in range(0,i+1):
                 m[self.ind(i,j)]=dv*sum([self.grads[6*i+2*k]*
                                          self.grads[6*j+2*k]+ \
                                          self.grads[6*i+2*k+1]*
                                          self.grads[6*j+2*k+1] \
                                          for k in range(0,3)])
+
