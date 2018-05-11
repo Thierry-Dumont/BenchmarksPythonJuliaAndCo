@@ -1,0 +1,3 @@
+#!/bin/bash
+pythran -march=native -O3 Burghers.py
+pythran -march=native -O3 GodunovFlux.py

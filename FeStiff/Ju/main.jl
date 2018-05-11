@@ -34,7 +34,7 @@ prSubDiag(m)
 #Profile.print()
 
 println("\nNow, start the benchmark:")
-const ntri=100000
+const ntri=1000000
 println(ntri," triangles.")
 R=RandoData()
 t1 = time_ns()

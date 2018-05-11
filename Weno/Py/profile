@@ -1,0 +1,17 @@
+  ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1999    0.003    0.000   11.202    0.006 <ipython-input-1-58b4317959d9>:34(<lambda>)
+        1    0.001    0.001   11.203   11.203 <string>:1(<module>)
+   463768    0.072    0.000    0.072    0.000 Burghers.py:1(flux)
+    63968    0.028    0.000    0.059    0.000 Burghers.py:10(maxf)
+   335832    0.132    0.000    0.185    0.000 Burghers.py:3(minf)
+   399800    0.103    0.000    0.347    0.000 GodunovFlux.py:1(NumFlux)
+     1999    7.921    0.004   11.199    0.006 Weno.py:25(weno)
+   399800    0.087    0.000    0.435    0.000 Weno.py:26(<lambda>)
+   799600    0.125    0.000    1.095    0.000 _methods.py:31(_sum)
+        1    0.000    0.000   11.203   11.203 {built-in method builtins.exec}
+    63968    0.012    0.000    0.012    0.000 {built-in method builtins.max}
+  4797600    1.129    0.000    1.129    0.000 {built-in method builtins.pow}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+   799600    0.411    0.000    0.411    0.000 {method 'dot' of 'numpy.ndarray' objects}
+   799600    0.970    0.000    0.970    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+   799600    0.208    0.000    1.303    0.000 {method 'sum' of 'numpy.ndarray' objects}
