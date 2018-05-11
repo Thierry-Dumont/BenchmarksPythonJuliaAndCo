@@ -20,8 +20,6 @@ The benchmark(s):
 * :new: FeStiff: compute the stiffness matrix, for the Poisson equation,
   discretized with P2 finite elements on triangles.
 
-* :new: Weno: a classical computation in hyperbolic PDES (see README
-  inside).
   
 * :new: MicroBenchmarks: very simple benchmarks to show the importance
   of different programing styles. 
