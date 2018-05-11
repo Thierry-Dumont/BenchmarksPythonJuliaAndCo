@@ -4,7 +4,7 @@ from Stiffness import *
 from RandomTriangle import *
 import time
 import socket
-
+import cProfile
 
 ntri=10**7
 x=np.empty(3)

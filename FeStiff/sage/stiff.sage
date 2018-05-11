@@ -92,5 +92,9 @@ for i in range(0,200):
         y1=dilat*y
         assert(Stiff(x1,y1) == M)
 
+# usefull for Python programing (see Py*/ directories)
+import numpy as np
+gqnp=np.array(gq,dtype=np.float64).reshape(18,2)
+print(gqnp)
 print("end")
 
