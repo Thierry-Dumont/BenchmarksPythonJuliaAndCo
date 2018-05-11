@@ -90,7 +90,7 @@ int main()
   double ttri=static_cast<double>(T)/ CLOCKS_PER_SEC /ntri;
   cout<<"Time by triangle: "<<ttri<<" second."<<endl;
 
-  cout<<S.nflops()/ttri<<" Gflops/s."<<endl;
+  cout<<S.flops/ttri<<" Gflops/s."<<endl;
   cout<<endl;
   cout<<"end."<<endl;
 }

@@ -7,7 +7,7 @@ function RandomFeedMatrix(M,R::RandoData)
     n,m=size(M)
     @inbounds for i = 1:n
         @inbounds for j = 1:m
-            M[i,j]=fv(R)
+            M[i,j]=Rando.fv!(R)
         end
     end
 end
