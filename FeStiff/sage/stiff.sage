@@ -95,6 +95,6 @@ for i in range(0,200):
 # usefull for Python programing (see Py*/ directories)
 import numpy as np
 gqnp=np.array(gq,dtype=np.float64).reshape(18,2)
-print(gqnp)
+#print(gqnp)
 print("end")
 
