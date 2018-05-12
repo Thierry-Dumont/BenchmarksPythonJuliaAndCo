@@ -1,6 +1,6 @@
 import numpy as np
 import time
-from numba import jit
+from numba import jit,stencil
 def Init(X,L):
     size=X.size
     h=L/size
@@ -25,7 +25,16 @@ def lapl1d_2(In,Out,niter):
         for i in range(1,size-1):
             Out[i]=h2*(In[i-1]- 2.0*In[i]+ In[i+1])
         In,Out=Out,In  
-      
+@stencil
+def kernel(In,h2):
+    return h2*(In[1]- 2.0*In[0]+ In[-1])
+@jit(nopython=True,nogil=True,parallel=True)
+def lapl1d_3(In,Out,niter):
+    size=In.size
+    h2= (1./size)**2
+    for it in range(0,niter):
+        kernel(In,h2,out=Out)
+    In,Out=Out,In
 def test(p,In,Out,nit):
    
     niter=nit
@@ -60,7 +69,7 @@ while size<sizemax:
     tbest=10.**20
     best=0
     t=0.0
-    for p in  [lapl1d_1,lapl1d_2]:
+    for p in  [lapl1d_1,lapl1d_2,lapl1d_3]:
         t,it=test(p,In,Out,niter)
         if t<tbest:
             tbest=t
