@@ -31,8 +31,7 @@ Thierry Dumont   tdumont@math.univ-lyon1.fr
 - **sage**: _SageMath_ material (see below).
 ### Running the benchmarks
 
-cd successively in C++, Ju, Numba Py, Pythran, PyVec,
- PythranVec; then look at the documentation.
+cd successively in C++, Py, Pythran, Numba, Ju; then look at the documentation.
 
 #### Sage material:
 

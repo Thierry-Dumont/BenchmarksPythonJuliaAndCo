@@ -23,6 +23,7 @@ function op!(S::StiffnessData,x::Array{Float64,1},y::Array{Float64,1},
             S.grads[1,p,f]=a11*S.gq[1,p,f]+a12*S.gq[2,p,f]
             S.grads[2,p,f]=a21*S.gq[1,p,f]+a22*S.gq[2,p,f]
         end
+        # this seems slower:
         # S.grads[1,1:3,f]=a11*S.gq[1,1:3,f]+a12*S.gq[2,1:3,f]
         # S.grads[2,1:3,f]=a21*S.gq[1,1:3,f]+a22*S.gq[2,1:3,f]
     end
@@ -36,6 +37,7 @@ function op!(S::StiffnessData,x::Array{Float64,1},y::Array{Float64,1},
                 s+=S.grads[1,k,i]*S.grads[1,k,j]+S.grads[2,k,i]*S.grads[2,k,j]
             end
             m[ii]=dv*s
+            # this seems slower:
             # m[ii]=dv*(dot(S.grads[1,:,i],S.grads[1,:,j])+
             #           dot(S.grads[2,:,i],S.grads[2,:,j]))
             ii+=1
