@@ -16,13 +16,10 @@ function Init!(X,L)
         end
     end
 end
-macro NumericalFluxFor(NumFlux,FluxR,X,Y)
-     return :(Numflux.Numflux(FluxR,X,Y))
+@inline function NumFluxL(a::Float64,b::Float64)
+    0.5*(0.5*a^2+0.5*b^2-0.5*(b-a))
 end
-#ex = macroexpand( :(@NumericalFluxFor :Godunov,Burghers,X,Y) );
-#println(ex)
-#eval(ex)
-const size=200
+const size=1000
 const L=1.
 const T=1.0
 const dt=0.8/size
@@ -35,14 +32,12 @@ println("start computation")
 W=WenoData(size)
 R=RK3TVDData(size)
 
-@NumericalFluxFor(Godunov, Convection, In, Out)
-
 #NumFlux(X,Y)=Godunov.NumFlux(Convection,X,Y)
-NumFlux(X::Float64,Y::Float64)=LaxFriedrichs.NumFlux(Convection,X,Y,1.)
-#NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
-#NumFlux(X,Y)=LaxFriedrichs.NumFlux(Burghers,X,Y,1.0)
-S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFlux,L,X,Y)
-
+#NumFlux(X::Float64,Y::Float64)=LaxFriedrichs.NumFlux(Convection,X,Y,1.)
+#@inline NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
+@inline NumFlux(X,Y)=LaxFriedrichs.NumFlux(Burghers,X,Y,1.0)
+#S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFlux,L,X,Y)
+S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFluxL,L,X,Y)
 f=open("gp0","w")
 writedlm(f, In)
 close(f)

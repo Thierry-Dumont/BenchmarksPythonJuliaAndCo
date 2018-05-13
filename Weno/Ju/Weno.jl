@@ -43,8 +43,6 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
 
     size=W.size
 
-    size1=size+1
-    size4=size+4
     const h1 = -1./(L/size)
     
     # build an extended array with phantom cells to deal with periodicity:

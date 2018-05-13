@@ -47,10 +47,10 @@ int main()
   //typedef Convection Problem;
 
   // define numerical flux:
-  typedef GodunovFlux<Problem> NumFlux;
-  //typedef LaxFriedrichsFlux<Problem> NumFlux;
+  //typedef GodunovFlux<Problem> NumFlux;
+  typedef LaxFriedrichsFlux<Problem> NumFlux;
   
-  const int size=200;
+  const int size=1000;
   const double L=1.0;
   double dt=0.8/size;
   double T=1.;
