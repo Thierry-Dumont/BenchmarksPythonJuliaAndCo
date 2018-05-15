@@ -16,9 +16,14 @@ function Init!(X,L)
         end
     end
 end
-@inline function NumFluxL(a::Float64,b::Float64)
-    0.5*(0.5*a^2+0.5*b^2-0.5*(b-a))
-end
+
+@inline NumfluxGodunov(Fminf,Fmaxf,a::Float64,b::Float64)=
+                     ifelse(a<=b,Fminf(a,b),Fmaxf(b,a))
+@inline NumfluxLaxFriedrichs(F,a::Float64,b::Float64,alpha::Float64)=
+                      0.5*(F(a)+F(b) - alpha*(b-a))
+
+
+
 const size=1000
 const L=1.
 const T=1.0
@@ -35,9 +40,21 @@ R=RK3TVDData(size)
 #NumFlux(X,Y)=Godunov.NumFlux(Convection,X,Y)
 #NumFlux(X::Float64,Y::Float64)=LaxFriedrichs.NumFlux(Convection,X,Y,1.)
 #@inline NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
-@inline NumFlux(X,Y)=LaxFriedrichs.NumFlux(Burghers,X,Y,1.0)
-#S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFlux,L,X,Y)
-S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFluxL,L,X,Y)
+#@inline NumFlux(X,Y)=LaxFriedrichs.NumFlux(EQ,X,Y,1.0)
+
+
+const EQ=Burghers
+#const NF=NumfluxGodunov
+const NF=NumfluxLaxFriedrichs
+
+if NF==NumfluxGodunov
+@inline NumFlux(X::Float64,Y::Float64)=NumfluxGodunov(EQ.minf,EQ.maxf,X,Y)
+else
+NumFlux(X::Float64,Y::Float64)=NumfluxLaxFriedrichs(EQ.flux,X,Y,1.0)
+end
+
+S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFlux,L,X,Y)
+
 f=open("gp0","w")
 writedlm(f, In)
 close(f)
@@ -45,7 +62,7 @@ close(f)
 t=0.
 t1 = time_ns()
 #Profile.clear_malloc_data()
-#@profile 
+#@profile
 while t<T
     Rk3tvd!(R,S,dt,In,Out)
     Out,In=In,Out

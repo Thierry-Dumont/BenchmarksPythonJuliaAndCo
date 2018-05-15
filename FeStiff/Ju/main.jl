@@ -31,7 +31,6 @@ x*=2.0
 y*=2.0
 Stiffness.op!(S,x,y,m)
 prSubDiag(m)
-#Profile.print()
 
 println("\nNow, start the benchmark:")
 const ntri=1000000
@@ -58,6 +57,7 @@ byTr=Tsecond/ntri
 println("Time by triangle: ",byTr," seconds.")
 println("end.")
 
+# to prile the code,uncomment:
 # ntri1=100000
 # @profile for t=1:ntri1
 #     RandomTriangle!(R,x,y)

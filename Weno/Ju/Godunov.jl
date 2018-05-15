@@ -7,5 +7,6 @@ function NumFlux(F,a::Float64,b::Float64)
     #     return F.maxf(b,a)
     # end
     a<=b ? F.minf(a,b):  F.maxf(b,a)
+    #ifelse(a<=b,F.minf(a,b),F.maxf(b,a))
 end
 end
