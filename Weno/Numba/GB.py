@@ -1,7 +1,7 @@
-from numba import jit
+from numba import jit,float64,njit
 import GodunovFlux as Godunov
 import Burghers as Burg
-from numba import float64
-@jit(float64(float64, float64),nopython=True)
+
+@jit(nopython=True)
 def gb(X,Y):
     return Godunov.NumFlux(Burg,X,Y)

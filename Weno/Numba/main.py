@@ -10,7 +10,7 @@ from  RK3TVD import *
 import numba as nb
 import time
 
-size=200
+size=1000
 L=1.0
 dt=0.8/size
 T=1.

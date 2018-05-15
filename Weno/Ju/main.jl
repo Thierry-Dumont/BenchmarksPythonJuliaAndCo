@@ -2,8 +2,6 @@ push!(LOAD_PATH, "./")
 using Weno
 using Burghers
 using Convection
-using Godunov
-using LaxFriedrichs
 using RK3TVD
 function Init!(X,L)
     size=length(X)
@@ -29,23 +27,21 @@ const L=1.
 const T=1.0
 const dt=0.8/size
 println("size= ",size," dt= ",dt, " nteps= ",floor(T/dt))
+
 In=Array{Float64}(size)
 Init!(In,L)
 Out=Array{Float64}(size)
-println("start computation")
+
 
 W=WenoData(size)
 R=RK3TVDData(size)
 
-#NumFlux(X,Y)=Godunov.NumFlux(Convection,X,Y)
-#NumFlux(X::Float64,Y::Float64)=LaxFriedrichs.NumFlux(Convection,X,Y,1.)
-#@inline NumFlux(X,Y)=Godunov.NumFlux(Burghers,X,Y)
-#@inline NumFlux(X,Y)=LaxFriedrichs.NumFlux(EQ,X,Y,1.0)
-
-
+#const EQ=Convection
 const EQ=Burghers
-#const NF=NumfluxGodunov
-const NF=NumfluxLaxFriedrichs
+
+
+const NF=NumfluxGodunov
+#const NF=NumfluxLaxFriedrichs
 
 if NF==NumfluxGodunov
 @inline NumFlux(X::Float64,Y::Float64)=NumfluxGodunov(EQ.minf,EQ.maxf,X,Y)
@@ -59,6 +55,7 @@ f=open("gp0","w")
 writedlm(f, In)
 close(f)
 
+println("start computation")
 t=0.
 t1 = time_ns()
 #Profile.clear_malloc_data()
