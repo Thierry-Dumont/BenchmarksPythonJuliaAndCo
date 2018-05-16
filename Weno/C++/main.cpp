@@ -15,7 +15,7 @@
 #include <cmath>
 #include <ctime>
 #include <memory>
-//#define DO_GNUPLOT_FILES
+#define DO_GNUPLOT_FILES
 using namespace std;
 
 double get_time() {
@@ -43,12 +43,12 @@ void Init(std::unique_ptr<double[]>&  X,double L,int size)
 int main()
 {
   // define problem:
-  typedef Burghers Problem;
-  //typedef Convection Problem;
+  //typedef Burghers Problem;
+  typedef Convection Problem;
 
   // define numerical flux:
-  //typedef GodunovFlux<Problem> NumFlux;
-  typedef LaxFriedrichsFlux<Problem> NumFlux;
+  typedef GodunovFlux<Problem> NumFlux;
+  //typedef LaxFriedrichsFlux<Problem> NumFlux;
   
   const int size=1000;
   const double L=1.0;

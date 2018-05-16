@@ -1,7 +1,7 @@
 from numba import jit,njit,float64
 @jit(nopython=True)
-def NumFlux(F,a,b):
+def NumFlux(Fmin,Fmax,a,b):
     if a<=b:
-      return F.minf(a,b)
+      return Fmin(a,b)
     else:
-      return F.maxf(b,a);
+      return Fmax(b,a);

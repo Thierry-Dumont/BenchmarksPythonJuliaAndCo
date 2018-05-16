@@ -1,11 +1,12 @@
 import numpy as np
 from Weno import *
-from numba import jit
+import cProfile
 import time
 import socket
-import Numfluxes as NF
+import GodunovFlux as Godunov
+import Burghers as Burg
+import Convection
 from  RK3TVD import *
-import numba as nb
 import time
 
 size=1000
@@ -29,18 +30,18 @@ np.savetxt("gp0",In)
 
 print("size= ",size," dt= ",dt," nteps=", T/dt)
 
-R=RK3TVD(size,L)
 
-#NumF=NF.GodunovConvection
-#NumF=NF.GodunovBurghers
-NumF=NF.LaxFriedrichsConvection
-#NumF=NF.LaxFriedrichsBurghers
+W=Weno(size)
+Meth=lambda x,y: W.weno(Godunov,Burg,L,x,y)
+#Meth=lambda x,y: W.weno(Godunov,Convection,L,x,y)
+R=RK3TVD(size)
+
 
 t=0
 
 t1 = time.time()
 while t<T:
-     Out=R.op(NumF,In,dt)
+     Out=R.op(Meth,In,dt)
      In,Out=Out,In
      t+=dt
 
@@ -50,4 +51,3 @@ fi=open("gp","w")
 np.savetxt("gp",In)
 fi.close()
 print("A file 'gp' with the final solution was created.")
-
