@@ -15,7 +15,7 @@
 #include <cmath>
 #include <ctime>
 #include <memory>
-#define DO_GNUPLOT_FILES
+//#define DO_GNUPLOT_FILES
 using namespace std;
 
 double get_time() {

@@ -1,12 +1,10 @@
 import numpy as np
 from Weno import *
-from numba import jit
-import time
-import socket
 import Numfluxes as NF
 from  RK3TVD import *
 import numba as nb
 import time
+import socket
 
 size=1000
 L=1.0
@@ -32,8 +30,8 @@ print("size= ",size," dt= ",dt," nteps=", T/dt)
 R=RK3TVD(size,L)
 
 #NumF=NF.GodunovConvection
-#NumF=NF.GodunovBurghers
-NumF=NF.LaxFriedrichsConvection
+NumF=NF.GodunovBurghers
+#NumF=NF.LaxFriedrichsConvection
 #NumF=NF.LaxFriedrichsBurghers
 
 t=0

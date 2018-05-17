@@ -116,7 +116,12 @@ function test(p,In::Array{Float64,2},Out::Array{Float64,2},nit::Int)
 end
     T,niter
 end
-
+DD=Dict("proc1!"=>"Vectorisation with braces             ",
+        "proc2!"=>"Vectorisation with @. and braces      ",
+        "proc3!"=>"Unrolled loop (good order)            ",
+        "proc4!"=>"Unrolled loop with @simd (good order) ",
+        "proc5!"=>"Unrolled loop with @simd (bad order)  "
+        )
 # computation starts here:
 siz=8
 sizemax=1025
@@ -135,12 +140,12 @@ while siz<sizemax
             best=p
         end
         t*=10.0^(-9)
-        println(p," : t= ",t," seconds ")
+        println(DD[string(p)]," : t= ",t," seconds ")
     end
 
     nflops=6*(siz-2)^2
     flops=nflops/tbest
-    println("\nbest: ",best)
+    println("\nbest: ",DD[string(best)])
     println("nb. flops (best): ",nflops, ", Gflops/s: ",flops)
     println("-------")
     

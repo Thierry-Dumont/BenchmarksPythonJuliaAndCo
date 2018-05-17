@@ -94,14 +94,19 @@ function test(p,A::Array{Float64,1},B::Array{Float64,1},
 end
     T,niter
 end
-
+DD=Dict("proc1!"=>"Naïve vectorisation               ",
+        "proc2!"=>"Vectorisation with braces         ",
+        "proc3!"=>"Unrolled loop                     ",
+        "proc4!"=>"Vectorisation with braces by steps",
+        "proc5!"=>"Vectorisation with @. by steps    "
+        )
 # computation starts here:
 size=1
-sizemax=10^7
+sizemax=10^6
 const niter=2
 
 while size<sizemax
-    println("size: ",size)
+    println("size: ",size,":\n")
     A=Array{Float64}(size)
     B=Array{Float64}(size)
     C=Array{Float64}(size)
@@ -116,11 +121,11 @@ while size<sizemax
             best=p
         end
         t*=10.0^(-9)
-        println(p," : t= ",t," seconds")
+        println(DD[string(p)]," : t= ",t," seconds")
     end
     nflops=size*5
     flops=nflops/tbest
-    println("\nbest: ",best)
+    println("\nbest: ",DD[string(best)])
     println("nb. flops (best): ",nflops, ", Gflops/s: ",flops)
     println("-------")
     

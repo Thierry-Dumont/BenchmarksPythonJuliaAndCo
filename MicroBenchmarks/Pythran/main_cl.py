@@ -37,6 +37,8 @@ size=1
 sizemax=1000000
 niter=10
 parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
+DD={"cl_2":"Naïve","cl_1":"Vectorized"}
+
 while size<sizemax:
     print("size: ",size)
     A= np.empty(size)
@@ -54,7 +56,7 @@ while size<sizemax:
         print(parsef(p)," : t= ",t," seconds ")
     nflops= size*2
     flops=nflops/tbest
-    print("\nbest: ",parsef(best))
+    print("\nbest: ",DD[parsef(best)])
     print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))
     print("-------")
     size*=10

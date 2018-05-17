@@ -28,7 +28,7 @@ int main()
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
   
-  const long int ntri=std::pow(10,8);
+  const long int ntri=std::pow(10,6);
   
   double x[3],y[3]; // triangle summits.
   double mat[21];
