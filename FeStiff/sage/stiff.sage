@@ -68,7 +68,7 @@ MN*=(1/(6*det))
 print(MN(x0=0,x1=1,y0=0,y1=0,x2=0,y2=1))
 print("verify:")
 print(MN(x0=0,x1=1,y0=0,y1=0,x2=0,y2=1)==M)
-#verify also that if v=[1,1,1,1,1,1], M*V==0 and MN*V=0.
+#verify also that if v=[1,1,1,1,1,1], M*V==0 and MN*V=0 an any triangle:
 x=vector([1,1,1,1,1,1])
 print( (M*x).is_zero(),(MN*x).simplify_rational().is_zero())
 # Define a function that will return the stiffness matrix, for x=[], y=[]
@@ -91,10 +91,23 @@ for i in range(0,200):
         x1=dilat*x
         y1=dilat*y
         assert(Stiff(x1,y1) == M)
-
+#
+# Verify that the Stiffness matrix is invariant under some rotations.
+# (we must rotate by angles whose sinus and cosinus are Algebraic Numbers,
+# and compute in (real) Algebraic Numbers (AA for SageMath), so as to make
+# again exact computations):
+tetas=[pi/12,pi/6,pi/4,pi/3,pi/2]
+for teta in tetas:
+    Rot=matrix(AA,[[cos(teta),-sin(teta)],[sin(teta),cos(teta)]])
+    V=[Rot*vector(AA,[x[i],y[i]]) for i in range(0,3)]
+    xr=vector(AA,[s[0] for s in V])
+    yr=vector(AA,[s[1] for s in V])
+    print(Stiff(xr,yr)==M)
+#
 # usefull for Python programing (see Py*/ directories)
 import numpy as np
 gqnp=np.array(gq,dtype=np.float64).reshape(18,2)
 #print(gqnp)
 print("end")
+
 
