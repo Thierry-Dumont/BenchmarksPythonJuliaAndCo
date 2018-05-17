@@ -58,6 +58,8 @@ def test(p,In,Out,nit):
 
     return T,niter
 
+DD={"lapl2d_1":"Vectorized",
+    "lapl2d_2":"Naïve     "}
 size=16
 sizemax=513
 niter=10
@@ -74,10 +76,10 @@ while size<sizemax:
         if t<tbest:
             tbest=t
             best=p
-        print(parsef(p)," : t= ",t," seconds ")
+        print(DD[parsef(p)]," : t= ",t," seconds ")
     nflops=6*(size-2)**2
     flops=nflops/tbest
-    print("\nbest: ",parsef(best))
+    print("\nbest: ",DD[parsef(best)])
     print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))
     print("-------")
     size*=2

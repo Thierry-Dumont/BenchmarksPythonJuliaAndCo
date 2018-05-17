@@ -35,11 +35,12 @@ def test(p,In,Out,nit):
 
     return T,niter
 
+DD={"lapl1d_1":"Vectorized",
+    "lapl1d_2":"Naïve     "}
 size=16
 sizemax=100000
 niter=10
 parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
-D={"lapl1d_2":"Naïve","lapl1d_1":"Vectorized"}
 
 while size<sizemax:
     print("size: ",size)
@@ -53,10 +54,10 @@ while size<sizemax:
         if t<tbest:
             tbest=t
             best=p
-        print(parsef(p)," : t= ",t," seconds ")
+        print(DD[parsef(p)]," : t= ",t," seconds ")
     nflops=size*4
     flops=nflops/tbest
-    print("\nbest: ",D[parsef(best)])
+    print("\nbest: ",DD[parsef(best)])
     print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))
     print("-------")
     size*=2
