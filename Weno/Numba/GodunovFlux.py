@@ -1,4 +1,4 @@
-from numba import jit,njit,float64
+from numba import jit
 @jit(nopython=True)
 def NumFlux(Fmin,Fmax,a,b):
     if a<=b:

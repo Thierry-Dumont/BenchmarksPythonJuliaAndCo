@@ -100,9 +100,7 @@ tetas=[pi/12,pi/6,pi/4,pi/3,pi/2]
 for teta in tetas:
     Rot=matrix(AA,[[cos(teta),-sin(teta)],[sin(teta),cos(teta)]])
     V=[Rot*vector(AA,[x[i],y[i]]) for i in range(0,3)]
-    xr=vector(AA,[s[0] for s in V])
-    yr=vector(AA,[s[1] for s in V])
-    print(Stiff(xr,yr)==M)
+    print teta,": ",Stiff([s[0] for s in V],[s[1] for s in V])==M
 #
 # usefull for Python programing (see Py*/ directories)
 import numpy as np

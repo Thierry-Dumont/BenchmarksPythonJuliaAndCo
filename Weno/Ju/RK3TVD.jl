@@ -1,5 +1,6 @@
 module RK3TVD
 export Rk3tvd!,RK3TVDData
+# RK explicit method, TVD.
 struct RK3TVDData
     size::Int64
     c21::Float64

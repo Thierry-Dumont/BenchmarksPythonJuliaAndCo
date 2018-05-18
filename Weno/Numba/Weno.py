@@ -39,7 +39,7 @@ class Weno(object):
         self.alphaleft=np.empty(3)
         self.InC=np.empty(size+4)
         self.L=L
-    #def weno(self,NumFl,Fl,L,In,Out):
+
     def weno(self,F,In,Out):
         size=self.size
         h1= -1./(self.L/size)

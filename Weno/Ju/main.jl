@@ -36,10 +36,11 @@ Out=Array{Float64}(size)
 W=WenoData(size)
 R=RK3TVDData(size)
 
+# Choose equation:
 #const EQ=Convection
 const EQ=Burghers
 
-
+# Choose numerical flux:
 const NF=NumfluxGodunov
 #const NF=NumfluxLaxFriedrichs
 
@@ -58,7 +59,7 @@ close(f)
 println("start computation")
 t=0.
 t1 = time_ns()
-#Profile.clear_malloc_data()
+
 #@profile
 while t<T
     Rk3tvd!(R,S,dt,In,Out)

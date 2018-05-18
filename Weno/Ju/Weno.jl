@@ -48,7 +48,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     # build an extended array with phantom cells to deal with periodicity:
     W.InC[1]=In[size-1]
     W.InC[2]=In[size]
-    #W.InC[3:2+size]=In[:]
+    #W.InC[3:2+size]=In[:] #slower!
     #W.InC[3:2+size]=copy(In[:])
     @simd for i=1:size
         W.InC[2+i]=In[i]
@@ -91,7 +91,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
         W.reconstructed[2*vol-1]  = recleft/sleft
         W.reconstructed[2*vol]= recright/sright
     end
-    #W.reconstructed[1:4]=W.reconstructed[2*size+1:2*size+4]
+ 
     W.reconstructed[2*size+5:2*size+8]=W.reconstructed[5:8]
     #Numerical flux at boundaries of volumes:
     @simd for vol in 1:size
@@ -103,6 +103,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     @simd for vol in 1:size
         Out[vol]=h1*(W.work[vol+1]-W.work[vol])
     end
+    # slower:
     #@. Out[1:size] = h1*(W.work[2:size+1]-W.work[1:size])
     nothing
 end
