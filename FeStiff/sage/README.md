@@ -7,7 +7,10 @@ which both perform the same computation:
 ```
 >sage -n jupyter
 ```
-and let you conduct by Jupyter.
+and let you conduct by Jupyter. 
+
+Note that if you click on Stiff.ipynb here,
+Github will display the results.
 
 * **stiff.sage:** a command line script; to run it:
 ```
