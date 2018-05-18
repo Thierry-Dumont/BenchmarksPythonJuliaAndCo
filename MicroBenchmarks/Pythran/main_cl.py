@@ -58,7 +58,7 @@ while size<sizemax:
     nflops= size*2
     flops=nflops/tbest
     print("\nbest: ",DD[parsef(best)])
-    print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))
+    print("nb. flop: ",nflops, ", Gflops/ss (best): ",flops/(10**9))
     print("-------")
     size*=10
     print(" ")

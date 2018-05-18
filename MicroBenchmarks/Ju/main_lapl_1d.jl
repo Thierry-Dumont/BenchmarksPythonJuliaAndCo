@@ -101,7 +101,7 @@ while size<sizemax
     nflops=size*4
     flops=nflops/tbest
     println("\nbest: ",DD[string(best)])
-    println("nb. flops (best): ",nflops, ", Gflops/s: ",flops)
+    println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
     size*=2

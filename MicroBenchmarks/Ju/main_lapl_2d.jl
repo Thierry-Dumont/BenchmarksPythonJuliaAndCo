@@ -146,7 +146,7 @@ while siz<sizemax
     nflops=6*(siz-2)^2
     flops=nflops/tbest
     println("\nbest: ",DD[string(best)])
-    println("nb. flops (best): ",nflops, ", Gflops/s: ",flops)
+    println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
     siz*=2
