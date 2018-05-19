@@ -1,6 +1,7 @@
 #include "rando.hpp"
 #include "Stiffness.hpp"
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <unistd.h>
 #include <limits.h>
@@ -91,6 +92,10 @@ int main()
   cout<<"Time by triangle: "<<ttri<<" second."<<endl;
 
   cout<<S.flops/ttri<<" Gflops/s."<<endl;
+
+  ofstream f; f.open("../RunningOn"+hostname);
+  f<<ttri<<endl;
+  f.close();
   cout<<endl;
   cout<<"end."<<endl;
 }

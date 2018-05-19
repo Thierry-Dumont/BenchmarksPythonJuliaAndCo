@@ -55,6 +55,9 @@ Tsecond=float(T)*10.0^(-9)
 println("Total time: ",Tsecond)
 byTr=Tsecond/ntri
 println("Time by triangle: ",byTr," seconds.")
+open("RunningOn"*gethostname(),"w") do f
+    write(f,string(byTr),"\n")
+end
 println("end.")
 
 # to prile the code,uncomment:
