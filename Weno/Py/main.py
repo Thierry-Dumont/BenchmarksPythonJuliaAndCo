@@ -51,3 +51,7 @@ fi=open("gp","w")
 np.savetxt("gp",In)
 fi.close()
 print("A file 'gp' with the final solution was created.")
+
+f=open("RunningOn"+socket.gethostname(),"w")   
+f.write(str(t)+"\n")
+f.close()

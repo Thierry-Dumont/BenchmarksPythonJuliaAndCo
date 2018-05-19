@@ -75,3 +75,6 @@ f=open("gp","w")
 writedlm(f, In)
 close(f)
 println("A file 'gp' with the final solution was created.")
+open("RunningOn"*gethostname(),"w") do f
+    write(f,string(tcomp),"\n")
+end

@@ -120,5 +120,12 @@ int main()
   f.close();
   cout<<"A file 'gp' with the final solution was created."<<endl; 
 #endif
+
+
+  ofstream fb; fb.open("../RunningOn"+hostname);
+  fb<<t2-t1<<endl;
+  fb.close();
+
+  
   cout<<"end"<<endl;
 }
