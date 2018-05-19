@@ -33,6 +33,10 @@ Thierry Dumont   tdumont@math.univ-lyon1.fr
 
 cd successively in C++, Py, Pythran, Numba, Ju; then look at the documentation.
 
+Once you have run the benchmark in **all** directories (except sage,
+which is not for benchmarking!), go to Results/
+and look at the documentation to know how to exploit the results.
+
 #### Sage material:
 
 In directory "sage": how to use a (free!) computer algebra system to
