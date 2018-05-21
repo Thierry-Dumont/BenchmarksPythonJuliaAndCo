@@ -104,7 +104,7 @@ DD=Dict("proc1!"=>"Naïve vectorisation               ",
 size=1
 sizemax=10^6
 const niter=2
-
+fw=open("RunningOn"*gethostname()*"_cl","w")
 while size<sizemax
     println("size: ",size,":\n")
     A=Array{Float64}(size)
@@ -126,9 +126,14 @@ while size<sizemax
     nflops=size*5
     flops=nflops/tbest
     println("\nbest: ",DD[string(best)])
+
+    write(fw,string(size)," ",string(tbest*10.0^(-9)),"\n")
+    
     println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
     size*=10
     println()
+    
 end
+close(fw)

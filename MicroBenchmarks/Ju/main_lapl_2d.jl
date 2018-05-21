@@ -122,6 +122,9 @@ DD=Dict("proc1!"=>"Vectorisation with braces             ",
         "proc4!"=>"Unrolled loop with @simd (good order) ",
         "proc5!"=>"Unrolled loop with @simd (bad order)  "
         )
+
+fw=open("RunningOn"*gethostname()*"_lapl_2","w")
+
 # computation starts here:
 siz=8
 sizemax=1025
@@ -146,9 +149,13 @@ while siz<sizemax
     nflops=6*(siz-2)^2
     flops=nflops/tbest
     println("\nbest: ",DD[string(best)])
+    
+    write(fw,string(siz)," ",string(tbest*10.0^(-9)),"\n")
+    
     println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
     siz*=2
     println()
 end
+close(fw)
