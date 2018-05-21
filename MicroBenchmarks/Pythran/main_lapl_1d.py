@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import socket
 from lapl1d_1 import *
 from lapl1d_2 import *
 def Init(X,L):
@@ -37,7 +38,10 @@ def test(p,In,Out,nit):
 
 DD={"lapl1d_1":"Vectorized",
     "lapl1d_2":"Naïve     "}
-size=16
+
+f=open("RunningOn"+socket.gethostname()+"_lapl_1","w")
+
+size=32
 sizemax=100000
 niter=10
 parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
@@ -58,7 +62,9 @@ while size<sizemax:
     nflops=size*4
     flops=nflops/tbest
     print("\nbest: ",DD[parsef(best)])
+    f.write(str(size)+" "+str(tbest)+"\n")
     print("nb. flops: ",nflops, ", Gflops/s (best): ",flops/(10**9))
     print("-------")
     size*=2
     print(" ")
+f.close()
