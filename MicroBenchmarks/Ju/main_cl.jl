@@ -80,7 +80,7 @@ function test(p,A::Array{Float64,1},B::Array{Float64,1},
         t1 = time_ns()
         p(A,B,C,D,niter)
         t = (time_ns() -t1)/niter
-        if abs(t-T)/t<0.025
+        if abs(t-T)/t<0.05
             break
     else
             T=t
@@ -101,7 +101,7 @@ DD=Dict("proc1!"=>"Naïve vectorisation               ",
         "proc5!"=>"Vectorisation with @. by steps    "
         )
 # computation starts here:
-size=1
+size=32
 sizemax=10^6
 const niter=2
 fw=open("RunningOn"*gethostname()*"_cl","w")
@@ -132,7 +132,7 @@ while size<sizemax
     println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
-    size*=10
+    size*=2
     println()
     
 end

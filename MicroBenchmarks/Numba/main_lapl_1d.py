@@ -66,7 +66,7 @@ DD={"lapl1d_1":"Vectorized          ",
 
 f=open("RunningOn"+socket.gethostname()+"_lapl_1","w")
 
-size=16
+size=32
 sizemax=100000
 niter=10
 parsef= lambda  f: str(f).split(" ")[1] #parse function name

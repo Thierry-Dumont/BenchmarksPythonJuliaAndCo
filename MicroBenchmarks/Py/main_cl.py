@@ -51,7 +51,7 @@ def test(p,A,B,C,D,nit):
 
     return T,niter
 
-size=16
+size=32
 sizemax=100000
 niter=10
 parsef= lambda  f: str(f).split(" ")[1] #parse function name

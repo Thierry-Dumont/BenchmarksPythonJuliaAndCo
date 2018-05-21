@@ -126,8 +126,8 @@ DD=Dict("proc1!"=>"Vectorisation with braces             ",
 fw=open("RunningOn"*gethostname()*"_lapl_2","w")
 
 # computation starts here:
-siz=8
-sizemax=1025
+siz=32
+sizemax=2049
 const niter=2
 while siz<sizemax
     println("siz: ",siz)

@@ -56,14 +56,15 @@ double  dotest(int size)
       double t1=get_time();
       for(int i=0;i<iter;i++)
 	cl(size,A,B,C,D);
-      Tnew=(get_time()-t1)/iter;
+      Tnew=(get_time()-t1);
       A.swap(D);
-      ok= std::abs(Tnew-T)<0.01;
+      ok= std::abs(Tnew-2*T)/Tnew<0.1 ||iter>100000;
+      //cout<<std::abs(Tnew-2*T)/Tnew<<" "<<iter<<endl;
       T=Tnew;
-      iter*=10;
+      if(!ok) iter*=2;
     }
   while(!ok);
-  return T;
+  return T/iter;
 }
   
 int main()
@@ -73,7 +74,7 @@ int main()
   ofstream fb; fb.open("../RunningOn"+hostname+"_cl");
   
   int sizemax=std::pow(10,6);
-  int size=4;
+  int size=32;
   while(size<sizemax)
     {
       auto T=dotest(size);

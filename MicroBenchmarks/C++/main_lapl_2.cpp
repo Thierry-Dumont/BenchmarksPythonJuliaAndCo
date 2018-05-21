@@ -65,14 +65,16 @@ double  dotest(int size)
       double t1=get_time();
       for(int i=0;i<iter;i++)
 	lapl_2(size,A,B);
-      Tnew=(get_time()-t1)/iter;
+      Tnew=(get_time()-t1);
+      ok= std::abs(Tnew-2*T)/Tnew<0.1||iter>100000;
+      //cout<< std::abs(Tnew-2*T)/Tnew<<" "<<iter<<endl;
       A.swap(B);
-      ok= std::abs(Tnew-T)<0.01;
+      
       T=Tnew;
-      iter*=10;
+      if(!ok) iter*=2;
     }
   while(!ok);
-  return T;
+  return T/iter;
 }
   
 int main()
@@ -83,7 +85,7 @@ int main()
   cout<<"hostname: "<<hostname<<endl;
   ofstream fb; fb.open("../RunningOn"+hostname+"_lapl_2");
   int sizemax=2049;
-  int size=8;
+  int size=32;
   while(size<sizemax)
     {
       auto T=dotest(size);
