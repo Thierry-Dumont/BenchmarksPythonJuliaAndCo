@@ -49,7 +49,7 @@ double  dotest(int size)
   Init(A,1.,size); Init(B,1.,size); Init(C,1.,size); Init(D,1.,size); 
   double T=0;
   double Tnew=std::pow(10.,20);
-  int iter=100000;
+  int iter=10000;
   bool ok=false;
   do
     {
@@ -73,14 +73,14 @@ int main()
   ofstream fb; fb.open("../RunningOn"+hostname+"_cl");
   
   int sizemax=std::pow(10,6);
-  int size=1;
+  int size=4;
   while(size<sizemax)
     {
       auto T=dotest(size);
       double flops=size*5/T;
       cout<<size<<" "<<T<<", Gflops/s: "<<flops*std::pow(10,-9)<<endl;
       fb<<size<<" "<<T<<endl;
-      size*=10;
+      size*=2;
     }
   fb.close();
   cout<<"end"<<endl;

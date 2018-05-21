@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import socket
 
 def Init(X,L):
     size=X.size
@@ -56,6 +57,9 @@ niter=10
 parsef= lambda  f: str(f).split(" ")[1] #parse function name
 DD={"cl_2":"Naïve     ",
     "cl_1":"Vectorized"}
+
+f=open("RunningOn"+socket.gethostname()+"_cl","w")
+
 while size<sizemax:
     print("size: ",size)
     A= np.empty(size)
@@ -74,7 +78,9 @@ while size<sizemax:
     nflops= 4*(size-2)
     flops=nflops/tbest
     print("\nbest: ",DD[parsef(best)])
+    f.write(str(size)+" "+str(tbest)+"\n")
     print("nb. flops: ",nflops, ", Gflops/s (best): ",flops/(10**9))
     print("-------")
     size*=2
     print(" ")
+f.close()

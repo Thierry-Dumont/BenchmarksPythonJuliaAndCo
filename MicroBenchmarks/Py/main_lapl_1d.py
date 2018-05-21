@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import socket
 
 def Init(X,L):
     size=X.size
@@ -51,6 +52,9 @@ def test(p,In,Out,nit):
 
 DD={"lapl1d_1":"Vectorized",
     "lapl1d_2":"Naïve     "}
+
+f=open("RunningOn"+socket.gethostname()+"_lapl_1","w")
+
 size=16
 sizemax=100000
 niter=10
@@ -71,7 +75,9 @@ while size<sizemax:
     nflops= 4*(size-2)
     flops=nflops/tbest
     print("\nbest: ",DD[parsef(best)])
+    f.write(str(size)+" "+str(tbest)+"\n")
     print("nb. flops: ",nflops, ", Gflops/s (best): ",flops/(10**9))
     print("-------")
     size*=2
     print(" ")
+f.close()
