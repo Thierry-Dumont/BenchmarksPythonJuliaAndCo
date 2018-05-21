@@ -17,6 +17,7 @@ files=[
     "../Py",
     "../Ju",
     "../Numba",
+    "../Pythran"
 ]
 cpp="../C++"
 
