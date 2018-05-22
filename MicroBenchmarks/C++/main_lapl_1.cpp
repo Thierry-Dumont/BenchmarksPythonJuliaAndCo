@@ -55,9 +55,7 @@ double  dotest(int size)
       for(int i=0;i<iter;i++)
 	lapl_1(size,A,B);
       Tnew=(get_time()-t1);
-     
-      //cout<<size<<" "<<iter<<" "<<Tnew<<" "<<2*T<<" "<<std::abs(Tnew-2*T)/Tnew<<endl;
-      A.swap(B);
+  
       ok= std::abs(Tnew-2*T)/Tnew<0.1||iter>100000;
       T=Tnew;
       if(!ok) iter*=2;
