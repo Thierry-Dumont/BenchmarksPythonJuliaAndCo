@@ -16,8 +16,7 @@ for hyperbolic conservation laws_, which can be found [here](https://ntrs.nasa.g
 This is a classical computation in hyperbolic PDEs.
 
 It needs to compute with large stencils, min and max functions. As we
-compute in dimension 1, the memory footprint is very low (
-everything can be stored in the cache), but the access patterns to
+compute in dimension 1, the memory footprint is very low, but the access patterns to
 arrays are not so trivial.
 
 One can chose between two problems:
@@ -45,7 +44,6 @@ Thierry Dumont   tdumont@math.univ-lyon1.fr
 
 - **C++**:      pure C++, sequential.
 - **Py**:       pure Python.
-- **Pytran**:   Python/Pythran version.
 - **Ju**:       Ĵulia.
 - **Numba**:    Python/Numba version.
 
@@ -55,14 +53,11 @@ Thierry Dumont   tdumont@math.univ-lyon1.fr
 * All the codes are self-contained; there is no linear algebra and thus
 no need for external libraries.
 
-* The pure Python **Py** implementation is a relatively immediate
-  translation of the **C++** implementation: it seems to be what a
-  programmer would implement if he wants to follow the algorithmic description.
+
 
 ### Running the benchmarks
 
-cd succesively in C++, Ju, Numba Py, Pythran, PyVec,
- PythranVec; then look at the documentation.
+cd succesively in C++, Ju, Numba Py; then look at the documentation.
 
 #### Results:
 
@@ -71,3 +66,7 @@ hostname".
 
 * The C++ code can produce files to visualize the solution with
 gnuplot. _Deactivate this for benchmarking!_ 
+
+##### To exploit the results:
+
+Go to Results/ directory. Then, read the doc.

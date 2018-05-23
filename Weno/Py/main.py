@@ -4,6 +4,7 @@ import cProfile
 import time
 import socket
 import GodunovFlux as Godunov
+import LaxFriedrichs 
 import Burghers as Burg
 import Convection
 from  RK3TVD import *
@@ -32,8 +33,18 @@ print("size= ",size," dt= ",dt," nteps=", T/dt)
 
 
 W=Weno(size)
-Meth=lambda x,y: W.weno(Godunov,Burg,L,x,y)
-#Meth=lambda x,y: W.weno(Godunov,Convection,L,x,y)
+
+# Choose on equation:
+Flux=Burg
+#Flux=Convection
+
+# Choose one numerical flux:
+NumFlux=Godunov
+#NumFlux=LaxFriedrichs 
+
+Meth=lambda x,y: W.weno(NumFlux,Flux,L,x,y)
+
+
 R=RK3TVD(size)
 
 
