@@ -4,7 +4,7 @@
 ./script  code.jl
 ```
 
-with code.jl = main_cl.jl,  main_dot.jl,  main_lapl_1d.jl or main_lapl_2d.jl
+with code.jl = main_cl.jl,  main_lapl_1d.jl or main_lapl_2d.jl
 
 * If you want to look at memory usage do:
 ```

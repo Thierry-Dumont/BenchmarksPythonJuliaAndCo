@@ -1,22 +1,17 @@
-#### These small SageMath scripts are supposed to show how computer algebra can help implementing finite elements (this a very simple example!). 
+#### This small SageMath script is supposed to show how computer algebra can help implementing finite elements (this a very simple example!). 
 
-You need [SageMath](http://www.sagemath.org/) to run these snippets,
-which both perform the same computation:
+You need [SageMath](http://www.sagemath.org/) to run this snippet,
 
-* **Stiff.ipynb:** this is a SageMath _notebook_. To launch it:
+
+* **Stiff.ipynb:**  is a SageMath _notebook_. To launch it:
 ```
 >sage -n jupyter
 ```
-and let you conduct by Jupyter.
+and let you conduct by Jupyter and SageMath. 
 
-* **stiff.sage:** a command line script; to run it:
-```
->sage
-sage: load("stiff.sage")
-```
+Note that if you click on Stiff.ipynb here,
+Github will display the results (as stored in the notebook).
 
-
-The _notebook_ may be more pedagogical than the script.
 
 ##### Note: ####
 If you want to learn _SageMath_, you can read the book _Mathematical Computation

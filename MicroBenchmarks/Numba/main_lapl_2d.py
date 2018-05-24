@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import socket
 from numba import jit,stencil
 
 def Init(X,L):
@@ -14,6 +15,7 @@ def Init(X,L):
 
 @jit
 def lapl2d_1(In,Out,niter):
+    # Vectorized version:
     siz=In.shape[0]
     h2= (1./size)**2
 
@@ -25,6 +27,7 @@ def lapl2d_1(In,Out,niter):
         In,Out=Out,In
 @jit
 def lapl2d_2(In,Out,niter):
+    # Naïve version:
     size=In.shape[0]
     h2= (1./size)**2
     for it in range(0,niter):
@@ -40,6 +43,7 @@ def kernel(In,h2):
     return h2*(In[1,0] + In[0,-1]-4.0*In[0,0]+In[+1,0]+In[0,+1])
 @jit
 def lapl2d_3(In,Out,niter):
+    # Version using Numba "stencils".
     size=In.shape[0]
     h2= (1./size)**2
     for it in range(0,niter):
@@ -68,8 +72,14 @@ def test(p,In,Out,nit):
 
     return T,niter
 
-size=16
-sizemax=1025
+DD={"lapl2d_1":"Vectorized          ",
+    "lapl2d_2":"Naïve               ",
+    "lapl2d_3":"Numba stencil kernel"}
+
+f=open("RunningOn"+socket.gethostname()+"_lapl_2","w")
+
+size=32
+sizemax=2049
 niter=10
 parsef= lambda  f: str(f).split(" ")[1] #parse function name
 while size<sizemax:
@@ -84,11 +94,13 @@ while size<sizemax:
         if t<tbest:
             tbest=t
             best=p
-        print(parsef(p)," : t= ",t," seconds ")
+        print(DD[parsef(p)]," : t= ",t," seconds ")
     nflops=6*(size-2)**2
     flops=nflops/tbest
-    print("\nbest: ",parsef(best))
-    print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))
+    print("\nbest: ",DD[parsef(best)])
+    f.write(str(size)+" "+str(tbest)+"\n")
+    print("nb. flops: ",nflops, ", Gflops/s (best): ",flops/(10**9))
     print("-------")
     size*=2
     print(" ")
+f.close()

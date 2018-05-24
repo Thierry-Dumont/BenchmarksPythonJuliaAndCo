@@ -1,6 +1,7 @@
 #include "rando.hpp"
 #include "Stiffness.hpp"
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <unistd.h>
 #include <limits.h>
@@ -28,7 +29,7 @@ int main()
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
   
-  const long int ntri=std::pow(10,8);
+  const long int ntri=std::pow(10,6);
   
   double x[3],y[3]; // triangle summits.
   double mat[21];
@@ -91,6 +92,10 @@ int main()
   cout<<"Time by triangle: "<<ttri<<" second."<<endl;
 
   cout<<S.flops/ttri<<" Gflops/s."<<endl;
+
+  ofstream f; f.open("../RunningOn"+hostname);
+  f<<ttri<<endl;
+  f.close();
   cout<<endl;
   cout<<"end."<<endl;
 }

@@ -48,5 +48,7 @@ print("second phase: ",tr," seconds.")
 t-=tr
 print("Total time: ",t," seconds.")
 print("Time by triangle:", "{:.5e}".format(t/ntri),"second.")
-
+f=open("RunningOn"+socket.gethostname(),"w")   
+f.write(str(t/ntri)+"\n")
+f.close()
 print("fin")

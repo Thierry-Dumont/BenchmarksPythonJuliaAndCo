@@ -43,7 +43,7 @@ Roland Denis     denis@math.univ-lyon1.fr
 
 - **Numba**:    Python + Numba
 
-- **PLOT**:    graphical material and an example of result.
+- **Results**:    graphical material and an example of result.
 
 ### Note:
 

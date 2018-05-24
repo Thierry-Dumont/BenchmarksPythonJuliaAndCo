@@ -116,10 +116,18 @@ function test(p,In::Array{Float64,2},Out::Array{Float64,2},nit::Int)
 end
     T,niter
 end
+DD=Dict("proc1!"=>"Vectorisation with braces             ",
+        "proc2!"=>"Vectorisation with @. and braces      ",
+        "proc3!"=>"Unrolled loop (good order)            ",
+        "proc4!"=>"Unrolled loop with @simd (good order) ",
+        "proc5!"=>"Unrolled loop with @simd (bad order)  "
+        )
+
+fw=open("RunningOn"*gethostname()*"_lapl_2","w")
 
 # computation starts here:
-siz=8
-sizemax=1025
+siz=32
+sizemax=2049
 const niter=2
 while siz<sizemax
     println("siz: ",siz)
@@ -135,15 +143,19 @@ while siz<sizemax
             best=p
         end
         t*=10.0^(-9)
-        println(p," : t= ",t," seconds ")
+        println(DD[string(p)]," : t= ",t," seconds ")
     end
 
     nflops=6*(siz-2)^2
     flops=nflops/tbest
-    println("\nbest: ",best)
-    println("nb. flops (best): ",nflops, ", Gflops/s: ",flops)
+    println("\nbest: ",DD[string(best)])
+    
+    write(fw,string(siz)," ",string(tbest*10.0^(-9)),"\n")
+    
+    println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
     siz*=2
     println()
 end
+close(fw)

@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import socket
 from cl_1 import *
 from cl_2 import *
 
@@ -33,10 +34,15 @@ def test(p,A,B,C,D,nit):
 
     return T,niter
 
-size=1
+size=32
 sizemax=1000000
 niter=10
 parsef= lambda  f: str(f).split(" ")[2][:-1] #parse function name
+DD={"cl_2":"Naïve     ",
+    "cl_1":"Vectorized"}
+
+f=open("RunningOn"+socket.gethostname()+"_cl","w")
+
 while size<sizemax:
     print("size: ",size)
     A= np.empty(size)
@@ -51,11 +57,13 @@ while size<sizemax:
         if t<tbest:
             tbest=t
             best=p
-        print(parsef(p)," : t= ",t," seconds ")
+        print(DD[parsef(p)]," : t= ",t," seconds ")
     nflops= size*2
     flops=nflops/tbest
-    print("\nbest: ",parsef(best))
-    print("nb. flops (best): ",nflops, ", Gflops/s: ",flops/(10**9))
+    print("\nbest: ",DD[parsef(best)])
+    f.write(str(size)+" "+str(tbest)+"\n")
+    print("nb. flop: ",nflops, ", Gflops/ss (best): ",flops/(10**9))
     print("-------")
-    size*=10
+    size*=2
     print(" ")
+f.close()

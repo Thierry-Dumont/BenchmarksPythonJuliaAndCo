@@ -80,7 +80,7 @@ function test(p,A::Array{Float64,1},B::Array{Float64,1},
         t1 = time_ns()
         p(A,B,C,D,niter)
         t = (time_ns() -t1)/niter
-        if abs(t-T)/t<0.025
+        if abs(t-T)/t<0.05
             break
     else
             T=t
@@ -94,14 +94,19 @@ function test(p,A::Array{Float64,1},B::Array{Float64,1},
 end
     T,niter
 end
-
+DD=Dict("proc1!"=>"Naïve vectorisation               ",
+        "proc2!"=>"Vectorisation with braces         ",
+        "proc3!"=>"Unrolled loop                     ",
+        "proc4!"=>"Vectorisation with braces by steps",
+        "proc5!"=>"Vectorisation with @. by steps    "
+        )
 # computation starts here:
-size=1
-sizemax=10^7
+size=32
+sizemax=10^6
 const niter=2
-
+fw=open("RunningOn"*gethostname()*"_cl","w")
 while size<sizemax
-    println("size: ",size)
+    println("size: ",size,":\n")
     A=Array{Float64}(size)
     B=Array{Float64}(size)
     C=Array{Float64}(size)
@@ -116,14 +121,19 @@ while size<sizemax
             best=p
         end
         t*=10.0^(-9)
-        println(p," : t= ",t," seconds")
+        println(DD[string(p)]," : t= ",t," seconds")
     end
     nflops=size*5
     flops=nflops/tbest
-    println("\nbest: ",best)
-    println("nb. flops (best): ",nflops, ", Gflops/s: ",flops)
+    println("\nbest: ",DD[string(best)])
+
+    write(fw,string(size)," ",string(tbest*10.0^(-9)),"\n")
+    
+    println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
-    size*=10
+    size*=2
     println()
+    
 end
+close(fw)

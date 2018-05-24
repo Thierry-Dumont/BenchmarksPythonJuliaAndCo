@@ -30,7 +30,7 @@ for i in range(0,6):
     print([mat[i*(i+1)//2+j] for j in range(0,i+1)])
 
 print("\nNow, start the benchmark:")
-ntri=100000
+ntri=1000000
 print(ntri," triangles.")
 R = rando()
 t1 = time.time()
@@ -48,5 +48,7 @@ print("second phase: ",tr," seconds.")
 t-=tr
 print("Total time: ",t," seconds.")
 print("Time by triangle:", "{:.5e}".format(t/ntri),"second.")
-
+f=open("RunningOn"+socket.gethostname(),"w")   
+f.write(str(t/ntri)+"\n")
+f.close()
 print("fin")
