@@ -12,7 +12,7 @@ This computation is simple, but representative of many numerical
 computations. It is auto-contained;  there is no linear algebra and thus
 no need for external libraries.
 
-### Realization:
+### Author:
 
 Thierry Dumont   tdumont@math.univ-lyon1.fr
 

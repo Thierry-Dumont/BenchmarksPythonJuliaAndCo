@@ -19,6 +19,9 @@ The benchmark(s):
   
 * :new: FeStiff: compute the stiffness matrix, for the Poisson equation,
   discretized with P2 finite elements on triangles.
+  
+* :new: Weno: a classical solver for hyperbolic equations, in
+  dimension 1, with application to Burghers equation and to Convection. 
 
   
 * :new: MicroBenchmarks: very simple benchmarks to show the importance

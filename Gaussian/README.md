@@ -12,7 +12,7 @@ should not code in the real life (except for pedagogical purpose) seems to be
 a good prototype of numerical algorithm an user would like to code (as it uses
 about n^3 floating point operations and array manipulations).
 
-### Realisation:
+### Authors:
 
 Thierry Dumont   tdumont@math.univ-lyon1.fr
 

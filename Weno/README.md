@@ -36,7 +36,7 @@ Runke-Kutta explicit method of order 3.
 We use the Weno combination of 3 points stencils, thus giving a
 discretization of order 5 when applied to smooth functions.
 
-### Realisation:
+### Author:
 
 Thierry Dumont   tdumont@math.univ-lyon1.fr
 
