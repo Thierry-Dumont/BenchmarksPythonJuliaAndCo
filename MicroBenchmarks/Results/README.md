@@ -23,4 +23,4 @@ gnuplot>
 
 This will show the results for the 1d laplacian (as a function of the size).
 
-replace "vis_cl" by ""vis_lapl_1" by ""vis_lapl_2"  for the other results.
+replace "vis_cl" by ""vis_lapl_1" or by  ""vis_lapl_2"  for the other results.
