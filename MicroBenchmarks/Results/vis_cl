@@ -1,0 +1,11 @@
+set logscale 
+set key top right
+set xlabel "size"
+set ylabel "cpu time / cpu time C++"
+set title "Linear combinations"
+
+plot "./results/Py_cl"      title "Python" with linespoint
+replot "./results/Ju_cl"      title "Julia" with linespoint
+replot "./results/Pythran_cl" title "Pythran" with linespoint
+replot "./results/Numba_cl" title "Numba" with linespoint
+

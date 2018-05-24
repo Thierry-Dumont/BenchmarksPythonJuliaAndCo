@@ -1,0 +1,11 @@
+set logscale 
+set key top right
+set xlabel "size"
+set ylabel "cpu time / cpu time C++"
+set title "Laplacian 1d"
+
+plot "./results/Py_lapl_1"      title "Python" with linespoint
+replot "./results/Ju_lapl_1"      title "Julia" with linespoint
+replot "./results/Pythran_lapl_1" title "Pythran" with linespoint
+replot "./results/Numba_lapl_1" title "Numba" with linespoint
+

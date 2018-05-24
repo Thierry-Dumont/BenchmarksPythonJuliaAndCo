@@ -17,10 +17,10 @@ in C++ as unit).
 For visualisation you can do for example:
 ```
 gnuplot
-gnuplot> set logscale
-gnuplot> plot "Ju_lapl_1","Numba_lapl_1","Py_lapl_1","Pythran_lapl_1"
+gnuplot> load "vis_cl"
+gnuplot> 
 ```
 
 This will show the results for the 1d laplacian (as a function of the size).
 
-replace "lapl_1" by "lapl_2" or "_cl" for the other computations.
+replace "vis_cl" by ""vis_lapl_1" by ""vis_lapl_2"  for the other results.
