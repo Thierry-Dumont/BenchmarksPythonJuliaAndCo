@@ -50,6 +50,11 @@ Thierry Dumont   tdumont@math.univ-lyon1.fr
 
 ### Note:
 
+* It does not seems easy to implement a Pythran version: defining rhe
+  RHS of the Runge-Kutta solver needs to compose 3 levels of functions
+  (flux, Numerical flux and Weno) and to pass it to the solver. This
+  is something the author was unable to do.
+
 * All the codes are self-contained; there is no linear algebra and thus
 no need for external libraries.
 

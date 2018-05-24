@@ -16,8 +16,7 @@ class Stiffness:
                           -2., 2., 0., 0., 2., 2., 2., 2.,0., 0., 2., -2.,
                           -2., -2., 0.]).reshape(18,2)
 
-        # self.gq=gr.copy()
-
+ 
     def op(self,x,y,m):
         self.ji[0,0]=-y[0] + y[2]
         self.ji[0,1]= y[0] - y[1]

@@ -58,7 +58,7 @@ double  dotest(int size)
 	cl(size,A,B,C,D);
       Tnew=(get_time()-t1);
       A.swap(D);
-      ok= std::abs(Tnew-2*T)/Tnew<0.1 ||iter>100000;
+      ok= std::abs(Tnew-2*T)/Tnew<0.1 ||iter>1000000;
       T=Tnew;
       if(!ok) iter*=2;
     }
