@@ -55,7 +55,7 @@ def doWhatWeMustDo(Dirs,Type):
         with open(thefile, 'w') as file:
             kk=sorted([k for k in D.keys()])
             for k in kk:
-                file.write(str(k)+" "+str(D[k])+'\n')
+                file.write(str(k).ljust(10)+" "+str(D[k])+'\n')
 #------main:
 if not os.path.exists("./results"):
     os.makedirs("./results")
