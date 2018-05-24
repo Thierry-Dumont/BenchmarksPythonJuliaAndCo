@@ -8,4 +8,4 @@ plot "./results/Py_cl"      title "Python" with linespoint
 replot "./results/Ju_cl"      title "Julia" with linespoint
 replot "./results/Pythran_cl" title "Pythran" with linespoint
 replot "./results/Numba_cl" title "Numba" with linespoint
-
+replot 1  title "C++" lt -1
