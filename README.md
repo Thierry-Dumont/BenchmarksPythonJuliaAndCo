@@ -14,8 +14,7 @@ optimized implementation.
 
 The benchmark(s):
 
-* Gaussian:  Gaussian elimination with partial pivoting (see README
-  inside).
+* Gaussian:  Gaussian elimination with partial pivoting.
   
 * :new: FeStiff: compute the stiffness matrix, for the Poisson equation,
   discretized with P2 finite elements on triangles.
