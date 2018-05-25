@@ -43,8 +43,8 @@ void Init(std::unique_ptr<double[]>&  X,double L,int size)
 int main()
 {
   // define problem:
-  //typedef Burghers Problem;
-  typedef Convection Problem;
+  typedef Burghers Problem;
+  //typedef Convection Problem;
 
   // define numerical flux:
   typedef GodunovFlux<Problem> NumFlux;
