@@ -41,7 +41,7 @@ end
 
 function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
 
-    size=W.size
+    const size=W.size
 
     const h1 = -1./(L/size)
     
@@ -49,9 +49,9 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     W.InC[1]=In[size-1]
     W.InC[2]=In[size]
     #W.InC[3:2+size]=In[:] #slower!
-    #W.InC[3:2+size]=copy(In[:])
+    #W.InC[3:2+size]=copy(In[:]) #slower!
     @simd for i=1:size
-        W.InC[2+i]=In[i]
+       W.InC[2+i]=In[i]
     end
     W.InC[size+3]=In[1]
     W.InC[size+4]=In[2]
@@ -60,7 +60,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
         W.work[vol]= (W.InC[vol]-2.0*W.InC[vol+1]+W.InC[vol+2])^2
     end
     # lets's start computation: 
-    for vol= 3:2+size
+    @views for vol= 3:2+size
         @simd for r= 0:2
             W.left[r+1] =dot(W.c[r+1,:],W.InC[vol-r:vol-r+2])
             W.right[r+1]=dot(W.c[r+2,:],W.InC[vol-r:vol-r+2])
