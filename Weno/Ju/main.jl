@@ -52,6 +52,12 @@ end
 
 S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFlux,L,X,Y)
 
+# be sure to run once before actually running the benchmark!
+Rk3tvd!(R,S,dt,In,Out)
+Out,In=In,Out
+#
+Init!(In,L)
+
 f=open("gp0","w")
 writedlm(f, In)
 close(f)

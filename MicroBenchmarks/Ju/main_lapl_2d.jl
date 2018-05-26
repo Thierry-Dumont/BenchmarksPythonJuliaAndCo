@@ -91,10 +91,11 @@ end
 function test(p,In::Array{Float64,2},Out::Array{Float64,2},nit::Int)
    
     niter=nit
+    # be sure to run once before actually running the benchmark!
     Init!(In,1.)
     Init!(Out,1.)
- 
     p(In,Out,niter)
+    # 
     T=0.
     while true
         Init!(In,1.)

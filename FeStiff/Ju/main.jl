@@ -32,10 +32,18 @@ y*=2.0
 Stiffness.op!(S,x,y,m)
 prSubDiag(m)
 
+
+R=RandoData()
+
+# be sure to run once before actually running the benchmark !
+RandomTriangle!(R,x,y)
+Stiffness.op!(S,x,y,m)
+#
+
 println("\nNow, start the benchmark:")
 const ntri=1000000
 println(ntri," triangles.")
-R=RandoData()
+
 t1 = time_ns()
 for t=1:ntri
     RandomTriangle!(R,x,y)

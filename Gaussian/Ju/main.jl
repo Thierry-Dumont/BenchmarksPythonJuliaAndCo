@@ -61,6 +61,11 @@ end
 MatrixSize = 2048
 liminf = 2
 D = Dict{Integer, Real}()
+
+# be sure to run once before actually running the benchmark!
+T = doall(MatrixSize)
+#
+
 println("start")
 
 #Profile.clear()

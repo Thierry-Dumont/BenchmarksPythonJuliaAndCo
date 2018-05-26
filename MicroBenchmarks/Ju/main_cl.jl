@@ -66,11 +66,13 @@ function test(p,A::Array{Float64,1},B::Array{Float64,1},
               C::Array{Float64,1},D::Array{Float64,1},nit::Int)
    
     niter=nit
+    # be sure to run once before actually running the benchmark!
     Init!(A,1.)
     Init!(B,1.)
     Init!(C,1.)
     Init!(D,1.)
     p(A,B,C,D,niter)
+    #
     T=0.
     while true
         Init!(A,1.)

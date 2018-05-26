@@ -30,5 +30,5 @@ Ts=sorted([(n,C[n]/C[cpp]) for n in files],key=lambda x: x[1])
 
 print("\nComputing time / Computing time in C++:\n")
 for s in Ts:
-    print(s[0].ljust(9)," : ",s[1])
+    print("* ",s[0].ljust(9)," : ",str(s[1])[0:5])
 print("\n")
