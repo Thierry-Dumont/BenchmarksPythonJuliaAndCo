@@ -5,4 +5,5 @@ def NumFlux(F,a,b):
     #  return F.minf(a,b)
     #else:
     #  return F.maxf(b,a);
-    return np.select( [a <= b, a > b], [F.minf(a, b), F.maxf(b, a)])
+    return np.where(a <= b, F.minf(a, b), F.maxf(b, a))
+

@@ -10,7 +10,7 @@ def minf(a,b):
 #      return flux(a)
 #    else:
 #      return 0.0
-    return np.select([b <= 0, a >= 0], [flux(b), flux(a)])
+    return (b <= 0) * flux(b) + (a >= 0) * flux(a)
 
 def maxf(a,b):
     return np.maximum(flux(a), flux(b))
