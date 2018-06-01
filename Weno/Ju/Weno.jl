@@ -61,11 +61,25 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     end
     # lets's start computation: 
     @views for vol= 3:2+size
-        @simd for r= 0:2
-            W.left[r+1] =dot(W.c[r+1,:],W.InC[vol-r:vol-r+2])
-            W.right[r+1]=dot(W.c[r+2,:],W.InC[vol-r:vol-r+2])
+        # @simd for r= 0:2
+        #     W.left[r+1] =dot(W.c[r+1,:],W.InC[vol-r:vol-r+2])
+        #     W.right[r+1]=dot(W.c[r+2,:],W.InC[vol-r:vol-r+2])
+        # end
+
+        # faster, as it does not allocate memory:----
+        for r=0:2
+            W.left[r+1]=0.0
+            W.right[r+1]=0.0
+            k=vol-r-1
+            @simd for i=1:3
+                 W.left[r+1]+=W.c[r+1,i]*W.InC[k+i]
+            end
+            @simd for i=1:3
+                W.right[r+1]+=W.c[r+2,i]*W.InC[k+i]
+            end
         end
-         # regularity coefficients
+        #-------------------------------------------
+        # regularity coefficients
         W.beta[1]=W.b0* W.work[vol]+ 
 	W.b1*(3.*W.InC[vol]-4.*W.InC[vol+1]+W.InC[vol+2])^2
         
