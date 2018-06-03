@@ -7,7 +7,7 @@ template<class Flux> class Weno
 {
   int size;
   double h1;
-  double *reconstructed, *numflux;
+  std::unique_ptr<double[]> reconstructed,numflux;
   // Weno-3 coefficients:  --------------------
   const double c[4][3]={
     {11./6.,-7./6.,1./3.},
@@ -33,25 +33,21 @@ public:
   {
     F=Flux(FluxParams);
     // 
-    reconstructed=new double[2*size];
-    numflux= new double[size];
+    reconstructed=std::make_unique<double[]>(2*size);
+    numflux=std::make_unique<double[]>(size);
   }
   Weno& operator=(Weno<Flux>&& W)
   {
     size=W.size;
     F=std::move(W.F);
-    reconstructed=W.reconstructed;
-    numflux=W.numflux;
+    reconstructed=std::move(W.reconstructed);
+    numflux=std::move(W.numflux);
     h1=W.h1;
-    W.reconstructed=NULL; W.numflux=NULL;
-    
     return *this;
   }
   ~Weno()
   {
-    delete[] reconstructed;
-    delete[] numflux;
-   
+ 
   }
   void operator()(std::unique_ptr<double []>& In,
 		  std::unique_ptr<double []>& Out)
