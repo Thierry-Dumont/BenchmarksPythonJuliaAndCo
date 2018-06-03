@@ -24,7 +24,7 @@ struct WenoData
         [11./6.,-7./6.,1./3.,1./3.,5./6.,-1./6.,
          -1./6.,5./6.,1./3.,1./3.,-7/6.,11./6.],3,4)),
                Array([3./10.,3./5.,1./10.]),
-               Array([1./10.,3./5.,3.10]),
+               Array([1./10.,3./5.,3./10]),
                13./12.,
                1./4.,
                    1.e-6,
@@ -66,7 +66,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
         #     W.right[r+1]=dot(W.c[r+2,:],W.InC[vol-r:vol-r+2])
         # end
 
-        # faster tha above, as it does not allocate memory:----
+        # faster than above, as it does not allocate memory:----
         for r=0:2
             W.left[r+1]=0.0
             W.right[r+1]=0.0
