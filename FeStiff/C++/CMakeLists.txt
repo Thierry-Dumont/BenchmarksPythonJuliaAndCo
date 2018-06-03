@@ -15,7 +15,7 @@ if (${CMAKE_CXX_COMPILER} MATCHES "icpc.*$")
 
 else ()
   set (USING_GNU TRUE)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -O3 -Wall  -std=c++11 -march=native")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -O3 -Wall  -std=c++14 -march=native")
 
 endif ()
 

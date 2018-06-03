@@ -66,7 +66,7 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
         #     W.right[r+1]=dot(W.c[r+2,:],W.InC[vol-r:vol-r+2])
         # end
 
-        # faster, as it does not allocate memory:----
+        # faster tha above, as it does not allocate memory:----
         for r=0:2
             W.left[r+1]=0.0
             W.right[r+1]=0.0

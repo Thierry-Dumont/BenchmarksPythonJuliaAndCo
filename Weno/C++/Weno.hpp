@@ -32,7 +32,7 @@ public:
   Weno(int _size,double _L,double FluxParams[]): size(_size),h1(-1./(_L/size))
   {
     F=Flux(FluxParams);
-    //
+    // 
     reconstructed=new double[2*size];
     numflux= new double[size];
   }

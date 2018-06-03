@@ -131,7 +131,7 @@ siz=32
 sizemax=2049
 const niter=2
 while siz<sizemax
-    println("siz: ",siz)
+    println("size: ",siz)
     In=Array{Float64,2}(siz,siz)
     Out=Array{Float64,2}(siz,siz)
     tbest=10.^29
