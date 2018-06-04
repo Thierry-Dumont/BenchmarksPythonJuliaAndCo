@@ -36,7 +36,7 @@ make
 a file "run" is created.
 To use an other compiler (eg. clang++) do:
 ```
-CXX= clang++ cmake ..
+CXX=clang++ cmake ..
 make
 ```
 

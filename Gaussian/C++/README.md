@@ -1,4 +1,3 @@
-You need cmake !
 
 ### Compilation:
 ```
@@ -15,4 +14,4 @@ from Build/ directory, type:
 ```
 ./run
 ```
-By default, we use g++. Tou can change the compiler to use, for example clang++.
+

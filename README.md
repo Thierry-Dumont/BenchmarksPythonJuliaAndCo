@@ -35,7 +35,7 @@ We will add other numerical significative benchmarks in the (near) future.
 
 
 - python3
-- pip
+- pip (pip3)
 - g++ (and/or clang++)
 - lapack
 - openblas
@@ -69,3 +69,9 @@ pip install pythran
 and so on...
 
 You can also install them from [conda](https://conda.io/docs/).
+
+# Results:
+
+Have a look at the **wiki**, where you can find results obtained on my personal
+computer, as well as some considerations on the different benchmarks
+and on optimizations implemented.

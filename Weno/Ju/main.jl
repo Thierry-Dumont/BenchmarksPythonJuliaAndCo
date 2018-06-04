@@ -45,14 +45,15 @@ const NF=NumfluxGodunov
 #const NF=NumfluxLaxFriedrichs
 
 if NF==NumfluxGodunov
-@inline NumFlux(X::Float64,Y::Float64)=NumfluxGodunov(EQ.minf,EQ.maxf,X,Y)
+    @inline NumFlux(X::Float64,Y::Float64)=NumfluxGodunov(EQ.minf,EQ.maxf,X,Y)
 else
-NumFlux(X::Float64,Y::Float64)=NumfluxLaxFriedrichs(EQ.flux,X,Y,1.0)
+    @inline NumFlux(X::Float64,Y::Float64)=NumfluxLaxFriedrichs(EQ.flux,X,Y,1.0)
 end
 
 S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFlux,L,X,Y)
 
 # be sure to run once before actually running the benchmark!
+Init!(In,L)
 Rk3tvd!(R,S,dt,In,Out)
 Out,In=In,Out
 #

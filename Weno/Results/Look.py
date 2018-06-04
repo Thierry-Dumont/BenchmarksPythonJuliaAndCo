@@ -9,6 +9,7 @@ def parsit(D,name,l):
 # directories to explore ---------   
 files=[
     "Py",
+    "PyVec",
     "Ju",
     "Numba",
 ]
