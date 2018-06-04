@@ -75,3 +75,5 @@ cd PLOT/
 Read README.md file.
 
 
+### Results:
+Have a look at the  [this page in the Wiki](https://github.com/Thierry-Dumont/BenchmarksPythonJuliaAndCo/wiki/3-The-Gaussian-Benchmark).

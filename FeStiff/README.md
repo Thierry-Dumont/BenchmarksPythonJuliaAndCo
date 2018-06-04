@@ -41,3 +41,6 @@ and look at the documentation to know how to exploit the results.
 
 In directory "sage": how to use a (free!) computer algebra system to
  help compute and implement finite elements. 
+
+### Results:
+Have a look at the  [this page in the Wiki](https://github.com/Thierry-Dumont/BenchmarksPythonJuliaAndCo/wiki/5-The-FeStiff-benchmark).

@@ -12,3 +12,6 @@ software:
 ### Author:
 
 Thierry Dumont   tdumont@math.univ-lyon1.fr
+
+### Results:
+Have a look at the  [this page in the Wiki](https://github.com/Thierry-Dumont/BenchmarksPythonJuliaAndCo/wiki/6-The-micro-benchmarks).
