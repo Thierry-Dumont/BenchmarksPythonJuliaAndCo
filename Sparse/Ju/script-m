@@ -1,2 +1,0 @@
-#!/bin/bash
-julia --check-bounds=no -O3 --track-allocation=user main.jl
