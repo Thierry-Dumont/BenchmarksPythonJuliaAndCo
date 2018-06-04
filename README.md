@@ -72,6 +72,6 @@ You can also install them from [conda](https://conda.io/docs/).
 
 # Results:
 
-Have a look at the **wiki**, where you can find results obtained on my personal
+Have a look at the [wiki](https://github.com/Thierry-Dumont/BenchmarksPythonJuliaAndCo/wiki), where you can find results obtained on my personal
 computer, as well as some considerations on the different benchmarks
 and on optimizations implemented.
