@@ -10,4 +10,4 @@ with code.jl = main_cl.jl,  main_lapl_1d.jl or main_lapl_2d.jl
 ```
 ./script-m  code.jl
 ```
-(but this slow dowm the code. Do not use script-m for benchmarking!).
+(but this slow down the code. **Do not use script-m for benchmarking!**).

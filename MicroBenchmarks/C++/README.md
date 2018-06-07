@@ -7,12 +7,24 @@ cd Build
 cmake ..
 make
 ```
-a file "run" is created
+This creates the files: run_cl, run_lapl_1 and run_lapl_2.
 
 ### Run the code:
 
 from Build/ directory, type:
 ```
-./run
+./run_cl
 ```
-By default, we use g++. Tou can change the compiler to use, for example clang++.
+or  run_lapl_1 or  run_lapl_2.
+
+By default, we use g++. To can change the compiler to use, for example
+clang++,
+replace 
+```
+cmake ..
+```
+by
+
+```
+CXX=clang++ cmake ..
+```
