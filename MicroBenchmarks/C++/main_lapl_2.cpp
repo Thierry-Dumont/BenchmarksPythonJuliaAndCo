@@ -87,7 +87,7 @@ int main()
   while(size<sizemax)
     {
       auto T=dotest(size);
-      double flops=6*std::pow(size-2,2)/T;
+      double flops=5*std::pow(size-2,2)/T;
       cout<<size<<" "<<T<<", Gflops/s: "<<flops*pow(10,-9)<<endl;
       fb<<size<<" "<<T<<endl;
       size*=2;
