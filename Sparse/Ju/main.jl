@@ -13,7 +13,7 @@ function dotest(dim::Int,size::Int)
     t1 = time_ns()-t1
     V=Vector{Float64}([1 for i in 1:sizeV])
     W=Vector{Float64}([0 for i in 1:sizeV])
-    #println(M.n," ",M.m)
+
     t2 = time_ns()
     A_mul_B!(W,M,V)
     t2 = time_ns()-t2
@@ -40,6 +40,7 @@ sizeM=128
 dotest(3,size)
 while size<=sizeM
     t1,t2=dotest(3,size)
+    
     println(size," ",float(t1)*10.0^(-9)," ",float(t2)*10.0^(-9))
     size*=2
 end

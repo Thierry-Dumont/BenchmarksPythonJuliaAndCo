@@ -97,12 +97,11 @@ int main()
   for(int size=sizemin;size<=sizemax;size*=2)
     {
       tie(order,ncoefs,tb,tm) = dotest<2>(size);
-
-      cout<<left<<setw(9)<<size<<left<<setw(9)<<order<<setw(10)<<ncoefs<<" ";
       auto tbd=static_cast<double>(tb);
       auto tmb=static_cast<double>(tm)/CLOCKS_PER_SEC;
       long int flops=2*ncoefs-order;
       double Gflopss= pow(10,-9)*flops/tmb;
+      cout<<left<<setw(9)<<size<<left<<setw(9)<<order<<setw(10)<<ncoefs<<" ";
       cout<<left<<setw(10)<<tbd/CLOCKS_PER_SEC<<setw(10)
 	  <<tmb<<setw(10)
 	  <<static_cast<double>(tb)/ncoefs<<setw(13)
@@ -125,7 +124,7 @@ int main()
       double Gflopss= pow(10,-9)*flops/tmb;
       cout<<left<<setw(9)<<size<<left<<setw(9)<<order<<setw(10)<<ncoefs<<" ";
       cout<<left<<setw(10)<<tbd/CLOCKS_PER_SEC<<setw(10)
-	  <<tmb/CLOCKS_PER_SEC<<setw(10)
+	  <<tmb<<setw(10)
 	  <<static_cast<double>(tb)/ncoefs<<setw(13)
 	  <<static_cast<double>(tm)/ncoefs<<setw(10)<<Gflopss<<
 	endl;
