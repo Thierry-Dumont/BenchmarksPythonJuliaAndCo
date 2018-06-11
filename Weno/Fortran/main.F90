@@ -23,6 +23,10 @@ program main
   call initWenoData(W, size)
   call initRK3TVDData(R, size)
 
+  open(unit=12, file="gp0", action="write", status="replace")
+  write(12, "(1f16.12)") In
+  close(12)
+  
   print *, "Start computation"
 
   tt = 0.
@@ -38,6 +42,10 @@ program main
   call cpu_time(finish)
 
   print *, "Time : ", finish - start
+
+  open(unit=12, file="gp", action="write", status="replace")
+  write(12, "(1f16.12)") In
+  close(12)
   
 end program main
 
