@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -f *so
+pythran -march=native -O3 build2.py
+pythran -march=native -O3 build3.py

@@ -2,16 +2,18 @@ import numpy as np
 import time
 import socket
 from scipy.sparse import csr_matrix
-from build import build2,build3
+import build2
+import build3
 #
 def dotest(dim,size):
     tb = time.time()
     if dim==2:
-        A,nc= build2(size)
+        nc,row,col,v= build2.build2(size)
         lenv=size*size
     else:
-        A,nc=build3(size)
+        nc,row,col,v= build3.build3(size)
         lenv=size**3
+    A=csr_matrix((v, (row, col)))
     tb=time.time()-tb
     X=np.ones((lenv),dtype=float)
     Y=np.empty((lenv),dtype=float)
