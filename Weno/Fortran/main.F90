@@ -14,6 +14,8 @@ program main
 
   real(kind = 8), dimension(size) :: In, Out, Temp
 
+  character(len=64) :: hostname
+
   type(WenoData) :: W
   type(RK3TVDData) :: R
   
@@ -45,6 +47,11 @@ program main
 
   open(unit=12, file="gp", action="write", status="replace")
   write(12, "(1f16.12)") In
+  close(12)
+
+  call hostnm(hostname)
+  open(unit=12, file="RunningOn" // trim(hostname), action="write", status="replace")
+  write(12, *) finish - start
   close(12)
   
 end program main
