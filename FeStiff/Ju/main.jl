@@ -68,7 +68,7 @@ open("RunningOn"*gethostname(),"w") do f
 end
 println("end.")
 
-# to prile the code,uncomment:
+# to profile the code,uncomment:
 # ntri1=100000
 # @profile for t=1:ntri1
 #     RandomTriangle!(R,x,y)

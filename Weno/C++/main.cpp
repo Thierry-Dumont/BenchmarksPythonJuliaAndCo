@@ -102,7 +102,7 @@ int main()
  #endif
       ++step;
       t+=dt;
-      if(t>T) break;
+ 
     }
   double t2=get_time();
 

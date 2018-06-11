@@ -23,7 +23,7 @@ string host()
 {
   char hostnameC[HOST_NAME_MAX];
   gethostname(hostnameC, HOST_NAME_MAX);
-  return  string(hostnameC);
+  return string(hostnameC);
 }
 template<int dim> void Init(std::unique_ptr<double[]>& X,int size)
 {
@@ -45,11 +45,11 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest(int size)
   PreLapl<dim>(P,size);
   // if(dim==2 && size==32)
   //   {P.print();exit(0);}
+
   tie(ni,nj,sizem)=P.sizes();
  
   Csr M(P);
-  M.print();exit(0);
-  exit(0);
+  //M.print();exit(0);
   auto c2=ck()-c1;
   //
   
@@ -77,7 +77,7 @@ void banner()
 {
   cout<<left<<setw(9)<<"size"<<left<<setw(9)<<"order"<<setw(10)<<"nc"<<" ";
   cout<<left<<setw(10)<<"T.m."<<setw(10)<<"T.p."<<setw(10)
-      <<"T.m/nc"<<setw(10)<<"T.p./nc"<<setw(10)<<"Gflops/s"<<endl;
+      <<"T.m/nc"<<setw(13)<<"T.p./nc"<<setw(20)<<"Gflops/s"<<endl;
   for(int i=0;i<8;i++)
     cout<<"----------";
   cout<<endl;
@@ -97,15 +97,14 @@ int main()
   for(int size=sizemin;size<=sizemax;size*=2)
     {
       tie(order,ncoefs,tb,tm) = dotest<2>(size);
-
-      cout<<left<<setw(9)<<size<<left<<setw(9)<<order<<setw(10)<<ncoefs<<" ";
       auto tbd=static_cast<double>(tb);
       auto tmb=static_cast<double>(tm)/CLOCKS_PER_SEC;
       long int flops=2*ncoefs-order;
       double Gflopss= pow(10,-9)*flops/tmb;
+      cout<<left<<setw(9)<<size<<left<<setw(9)<<order<<setw(10)<<ncoefs<<" ";
       cout<<left<<setw(10)<<tbd/CLOCKS_PER_SEC<<setw(10)
 	  <<tmb<<setw(10)
-	  <<static_cast<double>(tb)/ncoefs<<setw(11)
+	  <<static_cast<double>(tb)/ncoefs<<setw(13)
 	  <<static_cast<double>(tm)/ncoefs<<setw(10)<<Gflopss<<
 	endl;
       fb<<"2 "<<" "<<size<<" "<<order<<" "<<ncoefs<<" "
@@ -120,13 +119,13 @@ int main()
     {
       tie(order,ncoefs,tb,tm) =dotest<3>(size);
       auto tbd=static_cast<double>(tb);
-      auto tmb=static_cast<double>(tm);
+      auto tmb=static_cast<double>(tm)/CLOCKS_PER_SEC;
       long int flops=2*ncoefs-order;
-      double Gflopss= flops/tmb;
+      double Gflopss= pow(10,-9)*flops/tmb;
       cout<<left<<setw(9)<<size<<left<<setw(9)<<order<<setw(10)<<ncoefs<<" ";
       cout<<left<<setw(10)<<tbd/CLOCKS_PER_SEC<<setw(10)
-	  <<tmb/CLOCKS_PER_SEC<<setw(10)
-	  <<static_cast<double>(tb)/ncoefs<<setw(10)
+	  <<tmb<<setw(10)
+	  <<static_cast<double>(tb)/ncoefs<<setw(13)
 	  <<static_cast<double>(tm)/ncoefs<<setw(10)<<Gflopss<<
 	endl;
       fb<<"3 "<<" "<<size<<" "<<order<<" "<<ncoefs<<" "

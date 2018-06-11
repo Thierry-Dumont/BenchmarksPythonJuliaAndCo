@@ -16,7 +16,6 @@ public:
   {
     int ncol;
     std::tie(nlig,ncol,nc)=P.sizes();
-    cout<<"--> "<<nlig<<" "<<ncol<<" "<<nc<<endl;
     if(nlig!=ncol)
       throw std::runtime_error("Csr: not a square matrix: nlig, ncol= "+
 			       to_string(nlig)+" "+to_string(ncol));
@@ -49,6 +48,7 @@ public:
 	V[pia++]=I->second;
       }
     ja[curia+1]=pia+1;
+    ia[nlig]=pia;
   
   }
   ~Csr()
@@ -59,7 +59,8 @@ public:
     for(int i=0;i<nlig;i++)
       {
 	double t=0.0;
-	for(int j=ia[i];j<ia[i+1]-1;j++)
+	int d= i==0? 0:ia[i];
+	for(int j=d;j<ia[i+1];j++)
         {
 #ifdef DEBUG
           if(j<0||ja[j]<0)
@@ -73,11 +74,12 @@ public:
   }
   void print()
   {
-    for(int i=0;i<10;i++) cout<<ia[i]<<" "; cout<<endl;
+    //for(int i=0;i<10;i++) cout<<ia[i]<<" ";
+    //cout<<endl;
     std::cout<<"order= "<<nlig<<" nzeros= "<<nc<<std::endl;
     for(int i=0;i<nlig;i++)
     {
-      int d= i==0? 0:ia[i-1];
+      int d= i==0? 0:ia[i];
       std::cout<<"line: "<<i<<" start at: "<<d<<
 	" end at:"<<ia[i+1]-1<<" len: "<<ia[i+1]-d<<std::endl;
       for(int j=d;j<ia[i+1];j++)

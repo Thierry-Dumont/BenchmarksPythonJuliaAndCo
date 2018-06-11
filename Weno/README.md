@@ -36,14 +36,17 @@ Runke-Kutta explicit method of order 3.
 We use the Weno combination of 3 points stencils, thus giving a
 discretization of order 5 when applied to smooth functions.
 
-### Author:
+### Authors:
 
-Thierry Dumont   tdumont@math.univ-lyon1.fr
+- Thierry Dumont   tdumont@math.univ-lyon1.fr
+- Roland Denis     denis@math.univ-lyon1.fr
+- Benoît Fabrèges  fabreges@math.univ-lyon1.fr
 
 ### The directories contain:
 
 - **C++**:      pure C++, sequential.
-- **Py**:       pure Python.
+- **Py**:       pure Python (with numpy).
+- **PyVec**:    vectorized Python version.
 - **Ju**:       Ĵulia.
 - **Numba**:    Python/Numba version.
 
