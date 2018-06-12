@@ -22,7 +22,7 @@ function dotest(dim::Int,size::Int)
 end
 
 
-fw=open("RunningOn"*gethostname()*"_lapl_2","w")
+fw=open("RunningOn"*gethostname(),"w")
 
 # computation starts here:
 println("2d:")

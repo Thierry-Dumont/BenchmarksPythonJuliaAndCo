@@ -51,6 +51,10 @@ public:
     ia[nlig]=pia;
   
   }
+  Csr(std::unique_ptr<int[]>& row,std::unique_ptr<int[]>& col,
+      std::unique_ptr<double[]>& v)
+  {
+  }
   ~Csr()
   {
   }

@@ -37,21 +37,20 @@ template<int dim> void Init(std::unique_ptr<double[]>& X,int size)
 }
 template<int dim> tuple<clock_t,clock_t,int,int> dotest(int size)
 {
+  PreLapl<dim>(size);
   int ni,nj,sizem;
 
   // construction of the matrix:
   auto c1=ck();
   PreSparse P;
   PreLapl<dim>(P,size);
-  // if(dim==2 && size==32)
-  //   {P.print();exit(0);}
-
+ 
   tie(ni,nj,sizem)=P.sizes();
  
   Csr M(P);
-  //M.print();exit(0);
+
   auto c2=ck()-c1;
-  //
+
   
   P.purge();
   
@@ -76,7 +75,7 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest(int size)
 void banner()
 {
   cout<<left<<setw(9)<<"size"<<left<<setw(9)<<"order"<<setw(10)<<"nc"<<" ";
-  cout<<left<<setw(10)<<"T.m."<<setw(10)<<"T.p."<<setw(10)
+  cout<<left<<setw(10)<<"T.b."<<setw(10)<<"T.p."<<setw(10)
       <<"T.m/nc"<<setw(13)<<"T.p./nc"<<setw(20)<<"Gflops/s"<<endl;
   for(int i=0;i<8;i++)
     cout<<"----------";
