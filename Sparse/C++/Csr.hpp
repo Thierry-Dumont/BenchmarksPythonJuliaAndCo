@@ -8,8 +8,9 @@
 //#define DEBUG
 class Csr
 {
-  std::unique_ptr<double[]> V;
-  std::unique_ptr<int[]> ia,ja;
+  std::shared_ptr<double[]> V;
+  std::unique_ptr<int[]> ia;
+  std::shared_ptr<int[]> ja;
   int nlig,nc;
 public:
   Csr(const PreSparse& P)
@@ -23,7 +24,7 @@ public:
     ja=std::make_unique<int[]>(nc);
     V=std::make_unique<double[]>(nc);
     //
-    for(int i=0;i<nlig+1;i++) ia[i]=0.0;
+    for(int i=0;i<nlig+1;i++) ia[i]=0;
     for(int i=0;i<nc;i++) ja[i]=0;
     for(int i=0;i<nc;i++) V[i]=0.0;
     //
@@ -36,11 +37,8 @@ public:
 	//cout<<curia<<" "<<cc<<" "<<I->first.second<<" "<<pia<<endl;
 	if(cc!=curia)
 	  {
-	    //cout<<"cc "<<cc<<" "<<pia<<endl;
 	    curia=cc;
 	    ia[curia]=pia; //start of the next line
-	    // for(int z=0;z<=curia;z++) cout<<ia[z]<<" ";
-	    // cout<<" <---"<<endl;
 	    
 	  }
 	ja[pia]=I->first.second;
@@ -51,9 +49,29 @@ public:
     ia[nlig]=pia;
   
   }
-  Csr(std::unique_ptr<int[]>& row,std::unique_ptr<int[]>& col,
-      std::unique_ptr<double[]>& v)
+  Csr(std::shared_ptr<int[]>& row,std::shared_ptr<int[]>& col,
+      std::shared_ptr<double[]>& v,int order,int _nc)
   {
+    ja=col;
+    V=v;
+    nlig=order; nc=_nc;
+    ia=std::make_unique<int[]>(nlig+1);
+    int pia=0,curia=0;
+    for(int I=0;I<nc;I++)
+      {
+	int cc=row[I];
+	if(cc!=curia)
+	  {
+	    curia=cc;
+	    ia[curia]=pia; //start of the next line
+	    
+	  }
+	++pia;
+      }
+    ia[nlig]=nc;
+    // for(int i=0;i<nc;i++) std::cout<<row[i]<<" "; std::cout<<std::endl;
+    // for(int i=0;i<nc;i++) std::cout<<col[i]<<" "; std::cout<<std::endl;
+    // print(); exit(0);
   }
   ~Csr()
   {

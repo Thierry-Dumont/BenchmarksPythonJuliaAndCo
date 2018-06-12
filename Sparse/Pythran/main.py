@@ -29,7 +29,7 @@ def dotest(dim,size):
 def banner(dim):
     print("\n",str(dim)+"d")
     print("size".ljust(4),"order".ljust(8),"nc".ljust(10),
-          "T.b".ljust(22),"T.m".ljust(20))
+          "T.b".ljust(22),"T.p".ljust(20))
     
 size=32
 sizeM=2048
@@ -40,7 +40,7 @@ while size<=sizeM:
           str(tb).ljust(22),str(tm).ljust(20))
     size*=2
 size=16
-sizeM=128
+sizeM=256
 banner(3)
 while size<=sizeM:
     order,nc,tb,tm=dotest(3,size)
