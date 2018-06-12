@@ -45,5 +45,5 @@ while size<=sizeM
     @printf "%4d %8d %8d %10.2e %10.2e \n" size order nc float(t1)*10.0^(-9) float(t2)*10.0^(-9)
     size*=2
 end
-#
+
 

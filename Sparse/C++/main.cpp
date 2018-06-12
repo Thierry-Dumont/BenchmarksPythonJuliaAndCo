@@ -115,13 +115,13 @@ int main()
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
 
-  ofstream fb; fb.open("../RunningOn"+hostname);
+  ofstream fb; 
   
   int sizemin=32,sizemax=2048;
   cout<<"2d:"<<endl;
   clock_t tb,tm;
   int order,ncoefs;
-
+  fb.open("../RunningOn"+hostname+"-2");
   banner();
   for(int size=sizemin;size<=sizemax;size*=2)
     {
@@ -137,13 +137,14 @@ int main()
 	  <<static_cast<double>(tb)/ncoefs<<setw(13)
 	  <<static_cast<double>(tm)/ncoefs<<setw(10)<<Gflopss<<
 	endl;
-      fb<<"2 "<<" "<<size<<" "<<order<<" "<<ncoefs<<" "
-	<<tbd/CLOCKS_PER_SEC<<" "<<tmb/CLOCKS_PER_SEC<<" "
-	<<static_cast<double>(tb)/ncoefs<<" "<<static_cast<double>(tm)/ncoefs
-	<<" "<<Gflopss<<endl;
+      fb<<size<<" "<<order<<" "<<ncoefs<<" "
+	<<tbd/CLOCKS_PER_SEC<<" "<<tmb<<endl;
     }
+  fb.close();
+  
   cout<<endl<<"3d:"<<endl;
   sizemin=16; sizemax=256;
+  fb.open("../RunningOn"+hostname+"-3");
   banner();
   for(int size=sizemin;size<=sizemax;size*=2)
     {
@@ -158,10 +159,8 @@ int main()
 	  <<static_cast<double>(tb)/ncoefs<<setw(13)
 	  <<static_cast<double>(tm)/ncoefs<<setw(10)<<Gflopss<<
 	endl;
-      fb<<"3 "<<" "<<size<<" "<<order<<" "<<ncoefs<<" "
-	<<tbd/CLOCKS_PER_SEC<<" "<<tmb/CLOCKS_PER_SEC<<" "
-	<<static_cast<double>(tb)/ncoefs<<" "<<static_cast<double>(tm)/ncoefs
-	<<" "<<Gflopss<<endl;
+      fb<<size<<" "<<order<<" "<<ncoefs<<" "
+	<<tbd/CLOCKS_PER_SEC<<" "<<tmb<<endl;
       
     }
   fb.close();
