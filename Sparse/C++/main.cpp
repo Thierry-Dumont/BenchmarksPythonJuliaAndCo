@@ -38,6 +38,7 @@ template<int dim> void Init(std::unique_ptr<double[]>& X,int size)
 template<int dim> tuple<clock_t,clock_t,int,int> dotest_arrays(int size)
 {
   int order,nc;
+  // build matrix:
   std::shared_ptr<int[]> row;
   std::shared_ptr<int[]> col;
   std::shared_ptr<double[]> v;
@@ -69,7 +70,7 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_map(int size)
   
   int ni,nj,sizem;
 
-  // construction of the matrix:
+  // build the matrix:
   auto c1=ck();
   PreSparse P;
   PreLapl<dim>(P,size);
@@ -112,12 +113,17 @@ void banner()
 }  
 int main()
 {
+
+  // If you want to test building matrices with maps, replace dotest_arrays
+  // by dotest_map below (twice).
+  
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
 
   ofstream fb; 
   
   int sizemin=32,sizemax=2048;
+  
   cout<<"2d:"<<endl;
   clock_t tb,tm;
   int order,ncoefs;
@@ -126,7 +132,8 @@ int main()
   for(int size=sizemin;size<=sizemax;size*=2)
     {
       tie(order,ncoefs,tb,tm) = dotest_arrays<2>(size);
-      //char cc; std::cout<<"-->";std::cin>>cc;
+      //tie(order,ncoefs,tb,tm) = dotest_map<2>(size);
+      
       auto tbd=static_cast<double>(tb);
       auto tmb=static_cast<double>(tm)/CLOCKS_PER_SEC;
       long int flops=2*ncoefs-order;
@@ -149,6 +156,7 @@ int main()
   for(int size=sizemin;size<=sizemax;size*=2)
     {
       tie(order,ncoefs,tb,tm) =dotest_arrays<3>(size);
+      //tie(order,ncoefs,tb,tm) =dotest_map<3>(size);
       auto tbd=static_cast<double>(tb);
       auto tmb=static_cast<double>(tm)/CLOCKS_PER_SEC;
       long int flops=2*ncoefs-order;

@@ -1,5 +1,8 @@
 push!(LOAD_PATH, "./")
+# if you want to experiment with the "pushed" matrix creation method,
+# switch comments on the two following lines:
 using Sparse23
+#using Sparse23push
 
 function dotest(dim::Int,size::Int)
     t1 = time_ns()

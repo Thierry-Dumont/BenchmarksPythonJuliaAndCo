@@ -1,4 +1,4 @@
-module Sparse23
+module Sparse23push
 export PreLapl2,PreLapl3
 function PreLapl2(size::Int)
     ind(i::Int,j::Int)=(j-1)*size+i
