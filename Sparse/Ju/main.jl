@@ -22,28 +22,35 @@ function dotest(dim::Int,size::Int)
 end
 
 
-fw=open("RunningOn"*gethostname(),"w")
-
 # computation starts here:
 println("\n2d:")
+fw=open("RunningOn"*gethostname()*"-2","w")
 size=32
 sizeM=2048
 dotest(2,size)
 @printf "%4s %8s %8s %10s %10s \n" "size" "order" "nc" "T.b" "T.p"
 while size<=sizeM
     order,nc,t1,t2=dotest(2,size)
-    @printf "%4d %8d %8d %10.2e %10.2e \n" size order nc float(t1)*10.0^(-9) float(t2)*10.0^(-9)
+    s=@sprintf "%4d %8d %8d %10.2e %10.2e \n" size order nc float(t1)*10.0^(-9) float(t2)*10.0^(-9)
+    print(s)
+    write(fw,s)
     size*=2
 end
+close(fw)
+
+
 println("\n3d:")
+fw=open("RunningOn"*gethostname()*"-3","w")
 size=16
 sizeM=256
 dotest(3,size)
 @printf "%4s %8s %8s %10s %10s \n" "size" "order" "nc" "T.b" "T.p"
 while size<=sizeM
     order,nc,t1,t2=dotest(3,size)
-    @printf "%4d %8d %8d %10.2e %10.2e \n" size order nc float(t1)*10.0^(-9) float(t2)*10.0^(-9)
+    s=@sprintf "%4d %8d %8d %10.2e %10.2e \n" size order nc float(t1)*10.0^(-9) float(t2)*10.0^(-9)
+    print(s)
+    write(fw,s)
     size*=2
 end
-
+close(fw)
 
