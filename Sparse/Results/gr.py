@@ -7,7 +7,7 @@ import socket
 def parsit(D,l):
     # extract two numbers from a line, if this is possible.
     ll=[s for s in l.split(" ") if s !=""]
-    D[int(ll[0])]=[float(ll[3].replace("\n","")),
+    D[int(ll[2])]=[float(ll[3].replace("\n","")),
                    float(ll[4].replace("\n",""))]
 
         
@@ -57,10 +57,11 @@ for dim in ["-2","-3"]:
 
     for typv in ["-b","-p"]:            
         Outf="gpc"+dim+typv
+        
         f=open(Outf,"w")
         f.write("set logscale\n")
         f.write("set key top right\n")
-        f.write('set xlabel "matrix size"\n')
+        f.write('set xlabel "Number of unknowns"\n')
         f.write('set ylabel "cpu time / cpu time C++"\n')
 
         first="plot "
@@ -80,4 +81,6 @@ for dim in ["-2","-3"]:
             f.write(s)
             first="replot "
         f.close()
-print("\n see gpc* files to plot with gnuplot.")
+        print("Created ./"+Outf)
+print("\nIn gnuplot, load one of the  gpc* files, for example, do:")
+print('gnuplot> load "gpc-2-b"')

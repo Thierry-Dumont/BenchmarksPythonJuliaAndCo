@@ -4,7 +4,7 @@ mkdir ./Results (if ./Results does not exists).
 ./gr.py
 ```
 It will parse your results (in the "RunningOn _your_ _hostname_*" files) and populate
-Results/ with gnuplot plotable files (4 files).
+Results/ with gnuplot plotable files (6 files).
 
 It also creates gnuplot _scripts_  gpc[2-3]-[b-p]:
 
