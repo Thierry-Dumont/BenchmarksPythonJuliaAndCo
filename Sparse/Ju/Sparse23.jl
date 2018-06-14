@@ -38,11 +38,7 @@ function PreLapl2(size::Int)
 
         end
     end
-    # for i=2:count
-    #     if row[i-1]> row[i]
-    #         println(i," ", row[i-1]," ",row[i])
-    #     end
-    # end
+
     M=sparse(row,col,v)
     return M,size2,count-1
 end
@@ -90,11 +86,7 @@ function PreLapl3(size)
             end
         end
     end
-    # for i=2:count-1
-    #     if row[i-1]> row[i]
-    #         println(i," ", row[i-1]," ",row[i])
-    #     end
-    # end
+
     M=sparse(row,col,v)
     return M,size^3,count-1
 end
