@@ -71,11 +71,11 @@ for dim in ["-2","-3"]:
             f.write('set title "Matrix x Vector product"\n') 
         for n in files:
             fil="./Results/"+n.replace("../","")+dim
-            if typv=="b":
+            if typv=="-b":
                 fieldv="2"
             else:
                 fieldv="3"
-                title=n.replace("../","'")+"'"
+            title=n.replace("../","'")+"'"
             s=first+"'"+fil+"' using 1:"+fieldv+" with linespoints title "+\
                title+" \n"
             f.write(s)
