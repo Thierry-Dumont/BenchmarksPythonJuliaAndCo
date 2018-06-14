@@ -45,10 +45,14 @@ for dim=2:3
         size=16
         sizeM=256
     end
-    dotest(dim,size)#warmup
     @printf "%4s %8s %9s %10s %10s \n" "size" "order" "nc" "T.b" "T.p"
     while size<=sizeM
+        
+        order,nc,t1,t2=dotest(dim,size)#warmup
+        
         order,nc,t1,t2=dotest(dim,size)
+
+ 
         s=@sprintf "%4d %8d %9d %10.2e %10.2e \n" size order nc float(t1)*10.0^(-9) float(t2)*10.0^(-9)
         print(s)
         write(fw,s)
