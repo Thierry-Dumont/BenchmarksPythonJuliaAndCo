@@ -106,7 +106,7 @@ void banner()
 {
   cout<<left<<setw(9)<<"size"<<left<<setw(9)<<"order"<<setw(10)<<"nc"<<" ";
   cout<<left<<setw(10)<<"T.b."<<setw(10)<<"T.p."<<setw(15)
-      <<"T.m/nc"<<setw(13)<<"T.p./nc"<<setw(20)<<"Gflops/s"<<endl;
+      <<"T.b/nc"<<setw(13)<<"T.m./nc"<<setw(20)<<"Gflops/s"<<endl;
   for(int i=0;i<85;i++)
     cout<<"-";
   cout<<endl;
@@ -118,8 +118,15 @@ int main()
   // by dotest_map below (twice).
   
   auto hostname = host();
-  cout<<"hostname: "<<hostname<<endl;
+  cout<<"hostname: "<<hostname<<endl<<endl;
 
+  cout<<left<<setw(6)<<"size"<<": "<<"size of the grid."<<endl;
+  cout<<left<<setw(6)<<"order"<<": "<<"order of the matrix."<<endl;
+  cout<<left<<setw(6)<< "nc"<<": "<<"number of ceofficients."<<endl;
+  cout<<left<<setw(6)<< "T.b"<<": "<<"time to build the matrix (s)."<<endl;
+  cout<<left<<setw(6)<< "T.p"<<": "<<"time for matrix x vector product (s)."
+      <<endl<<endl;
+  
   ofstream fb; 
   
   int sizemin=32,sizemax=2048;
@@ -132,7 +139,6 @@ int main()
   for(int size=sizemin;size<=sizemax;size*=2)
     {
       tie(order,ncoefs,tb,tm) = dotest_arrays<2>(size);
-      //tie(order,ncoefs,tb,tm) = dotest_map<2>(size);
       
       auto tbd=static_cast<double>(tb);
       auto tmb=static_cast<double>(tm)/CLOCKS_PER_SEC;
