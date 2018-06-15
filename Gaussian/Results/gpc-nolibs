@@ -9,4 +9,6 @@ replot "./Results/Ju"      title "Julia" with linespoint
 replot "./Results/PythranVec" title "Pythran vec." with linespoint
 replot "./Results/Pythran" title "Pythran" with linespoint
 replot "./Results/Numba" title "Numba" with linespoint
-
+set title "Not using libraries"
+#set terminal png size 600,450
+#set output "kepler.png"

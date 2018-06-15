@@ -1,6 +1,7 @@
 #pragma once
-#include "RandomFeedMatrix.hpp"
+#include "rando.hpp"
 #include "Array.hpp"
+using namespace Arrays;
 void RandomFeedMatrix(Array<double,2>& M,rando& R)
 {
     int n=M.maxs(0), m=M.maxs(1);

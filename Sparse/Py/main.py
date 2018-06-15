@@ -26,24 +26,25 @@ def dotest(dim,size):
 #
 def banner(dim):
     print("\n",str(dim)+"d")
-    print("size".ljust(4),"order".ljust(8),"nc".ljust(10),
-          "T.b".ljust(22),"T.m".ljust(20))
+    print("size".ljust(5),"order".ljust(9),"nc".ljust(9),
+          "T.b".ljust(21),"T.p".ljust(20))
     
-size=32
-sizeM=2048
-banner(2)
-while size<=sizeM:
-    order,nc,tb,tm=dotest(2,size)
-    print(str(size).ljust(4),str(order).ljust(8),str(nc).ljust(10),
-          str(tb).ljust(22),str(tm).ljust(20))
-    size*=2
-size=16
-sizeM=128
-banner(3)
-while size<=sizeM:
-    order,nc,tb,tm=dotest(3,size)
-    print(str(size).ljust(4),str(order).ljust(8),str(nc).ljust(10),
-          str(tb).ljust(22),str(tm).ljust(20))
-    size*=2
 
-        
+# lets's go:     
+for dim in [2,3]:
+    if dim==2:
+        size=32
+        sizeM=2048
+    else:
+        size=16
+        sizeM=128
+    banner(dim)
+    f=open("RunningOn"+socket.gethostname()+"-"+str(dim),"w")
+    while size<=sizeM:
+        order,nc,tb,tm=dotest(dim,size)
+        tw=repr(size).ljust(6)+repr(order).ljust(10)+repr(nc).ljust(10)+\
+            repr(tb).ljust(22)+repr(tm).ljust(20)
+        print(tw)
+        f.write(tw+"\n")
+        size*=2
+    f.close()  

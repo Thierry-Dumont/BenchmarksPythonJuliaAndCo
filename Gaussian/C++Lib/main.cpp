@@ -1,6 +1,6 @@
 #include "rando.hpp"
 #include <iostream>
-#include "factorMatrix.hpp"
+#include "Array.hpp"
 #include "RandomFeedMatrix.hpp"
 #include <map>
 #include <sys/time.h>
@@ -12,6 +12,7 @@
 #include "protos_lapack.hpp"
 using namespace std;
 using namespace odes;
+using namespace Arrays;
 double get_time() {
   struct timeval tv;
   gettimeofday(&tv,0);
@@ -24,8 +25,7 @@ int main()
   auto hostname = string(hostnameC);
   cout<<"hostname: "<<hostname<<endl;
   map<int,double> times;
-  // for(int i=0;i<100;i++)
-  //   cout<<R.fv(10.)<<endl;
+
   int sizeG=2048;
   int size=sizeG;
   int liminf=2;

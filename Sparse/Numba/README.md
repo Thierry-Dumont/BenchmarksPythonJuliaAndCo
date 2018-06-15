@@ -13,4 +13,4 @@ in ./script .
 
 ### Note:
 
-lambad functions in jitted routines could not be compiled.
+lambda functions in jitted routines could not be compiled.

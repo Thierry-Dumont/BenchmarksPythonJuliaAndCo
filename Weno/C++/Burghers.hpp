@@ -14,9 +14,9 @@ struct  Burghers
   {
 
     if(b<=0)
-      return flux(b);
+      return  0.5*b*b;
     else if (a>=0)
-      return flux(a);
+      return  0.5*a*a;
     else
       return 0.0;
   }
@@ -24,6 +24,6 @@ struct  Burghers
   //! we do NOT test a<=b !
   static double max(double a, double b)
   {
-     return std::max(flux(a),flux(b));
+     return 0.5*std::max(a*a,b*b);
   }
 };

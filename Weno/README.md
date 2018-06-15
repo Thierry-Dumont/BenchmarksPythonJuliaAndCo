@@ -78,3 +78,6 @@ gnuplot. _Deactivate this for benchmarking!_
 ##### To exploit the results:
 
 Go to Results/ directory. Then, read the doc.
+
+### Results:
+Have a look at the  [this page in the Wiki](https://github.com/Thierry-Dumont/BenchmarksPythonJuliaAndCo/wiki/4-The-Weno-benchmark).

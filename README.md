@@ -16,14 +16,15 @@ The benchmark(s):
 
 * Gaussian:  Gaussian elimination with partial pivoting.
   
-* :new: FeStiff: compute the stiffness matrix, for the Poisson equation,
+* FeStiff: compute the stiffness matrix, for the Poisson equation,
   discretized with P2 finite elements on triangles.
   
-* :new: Weno: a classical solver for hyperbolic equations, in
+*  Weno: a classical solver for hyperbolic equations, in
   dimension 1, with application to Burghers equation and to Convection. 
 
+* :new: Sparse: building a sparse matrix and doing a sparse matrix x vector product.
   
-* :new: MicroBenchmarks: very simple benchmarks to show the importance
+* MicroBenchmarks: very simple benchmarks to show the importance
   of different programing styles. 
 
 
@@ -72,6 +73,6 @@ You can also install them from [conda](https://conda.io/docs/).
 
 # Results:
 
-Have a look at the **wiki**, where you can find results obtained on my personal
+Have a look at the [wiki](https://github.com/Thierry-Dumont/BenchmarksPythonJuliaAndCo/wiki), where you can find results obtained on my personal
 computer, as well as some considerations on the different benchmarks
 and on optimizations implemented.

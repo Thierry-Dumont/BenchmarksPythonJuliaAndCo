@@ -14,16 +14,9 @@ end
 
 
 
-# proc[1-5]! functions make the same computation, with different programing
+# proc[1-3]! functions make the same computation, with different programing
 # styles.
-function proc1!(In::Array{Float64,1},Out::Array{Float64,1},niter::Int64)
-    const size=length(In)
-    h2::Float64= (1./size)^2
-    for it=1:niter
-        Out[2:size-1]= h2*(In[1:size-2]- 2.0*In[2:size-1]+ In[3:size])
-        In,Out=Out,In
-    end 
-end
+
 function proc1!(In::Array{Float64,1},Out::Array{Float64,1},niter::Int64)
     const size=length(In)
     h2::Float64= (1./size)^2
