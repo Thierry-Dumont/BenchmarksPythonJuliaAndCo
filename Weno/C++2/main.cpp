@@ -83,7 +83,6 @@ int main()
 
     // Scheme
     auto const scheme = makeWeno(num_flux, L);
-    std::cout << scheme.length << std::endl;
 
     // Time integrator
     auto const time_int = makeRK3TVD(scheme);

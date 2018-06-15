@@ -58,13 +58,64 @@ T WenoRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
 
 template <typename T>
 inline
+std::pair<T, T> WenoLeftRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
+{
+    const T eps = 1e-6;
+
+    // Regularity indicators (common part)
+    const T S_vm2 = 13./12. * std::pow(vm3 - 2*vm2 + vm1, 2);
+    const T S_vm1 = 13./12. * std::pow(vm2 - 2*vm1 + vp1, 2);
+    const T S_vp1 = 13./12. * std::pow(vm1 - 2*vp1 + vp2, 2);
+    const T S_vp2 = 13./12. * std::pow(vp3 - 2*vp2 + vp1, 2);
+
+    // Regularity indicators
+    const T S1_left  = S_vm2 + 1./4. * std::pow(  vm3 - 4*vm2 + 3*vm1, 2);
+    const T S2_left  = S_vm1 + 1./4. * std::pow(  vm2         -   vp1, 2);
+    const T S3_left  = S_vp1 + 1./4. * std::pow(3*vm1 - 4*vp1 +   vp2, 2);
+    const T S1_right = S_vp2 + 1./4. * std::pow(  vp3 - 4*vp2 + 3*vp1, 2);
+    const T S2_right = S_vp1 + 1./4. * std::pow(  vp2         -   vm1, 2);
+    const T S3_right = S_vm1 + 1./4. * std::pow(3*vp1 - 4*vm1 +   vm2, 2);
+
+    // Weighted coefficients for the reconstruction
+    const T w1_left  = (1./10.) / std::pow(S1_left + eps, 2);
+    const T w2_left  = (3./5.)  / std::pow(S2_left + eps, 2);
+    const T w3_left  = (3./10.) / std::pow(S3_left + eps, 2);
+    const T w1_right = (1./10.) / std::pow(S1_right + eps, 2);
+    const T w2_right = (3./5.)  / std::pow(S2_right + eps, 2);
+    const T w3_right = (3./10.) / std::pow(S3_right + eps, 2);
+
+    // Coefficients sum
+    const T wsum_left = w1_left + w2_left + w3_left;
+    const T wsum_right = w1_right + w2_right + w3_right;
+
+    // Reconstruction
+    const T rec_left = (
+          w1_left * ( 2./6. * vm3 - 7./6. * vm2 + 11./6. * vm1)
+        + w2_left * (-1./6. * vm2 + 5./6. * vm1 +  2./6. * vp1)
+        + w3_left * ( 2./6. * vm1 + 5./6. * vp1 -  1./6. * vp2)
+    ) / wsum_left;
+    
+    const T rec_right = (
+          w1_right * ( 2./6. * vp3 - 7./6. * vp2 + 11./6. * vp1)
+        + w2_right * (-1./6. * vp2 + 5./6. * vp1 +  2./6. * vm1)
+        + w3_right * ( 2./6. * vp1 + 5./6. * vm1 -  1./6. * vm2)
+    ) / wsum_right;
+
+    return {rec_left, rec_right};
+}
+
+template <typename T>
+inline
 std::pair<T, T> WenoRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
 {
+    /*
     return {
         WenoLeftRecKernel(vm3, vm2, vm1, vp1, vp2, vp3), 
         WenoLeftRecKernel(vp3, vp2, vp1, vm1, vm2, vm3), 
         //WenoRightRecKernel(vm3, vm2, vm1, vp1, vp2, vp3)
     };
+    */
+    return WenoLeftRightRecKernel(vm3, vm2, vm1, vp1, vp2, vp3);
 }
 
 template <typename Flux, typename T>
@@ -84,13 +135,13 @@ public:
     using Flux = typename std::decay<TFlux>::type;
     using Real = TReal;
 
-public: // FIXME
+private:
     TFlux flux;
     Real length;
 
 public:
     Weno(TFlux flux, Real length)
-        : flux(std::forward<TFlux>(flux)) // TODO: verif
+        : flux(std::forward<TFlux>(flux))
         , length(length)
     {
     }
