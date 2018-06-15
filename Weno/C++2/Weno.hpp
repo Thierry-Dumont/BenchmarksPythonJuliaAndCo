@@ -1,4 +1,5 @@
 #include <utility>
+#include <type_traits>
 #include <cmath>
 
 namespace {
@@ -22,10 +23,11 @@ T WenoLeftRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
     const T wsum = w1 + w2 + w3;
 
     // Reconstruction
-    return
+    return (
           w1 * ( 2./6. * vm3 - 7./6. * vm2 + 11./6. * vm1)
         + w2 * (-1./6. * vm2 + 5./6. * vm1 +  2./6. * vp1)
-        + w3 * ( 2./6. * vm1 + 5./6. * vp1 -  1./6. * vp2);
+        + w3 * ( 2./6. * vm1 + 5./6. * vp1 -  1./6. * vp2)
+    ) / wsum;
 }
 
 template <typename T>
@@ -47,10 +49,11 @@ T WenoRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
     const T wsum = w1 + w2 + w3;
 
     // Reconstruction
-    return
+    return (
           w1 * ( 2./6. * vp3 - 7./6. * vp2 + 11./6. * vp1)
         + w2 * (-1./6. * vp2 + 5./6. * vp1 +  2./6. * vm1)
-        + w3 * ( 2./6. * vp1 + 5./6. * vm1 -  1./6. * vm2);
+        + w3 * ( 2./6. * vp1 + 5./6. * vm1 -  1./6. * vm2)
+    ) / wsum;
 }
 
 template <typename T>
@@ -59,7 +62,8 @@ std::pair<T, T> WenoRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
 {
     return {
         WenoLeftRecKernel(vm3, vm2, vm1, vp1, vp2, vp3), 
-        WenoRightRecKernel(vm3, vm2, vm1, vp1, vp2, vp3)
+        WenoLeftRecKernel(vp3, vp2, vp1, vm1, vm2, vm3), 
+        //WenoRightRecKernel(vm3, vm2, vm1, vp1, vp2, vp3)
     };
 }
 
@@ -73,42 +77,55 @@ T WenoFluxKernel(Flux const& flux, T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
 
 } // namespace
 
-template <typename Flux, typename Real>
+template <typename TFlux, typename TReal>
 class Weno
 {
-private:
-    Flux flux;
+public:
+    using Flux = typename std::decay<TFlux>::type;
+    using Real = TReal;
+
+public: // FIXME
+    TFlux flux;
     Real length;
 
 public:
-    Weno(Flux flux, Real length)
-        : flux(std::forward<Flux>(flux)) // TODO: verif
+    Weno(TFlux flux, Real length)
+        : flux(std::forward<TFlux>(flux)) // TODO: verif
         , length(length)
     {
     }
 
-    Weno(Weno const&) = delete;
-    Weno(Weno &&) = delete;
-    Weno& operator= (Weno const&) = delete;
-    Weno& operator= (Weno &&) = delete;
-
-    ~Weno() = default;
-
     template <typename In, typename Out>
-    void operator() (In const& data, Out & result)
+    void operator() (In const& data, Out & result) const
     {
         std::size_t const size = data.size();
         Real const h1 = -1. / (length/size);
 
+        // Diff helper
+        struct Helper
+        {
+            Real left;
+            Real operator() (Real right) { Real diff = right - left; left = right; return diff; }
+        };
+
         // Left border
-        Real left_num_flux = WenoFluxKernel(flux, data[size-3], data[size-2], data[size-1], data[0], data[1], data[2]);
-        Real right_num_flux = WenoFluxKernel(flux, data[size-2], data[size-1], data[0], data[1], data[2], data[3]);
-        result[0] = h1 * (right_num_flux - left_num_flux); 
+        Helper helper = { WenoFluxKernel(flux, data[size-3], data[size-2], data[size-1], data[0], data[1], data[2]) };
+        result[0] = h1 * helper(WenoFluxKernel(flux, data[size-2], data[size-1], data[0], data[1], data[2], data[3]));
+        result[1] = h1 * helper(WenoFluxKernel(flux, data[size-1], data[0], data[1], data[2], data[3], data[4]));
+
+        // Center part
+        for (std::size_t pos = 2; pos < size-3; ++pos)
+            result[pos] = h1 * helper(WenoFluxKernel(flux, data[pos-2], data[pos-1], data[pos], data[pos+1], data[pos+2], data[pos+3]));
+
+        // Right border
+        result[size-3] = h1 * helper(WenoFluxKernel(flux, data[size-5], data[size-4], data[size-3], data[size-2], data[size-1], data[0]));
+        result[size-2] = h1 * helper(WenoFluxKernel(flux, data[size-4], data[size-3], data[size-2], data[size-1], data[0], data[1]));
+        result[size-1] = h1 * helper(WenoFluxKernel(flux, data[size-3], data[size-2], data[size-1], data[0], data[1], data[2]));
     }
 };
 
 template <typename Flux, typename Real>
-Weno<Flux, Real> makeWeno(Flux && flux, Real length)
+auto makeWeno(Flux && flux, Real length)
 {
-    return {std::forward<Flux>(flux), length};
+    return Weno<Flux, Real>(std::forward<Flux>(flux), length);
 }
