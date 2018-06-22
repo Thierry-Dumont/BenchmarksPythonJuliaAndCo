@@ -50,7 +50,7 @@ program main
   close(12)
 
   call hostnm(hostname)
-  open(unit=12, file="RunningOn" // trim(hostname), action="write", status="replace")
+  open(unit=12, file="../RunningOn" // trim(hostname), action="write", status="replace")
   write(12, *) finish - start
   close(12)
   
