@@ -53,6 +53,7 @@ public:
 		  std::unique_ptr<double []>& Out)
   {
     double right[3],left[3];
+    
     for(int vol=0;vol<size;vol++)
       {
 	//reconstructions right & left:
@@ -75,7 +76,7 @@ public:
 	beta[2]=b0* std::pow(In[index(vol-2)]-2.0*In[index(vol-1)]+In[vol],2)+
 	  b1*std::pow(In[index(vol-2)]-4.*In[index(vol-1)]+3*In[vol],2);
 	// 15 flops.
-	double alpharight[3],alphaleft[3],sright=0,sleft=0;
+	double alpharight[3],alphaleft[3],sright=0.0,sleft=0.0;
 	for(int r=0;r<3;r++)
 	  {
 	    alpharight[r]=dright[r]/std::pow(epsilon+beta[r],2);
