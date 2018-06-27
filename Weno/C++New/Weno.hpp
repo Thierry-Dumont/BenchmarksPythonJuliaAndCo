@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <cmath>
-#include "/usr/local/IACA/iaca-lin64/include/iacaMarks.h"
+//#include "/usr/local/IACA/iaca-lin64/include/iacaMarks.h"
 template<class Flux> class Weno
 {
   int size;
@@ -51,7 +51,6 @@ public:
   }
   ~Weno()
   {
- 
   }
   void operator()(std::unique_ptr<double []>& In,
 		  std::unique_ptr<double []>& Out)

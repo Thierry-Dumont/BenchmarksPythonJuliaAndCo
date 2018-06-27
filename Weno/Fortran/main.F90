@@ -19,7 +19,7 @@ program main
   type(WenoData) :: W
   type(RK3TVDData) :: R
   
-  print *, size, dt, floor(T/dt)
+  print *, "size=",size, "dt=",dt, "nsteps=",floor(T/dt)
 
   call init(In, L, size)
   call initWenoData(W, size)
