@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iterator>
 #include <type_traits>
+#include <vector>
 
 /**
  * Explicit TVD Runge-Kutta method of order 3.

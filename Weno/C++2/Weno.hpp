@@ -1,3 +1,5 @@
+#pragma once
+
 #include <utility>
 #include <type_traits>
 #include <cmath>
@@ -66,7 +68,7 @@ std::pair<T, T> WenoLeftRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
     const T S_vm2 = 13./12. * std::pow(vm3 - 2*vm2 + vm1, 2);
     const T S_vm1 = 13./12. * std::pow(vm2 - 2*vm1 + vp1, 2);
     const T S_vp1 = 13./12. * std::pow(vm1 - 2*vp1 + vp2, 2);
-    const T S_vp2 = 13./12. * std::pow(vp3 - 2*vp2 + vp1, 2);
+    const T S_vp2 = 13./12. * std::pow(vp1 - 2*vp2 + vp3, 2);
 
     // Regularity indicators
     const T S1_left  = S_vm2 + 1./4. * std::pow(  vm3 - 4*vm2 + 3*vm1, 2);
