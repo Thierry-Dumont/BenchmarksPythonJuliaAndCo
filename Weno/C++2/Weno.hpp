@@ -128,19 +128,19 @@ T WenoFluxKernel(Flux const& flux, T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
 
 } // namespace
 
-template <typename TFlux, typename TReal>
+template <typename Flux, typename TReal>
 class Weno
 {
 public:
-    using Flux = typename std::decay<TFlux>::type;
     using Real = TReal;
 
 private:
-    TFlux flux;
+    Flux flux;
     Real length;
 
 public:
-    Weno(TFlux flux, Real length)
+    template <typename TFlux>
+    Weno(TFlux && flux, Real length)
         : flux(std::forward<TFlux>(flux))
         , length(length)
     {
