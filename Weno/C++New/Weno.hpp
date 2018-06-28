@@ -96,9 +96,10 @@ public:
 	//IACA_START	 	
 	for(int r=0;r<3;r++)
 	  {
-            double s=pow(epsilon+beta[r],2);
-	    alpharight[r]=dright[r]/s;
-            alphaleft[r]=dleft[r]/s;
+            double s=1./pow(epsilon+beta[r],2);
+	    //double s=1./((epsilon+beta[r])*(epsilon+beta[r]));
+	    alpharight[r]=dright[r]*s;
+            alphaleft[r]=dleft[r]*s;
             sright+=alpharight[r];
             sleft+=alphaleft[r];
 	  }
