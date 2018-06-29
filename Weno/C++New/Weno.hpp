@@ -64,7 +64,7 @@ public:
     InC[size+3]=In[1];
     // precompute for regularity coefficients
     for(int vol=0;vol<size+2;vol++)
-      work[vol]= b0*pow(InC[vol]-2.0*InC[vol+1]+InC[vol+2],2);
+      work[vol]= b0*std::pow(InC[vol]-2.0*InC[vol+1]+InC[vol+2],2);
     
     // lets's start computation:
     for(int vol=2;vol<size+2;vol++)
@@ -84,11 +84,11 @@ public:
 	  }
 
 	// regularity coefficients:
-	beta[0]= work[vol]+  b1*pow(3.*InC[vol]-4.*InC[vol+1]+InC[vol+2],2);
+	beta[0]= work[vol]+  b1*std::pow(3.*InC[vol]-4.*InC[vol+1]+InC[vol+2],2);
         
-        beta[1]= work[vol-1]+b1*pow(InC[vol-1]-InC[vol+1],2);
+        beta[1]= work[vol-1]+b1*std::pow(InC[vol-1]-InC[vol+1],2);
         
-	beta[2]= work[vol-2]+b1*pow(InC[vol-2]-4.*InC[vol-1]+3*InC[vol],2);
+	beta[2]= work[vol-2]+b1*std::pow(InC[vol-2]-4.*InC[vol-1]+3*InC[vol],2);
 
 
         double sleft=0.0;
@@ -96,7 +96,7 @@ public:
 	//IACA_START	 	
 	for(int r=0;r<3;r++)
 	  {
-            double s=1./pow(epsilon+beta[r],2);
+            double s=1./std::pow(epsilon+beta[r],2);
 	    //double s=1./((epsilon+beta[r])*(epsilon+beta[r]));
 	    alpharight[r]=dright[r]*s;
             alphaleft[r]=dleft[r]*s;
