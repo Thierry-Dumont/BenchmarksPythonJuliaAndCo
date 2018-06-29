@@ -19,7 +19,7 @@ elseif(${CMAKE_CXX_COMPILER} MATCHES "clang.*$")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3  -Wall   -Wall -std=c++14 -march=native")
 else ()
    #set(CMAKE_CXX_COMPILER "g++-8")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -std=c++17 -Wall -march=native")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -g -std=c++17 -Wall -march=native")
 
 endif ()
 
