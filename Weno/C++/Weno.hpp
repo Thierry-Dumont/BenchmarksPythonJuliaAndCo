@@ -3,11 +3,12 @@
 #include <iostream>
 #include <memory>
 #include <cmath>
+//#include "/usr/local/IACA/iaca-lin64/include/iacaMarks.h"
 template<class Flux> class Weno
 {
   int size;
   double h1;
-  std::unique_ptr<double[]> reconstructed,numflux;
+  
   // Weno-3 coefficients:  --------------------
   const double c[4][3]={
     {11./6.,-7./6.,1./3.},
@@ -20,90 +21,112 @@ template<class Flux> class Weno
   const double b0=13./12.,b1=1./4.;
   const double epsilon=1.e-6;
   //-------------------------------------------
-    
+  std::unique_ptr<double[]> reconstructed,InC,work;
+  double right[3],left[3],alphaleft[3],alpharight[3],beta[3];
   Flux F;
 
-  inline int index(int i)
-  {
-    return i>=0 ? i%size: size-i;
-  }
+ 
 public:
   Weno(){}
   Weno(int _size,double _L,double FluxParams[]): size(_size),h1(-1./(_L/size))
   {
     F=Flux(FluxParams);
     // 
-    reconstructed=std::make_unique<double[]>(2*size);
-    numflux=std::make_unique<double[]>(size);
+    reconstructed=std::make_unique<double[]>(2*size+8);
+    InC=std::make_unique<double[]>(size+4);
+    work=std::make_unique<double[]>(size+2);
+    
   }
   Weno& operator=(Weno<Flux>&& W)
   {
     size=W.size;
     F=std::move(W.F);
+    
     reconstructed=std::move(W.reconstructed);
-    numflux=std::move(W.numflux);
+    InC=std::move(W.InC);
+    work=std::move(W.work);
+    
     h1=W.h1;
     return *this;
   }
   ~Weno()
   {
- 
   }
   void operator()(std::unique_ptr<double []>& In,
 		  std::unique_ptr<double []>& Out)
   {
-    double right[3],left[3];
+    // build an extended array with phantom cells to deal with periodicity:
+    InC[0]=In[size-2];
+    InC[1]=In[size-1];
+    for(int i=0;i<size;i++)
+      InC[i+2]=In[i];
+    InC[size+2]=In[0];
+    InC[size+3]=In[1];
+    // precompute for regularity coefficients
+    for(int vol=0;vol<size+2;vol++)
+      work[vol]= b0*::std::pow(InC[vol]-2.0*InC[vol+1]+InC[vol+2],2);
     
-    for(int vol=0;vol<size;vol++)
+    // lets's start computation:
+    for(int vol=2;vol<size+2;vol++)
       {
-	//reconstructions right & left:
+	
 	for(int r=0;r<3;r++)
 	  {
-	    right[r]=0.; left[r]=0;
+	    left[r]=0.0;
+	    right[r]=0.0;
+   
 	    for(int j=0;j<3;j++)
 	      {
-		right[r]+= c[r+1][j]*In[(vol-r+j)%size];
-		left[r]+=c[r][j]*In[(vol-r+j)%size];
+		left[r]+=c[r][j]*InC[vol-r+j];
+		right[r]+=c[r+1][j]*InC[vol-r+j];
 	      }
-	   
-	  } // 36 flops
-	// regularity coefficients:
-	double beta[3];
-	beta[0]= b0* std::pow(In[vol]-2.0*In[(vol+1)%size]+In[(vol+2)%size],2)+
-	  b1*std::pow(3.*In[vol]-4.*In[(vol+1)%size]+In[(vol+2)%size],2);
-	beta[1]=b0* std::pow(In[index(vol-1)]-2.0*In[vol]+In[(vol+1)%size],2)+
-	  b1*std::pow(In[index(vol-1)]-In[(vol+1)%size],2);
-	beta[2]=b0* std::pow(In[index(vol-2)]-2.0*In[index(vol-1)]+In[vol],2)+
-	  b1*std::pow(In[index(vol-2)]-4.*In[index(vol-1)]+3*In[vol],2);
-	// 15 flops.
-	double alpharight[3],alphaleft[3],sright=0.0,sleft=0.0;
-	for(int r=0;r<3;r++)
-	  {
-	    alpharight[r]=dright[r]/std::pow(epsilon+beta[r],2);
-	    sright+=alpharight[r];
-	  } //3*4 = 12 flops.
-	for(int r=0;r<3;r++)
-	  {
-	    alphaleft[r]=dleft[r]/std::pow(epsilon+beta[r],2);
-	    sleft+=alphaleft[r];
-	  } // 12 flops
-	double recleft=0,recright=0;
-	for(int r=0;r<3;r++) recleft+= alphaleft[r]*left[r]; // 12 flops
-	for(int r=0;r<3;r++) recright+= alpharight[r]*right[r];// 12 flops
 
-	// reconstructed values:
-	reconstructed[2*vol]  = recleft/sleft; // 1 flop
-	reconstructed[2*vol+1]= recright/sright; //1 flop
-      } //all together: size*(36+ 4*12 +2) flops = 86* size flops.
-    // compute the numerical fluxes at boundaries:
+	  }
+
+	// regularity coefficients:
+	beta[0]= work[vol]+  b1*::std::pow(3.*InC[vol]-4.*InC[vol+1]+InC[vol+2],2);
+        
+        beta[1]= work[vol-1]+b1*::std::pow(InC[vol-1]-InC[vol+1],2);
+        
+	beta[2]= work[vol-2]+b1*::std::pow(InC[vol-2]-4.*InC[vol-1]+3*InC[vol],2);
+
+
+        double sleft=0.0;
+        double sright=0.0;
+	//IACA_START	 	
+	for(int r=0;r<3;r++)
+	  {
+            double s=1./::std::pow(epsilon+beta[r],2);
+	    //double s=1./((epsilon+beta[r])*(epsilon+beta[r]));
+	    alpharight[r]=dright[r]*s;
+            alphaleft[r]=dleft[r]*s;
+            sright+=alpharight[r];
+            sleft+=alphaleft[r];
+	  }
+	//IACA_END 
+	double recleft=0.0;
+	for(int i=0;i<3;i++)
+	  recleft += alphaleft[i]*left[i];
+	double recright=0.0;
+	for(int i=0;i<3;i++)
+	  recright += alpharight[i]*right[i];
+	reconstructed[2*vol]  = recleft/sleft;
+	reconstructed[2*vol+1]= recright/sright;
+      }
+    for(int i=4;i<8;i++)
+      reconstructed[2*size+i]=reconstructed[i];
+ 
+    // Numerical flux at boundaries of volumes:
+    for(int vol=1;vol<size+1;vol++)
+      work[vol]=F(reconstructed[2*vol+3], reconstructed[2*vol+4]);
+    work[0]= work[size];
+
+    
+    //result:
+
     for(int vol=0;vol<size;vol++)
-      numflux[vol]=
-	F( reconstructed[2*vol+1], reconstructed[2*((vol+1)%size)]);
-    // size* nflops_F
-    // now, return RHS to solver:
-    Out[0]= h1*(numflux[0]-numflux[size-1]);
-    for(int vol=1;vol<size;vol++)
-      Out[vol]=h1*(numflux[vol]-numflux[(vol-1)%size]);
-    // 2*(size+1) flops
+      Out[vol]=h1*(work[vol+1]-work[vol]);
+
   }
+  
 };

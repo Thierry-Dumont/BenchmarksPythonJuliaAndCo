@@ -81,11 +81,8 @@ int main()
   Init(InOut,L,size);// initial condition.
 
   double t=0.;
-
-  int step=0;
-  cout<<"start..."<<endl;
-  
   double t1=get_time();
+  int step=0;
   while(t<T)
     {
       RFL.step(InOut,dt);
