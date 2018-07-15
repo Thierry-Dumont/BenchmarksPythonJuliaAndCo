@@ -19,7 +19,7 @@ program main
   type(WenoData) :: W
   type(RK3TVDData) :: R
   
-  print *, size, dt, floor(T/dt)
+  print *, "size=",size, "dt=",dt, "nsteps=",floor(T/dt)
 
   call init(In, L, size)
   call initWenoData(W, size)
@@ -50,7 +50,7 @@ program main
   close(12)
 
   call hostnm(hostname)
-  open(unit=12, file="RunningOn" // trim(hostname), action="write", status="replace")
+  open(unit=12, file="../RunningOn" // trim(hostname), action="write", status="replace")
   write(12, *) finish - start
   close(12)
   

@@ -29,12 +29,12 @@ struct WenoData
                1./4.,
                    1.e-6,
                    size,
-                   Array{Float64}(size+4),
-                   Array{Float64}(3),Array{Float64}(3),
-                   Array{Float64}(2*size+8),
-                   Array{Float64}(size+2),
-                   Array{Float64}(3),Array{Float64}(3),
-                   Array{Float64}(3)
+                   Array{Float64}(size+4), #InC
+                   Array{Float64}(3),Array{Float64}(3),#right,left
+                   Array{Float64}(2*size+8),#reconstructed
+                   Array{Float64}(size+2),#work
+                   Array{Float64}(3),Array{Float64}(3),#alpha{right,left}
+                   Array{Float64}(3)#beta
                )
 
 end

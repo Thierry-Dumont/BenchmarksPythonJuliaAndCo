@@ -1,17 +1,16 @@
 #pragma once
 #include <algorithm>
-//#include <string>
-//#include <cmath>
+#include <string>
 struct  Burghers
 {
   //! the flux.
-  inline double flux(double x) 
+  static double flux(double x) 
   {
     return 0.5*x*x;
   }
   //! min of flux  in [a,b]. Used by Godunov flux.
   //! we do NOT test a<=b !
-  double min(double a, double b)
+  static double min(double a, double b)
   {
 
     if(b<=0)
@@ -23,9 +22,8 @@ struct  Burghers
   }
   //! max of flux in [a,b]. Used by Godunov flux.
   //! we do NOT test a<=b !
-  inline  double max(double a, double b)
+  static double max(double a, double b)
   {
-    //return 0.5*fmax(a*a,b*b);
-    return 0.5*std::max(a*a,b*b);
+     return 0.5*std::max(a*a,b*b);
   }
 };

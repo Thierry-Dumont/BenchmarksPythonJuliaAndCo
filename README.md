@@ -10,7 +10,7 @@ programs.
 
  Are Python
 and Julia easy to use and efficient? We compare them with a C++
-optimized implementation.
+optimized implementation (and sometimes with a Fortran one)..
 
 The benchmark(s):
 
@@ -38,6 +38,7 @@ We will add other numerical significative benchmarks in the (near) future.
 - python3
 - pip (pip3)
 - g++ (and/or clang++)
+- gfortran
 - lapack
 - openblas
 - cmake

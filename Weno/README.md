@@ -49,7 +49,7 @@ discretization of order 5 when applied to smooth functions.
 - **PyVec**:    vectorized Python version.
 - **Ju**:       Ĵulia.
 - **Numba**:    Python/Numba version.
-
+- **Fortran**:  Fortran version.
 
 ### Note:
 
