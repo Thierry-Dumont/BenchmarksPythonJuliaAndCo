@@ -7,13 +7,12 @@
 #include <fstream>
 #include <cmath>
 #include <ctime>
-#include <memory>
+#include <array>
+#include "xtensor/xtensor.hpp"
+#include "xtensor/xview.hpp"
 using namespace std;
-struct index{
-  const int size;
-  index(int _size):size(_size){}
-  inline int operator()(int i,int j){return i*size+j;}
-};
+typedef xt::xtensor<double,2> Array;
+
 double get_time() {
     struct timeval tv;
     gettimeofday(&tv,0);
@@ -27,35 +26,36 @@ string host()
   return  string(hostnameC);
 }
 
-void Init(std::unique_ptr<double[]>&  X,double L,int size)
+void Init(Array&  X,double L,int size)
 {
-  index ii(size);
+
   double h=L/size;
   for(int i=0;i<size;i++)
     for(int j=0;j<size;j++)
       if(i>size/8 && i<size/2+size/8)
-	X[ii(i,j)]=1.-2*(i-size/8)*h/L;
+	X(i,j)=1.-2*(i-size/8)*h/L;
       else
-	X[ii(i,j)]=0.0;
+	X(i,j)=0.0;
 }
 // every intersting thing is done here:
-void lapl_2(int size,std::unique_ptr<double[]>& In,
-	    std::unique_ptr<double[]>& Out)
+void lapl_2(int size,Array& In,Array& Out)
 {
-  index ii(size);
+
   double h2= 1./(size*size);
-  for(int i=1;i<size-1;i++)
-    for(int j=1;j<size-1;j++)
-      Out[ii(i,j)]=
-	h2*(In[ii(i-1,j)] + In[ii(i,j-1)]-
-	    4.0*In[ii(i,j)]+
-	    In[ii(i+1,j)]+In[ii(i,j+1)]);
-  
+
+  xt::view(Out, xt::range(1,size-1), xt::range(1,size-1))=
+    h2*(
+	view(In, xt::range(0,size-2), xt::range(1,size-1))+
+	view(In, xt::range(1,size-1), xt::range(0,size-2))+
+	-4.0*view(In, xt::range(1,size-1), xt::range(1,size-1))+
+	view(In, xt::range(2,size), xt::range(1,size-1))+
+	view(In, xt::range(1,size-1), xt::range(2,size))
+	);
 }
-double  dotest(int size)
+double  dotest(std::size_t size)
 {
-  auto A=std::make_unique<double[]>(size*size);
-  auto B=std::make_unique<double[]>(size*size);
+  std::array<size_t, 2> shape = { size,size  };
+  Array A(shape), B(shape);
   Init(A,1.,size); Init(B,1.,size);
   double T=0;
   double Tnew=std::pow(10.,20);
@@ -83,8 +83,8 @@ int main()
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
   ofstream fb; fb.open("../RunningOn"+hostname+"_lapl_2");
-  int sizemax=2049;
-  int size=32;
+  std::size_t sizemax=2049;
+  std::size_t size=32;
   while(size<sizemax)
     {
       auto T=dotest(size);

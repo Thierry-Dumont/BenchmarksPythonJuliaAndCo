@@ -7,9 +7,10 @@
 #include <fstream>
 #include <cmath>
 #include <ctime>
-#include <memory>
+#include <array>
+#include "xtensor/xtensor.hpp"
 using namespace std;
-
+typedef xt::xtensor<double,1> Array;
 double get_time() {
     struct timeval tv;
     gettimeofday(&tv,0);
@@ -23,7 +24,7 @@ string host()
   return  string(hostnameC);
 }
 
-void Init(std::unique_ptr<double[]>&  X,double L,int size)
+void Init(Array&  X,double L,int size)
 {
   double h=L/size;
   for(int i=0;i<size;i++)
@@ -33,20 +34,18 @@ void Init(std::unique_ptr<double[]>&  X,double L,int size)
       X[i]=0.0;
 }
 // every intersting thing is done here:
-void cl(int size,std::unique_ptr<double[]>& A,std::unique_ptr<double[]>& B,
-	std::unique_ptr<double[]>& C,std::unique_ptr<double[]>& D)
+void cl(std::size_t size,Array& A,Array& B,
+	Array& C,Array& D)
 {
-  for(int i=0;i<size;i++)
-    A[i]=1.7*B[i]-0.8*C[i]-0.9*D[i];
-  
+
+  A=1.7*B-0.8*C-0.9*D;
   
 }
-double  dotest(int size)
+double  dotest(std::size_t size)
 {
-  auto A=std::make_unique<double[]>(size);
-  auto B=std::make_unique<double[]>(size);
-  auto C=std::make_unique<double[]>(size);
-  auto D=std::make_unique<double[]>(size);
+  std::array<size_t, 1> shape = { size  };
+  Array A(shape), B(shape), C(shape),D(shape);
+ 
   Init(A,1.,size); Init(B,1.,size); Init(C,1.,size); Init(D,1.,size); 
   double T=0;
   double Tnew=std::pow(10.,20);
@@ -58,7 +57,8 @@ double  dotest(int size)
       for(int i=0;i<iter;i++)
 	cl(size,A,B,C,D);
       Tnew=(get_time()-t1);
-      A.swap(D);
+      //A.swap(D);
+      C=A; A=D; D=A;
       ok= std::abs(Tnew-2*T)/Tnew<0.1 ||iter>1000000;
       T=Tnew;
       if(!ok) iter*=2;
@@ -73,8 +73,8 @@ int main()
   cout<<"hostname: "<<hostname<<endl;
   ofstream fb; fb.open("../RunningOn"+hostname+"_cl");
   
-  int sizemax=std::pow(10,6);
-  int size=32;
+  std::size_t sizemax=std::pow(10,6);
+  std::size_t size=32;
   while(size<sizemax)
     {
       auto T=dotest(size);

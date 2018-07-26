@@ -32,6 +32,7 @@ void Init(std::unique_ptr<double[]>&  X,double L,int size)
     else
       X[i]=0.0;
 }
+// every intersting thing is done here:
 void lapl_1(int size,std::unique_ptr<double[]>& In,
 	    std::unique_ptr<double[]>& Out)
 {
