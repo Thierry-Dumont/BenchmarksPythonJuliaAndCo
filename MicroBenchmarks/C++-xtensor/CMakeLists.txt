@@ -9,32 +9,35 @@ enable_language(CXX Fortran)
 # otherwise, to use g++:
 #  cmake ..
 #
-find_package(xsimd) 
+
+find_package(xsimd)
+find_package(xtensor)
+
 if (${CMAKE_CXX_COMPILER} MATCHES "icpc.*$")
-  set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS}  -DICC -DALIGN_64 -restrict -O3  -g -xavx -ipo -fargument-noalias  -ansi-alias -Wall -vec-report3 -std=c++0x")
-
-
+  set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS}  -DICC -DALIGN_64 -restrict -O3 -DXTENSOR_USE_XSIMD -g -xavx -ipo -fargument-noalias  -ansi-alias -Wall -vec-report3 -std=c++0x")
 else ()
-  
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -DXTENSOR_USE_XSIMD   -std=c++17 -march=native")
-
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -DXTENSOR_USE_XSIMD -std=c++17 -march=native")
 endif ()
+
 include_directories(
   $ENV{HOME}/anaconda3/include/
   ${xsimd_INCLUDE_DIR}
-   )
+  ${xtensor_INCLUDE_DIR}
+)
 
 add_executable(
   run_cl
   ../main_cl.cpp
-  )
+)
+
 add_executable(
   run_lapl_1
   ../main_lapl_1.cpp
-  )
+)
+
 add_executable(
   run_lapl_2
   ../main_lapl_2.cpp
-  )
+)
 
 
