@@ -10,6 +10,7 @@
 #include <array>
 #include "xtensor/xtensor.hpp"
 #include "xtensor/xview.hpp"
+#include <xtensor/xnoalias.hpp>
 using namespace std;
 typedef xt::xtensor<double,2> Array;
 
@@ -43,14 +44,15 @@ void lapl_2(int size,Array& In,Array& Out)
 
   double h2= 1./(size*size);
 
-  xt::view(Out, xt::range(1,size-1), xt::range(1,size-1))=
-    h2*(
+  auto w=xt::view(Out, xt::range(1,size-1), xt::range(1,size-1));
+  xt::noalias(w)=h2*(
 	view(In, xt::range(0,size-2), xt::range(1,size-1))+
 	view(In, xt::range(1,size-1), xt::range(0,size-2))+
 	-4.0*view(In, xt::range(1,size-1), xt::range(1,size-1))+
 	view(In, xt::range(2,size), xt::range(1,size-1))+
 	view(In, xt::range(1,size-1), xt::range(2,size))
 	);
+  
 }
 double  dotest(std::size_t size)
 {
@@ -67,8 +69,7 @@ double  dotest(std::size_t size)
       for(int i=0;i<iter;i++)
 	lapl_2(size,A,B);
       Tnew=(get_time()-t1);
-      ok= std::abs(Tnew-2*T)/Tnew<0.1||iter>1000000;
-
+      ok= (Tnew>0.001 &&std::abs(Tnew-2*T)/Tnew<0.1)||iter>1000000;
       T=Tnew;
       if(!ok) iter*=2;
     }
