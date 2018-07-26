@@ -11,12 +11,12 @@ enable_language(CXX Fortran)
 #
 find_package(xsimd) 
 if (${CMAKE_CXX_COMPILER} MATCHES "icpc.*$")
-  set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS}  -DICC -DALIGN_64 -restrict -O3  -g -xavx -ipo -fargument-noalias  -ansi-alias -Wall -vec-report3 -std=c++0x")
+  set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS}  -DICC -DALIGN_64 -restrict -O3 -DXTENSOR_USE_XSIMD -g -xavx -ipo -fargument-noalias  -ansi-alias -Wall -vec-report3 -std=c++0x")
 
 
 else ()
   
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -DGCC -DALIGN_64  -std=c++17 -march=native")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -DXTENSOR_USE_XSIMD -DGCC -DALIGN_64  -std=c++17 -march=native")
 
 endif ()
 include_directories(
