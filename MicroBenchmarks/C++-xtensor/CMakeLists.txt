@@ -16,7 +16,7 @@ if (${CMAKE_CXX_COMPILER} MATCHES "icpc.*$")
 
 else ()
   
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -DXTENSOR_USE_XSIMD   -std=c++17 -march=native")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -DXTENSOR_USE_XSIMD   -std=c++17 -march=native -mtune=native")
 
 endif ()
 include_directories(
