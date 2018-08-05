@@ -43,7 +43,6 @@ std::pair<T, T> WenoLeftRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
     const T wsum_right = w1_right + w2_right + w3_right;
 
     // Reconstruction
-#ifndef USE_FMA
     const T rec_left = (
           w1_left * ( 2./6. * vm3 - 7./6. * vm2 + 11./6. * vm1)
         + w2_left * (-1./6. * vm2 + 5./6. * vm1 +  2./6. * vp1)
@@ -55,39 +54,6 @@ std::pair<T, T> WenoLeftRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
         + w2_right * (-1./6. * vp2 + 5./6. * vp1 +  2./6. * vm1)
         + w3_right * ( 2./6. * vp1 + 5./6. * vm1 -  1./6. * vm2)
     ) / wsum_right;
-#else
-
-    T rec1_left =  2./6. * vm3;
-    T rec2_left = -1./6. * vm2;
-    T rec3_left =  2./6. * vm1;
-    T rec1_right =  2./6. * vp3;
-    T rec2_right = -1./6. * vp2;
-    T rec3_right =  2./6. * vp1;
-
-    rec1_left = std::fma(-7./6., vm2, rec1_left);
-    rec2_left = std::fma( 5./6., vm1, rec2_left);
-    rec3_left = std::fma( 5./6., vp1, rec3_left);
-    rec1_right = std::fma(-7./6., vp2, rec1_right);
-    rec2_right = std::fma( 5./6., vp1, rec2_right);
-    rec3_right = std::fma( 5./6., vm1, rec3_right);
-
-    rec1_left = std::fma(11./6., vm1, rec1_left);
-    rec2_left = std::fma( 2./6., vp1, rec2_left);
-    rec3_left = std::fma(-1./6., vp2, rec3_left);
-    rec1_right = std::fma(11./6., vp1, rec1_right);
-    rec2_right = std::fma( 2./6., vm1, rec2_right);
-    rec3_right = std::fma(-1./6., vm2, rec3_right);
-
-    rec1_left = w1_left * rec1_left;
-    rec2_left = w2_left * rec2_left;
-    rec3_left = w3_left * rec3_left;
-    rec1_right = w1_right * rec1_right;
-    rec2_right = w2_right * rec2_right;
-    rec3_right = w3_right * rec3_right;
-
-    const T rec_left = (rec1_left + rec2_left + rec3_left) / wsum_left;
-    const T rec_right = (rec1_right + rec2_right + rec3_right) / wsum_right;
-#endif
 
     return {rec_left, rec_right};
 }
