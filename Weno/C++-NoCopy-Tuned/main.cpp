@@ -70,7 +70,7 @@ int main()
     using Real = double;
 
     // Simulation parameters
-    std::size_t const size = 10000;
+    std::size_t const size = 1000;
     Real const L = 1.0;
     Real const dt = Real(0.8)/size;
     Real const T = 1.0;
