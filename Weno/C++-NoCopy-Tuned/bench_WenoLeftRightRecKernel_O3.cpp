@@ -120,7 +120,6 @@ int main(int argc, char* argv[])
             checksum += std::min(0.5 * result.first, 0.5 * result.second);
 #elif TEST ==  9
             //  (9) GNU 8.1: 32.5 @ 256b ; Intel 18.0.3: 32.4 @ 256b
-            // Same as (5) !!
             checksum += 0.5 * std::pow( std::min(result.first, result.second), 2);
 #elif TEST == 10
             // (10) GNU 8.1: 78.2 @ 128b ; Intel 18.0.3: 36.7 @ 256b
