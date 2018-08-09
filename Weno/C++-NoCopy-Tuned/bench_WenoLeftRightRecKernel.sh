@@ -34,7 +34,7 @@ for comp_mod in ${COMPILERS[@]}
 do
     module -q load "$comp_mod"
 
-    comp_name="${comp_mod%%/*}/$($CXX -v 2>&1 | grep -Eo '[[:space:]]version[[:space:]]+[0-9.]+' | grep -o '[0-9.]*')"
+    comp_name="${comp_mod%%/*}/$($CXX -v 2>&1 | grep -Eo '[[:space:]]version[[:space:]]+[0-9.]+' | grep -o -m 1 '[0-9.]*')"
     echo $comp_name >> "$OUTPUT.tmp"
 
     for test in $(seq 1 $NTEST)
