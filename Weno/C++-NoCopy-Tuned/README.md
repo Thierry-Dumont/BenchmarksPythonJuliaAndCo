@@ -1,3 +1,22 @@
+# Differences with the C++-NoCopy version
+
+The differences between this version and the `C++-NoCopy` version are:
+- storing results of each branch of the ternary operator in `GodunovFlux.hpp`
+- storing Weno reconstructions in a temporary vector before calculating the
+  finite differences in `Weno.hpp` (this version is strictly not a "NoCopy"
+  version)
+
+The preprocessor constant `USE_ORIGINAL_VERSION` can be set in order to disable
+these modifications.
+
+Using 1000 discretization points, this version runs the general Weno benchmark
+in 0.0945s (using GNU 8.1.0 on an Intel Xeon E5-2650 v4 @ 2.20GHz) compared
+with 0.147s for the `C++-NoCopy` version, and 0.100s for the `Fortran` version.
+
+Using 10000 discretization points, this version runs in 6.45s, the `C++-NoCopy`
+version runs in 10.97s and the `Fortran` version runs in 7.30s.
+
+
 # Why this "tuned" version ?
 
 While investigating the performances difference of Fortran and C++
@@ -225,25 +244,6 @@ for ( std::size_t i = 0; i < size; ++i )
 Delaying the difference calculation by storing the reconstruction in
 a temporary vector increases the performance by more than a factor 2
 (even if it implies using more memory) !!!
-
-
-## Differences with the C++-NoCopy version
-
-The differences between this version and the `C++-NoCopy` version are:
-- storing results of each branch of the ternary operator in `GodunovFlux.hpp`
-- storing Weno reconstructions in a temporary vector before calculating the
-  finite differences in `Weno.hpp` (this version is strictly not a "NoCopy"
-  version)
-
-The preprocessor constant `USE_ORIGINAL_VERSION` can be set in order to disable
-this modifications.
-
-Using 1000 discretization points, this version runs the general Weno benchmark
-in 0.0945s (using GNU 8.1.0 on an Intel Xeon E5-2650 v4 @ 2.20GHz) compared
-with 0.147s for the `C++-NoCopy` version, and 0.100s for the `Fortran` version.
-
-Using 10000 discretization points, this version runs in 6.45s, the `C++-NoCopy`
-version runs in 10.97s and the `Fortran` version runs in 7.30s.
 
 
 # General instructions
