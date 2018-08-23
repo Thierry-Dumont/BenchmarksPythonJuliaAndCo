@@ -26,9 +26,9 @@ std::pair<T, T> WenoLeftRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
     const T S1_left  = S_vm2 + 1./4. * std::pow(  vm3 - 4*vm2 + 3*vm1, 2);
     const T S2_left  = S_vm1 + 1./4. * std::pow(  vm2         -   vp1, 2);
     const T S3_left  = S_vp1 + 1./4. * std::pow(3*vm1 - 4*vp1 +   vp2, 2);
-    const T S1_right = S_vp2 + 1./4. * std::pow(  vp3 - 4*vp2 + 3*vp1, 2);
-    const T S2_right = S_vp1 + 1./4. * std::pow(  vp2         -   vm1, 2);
-    const T S3_right = S_vm1 + 1./4. * std::pow(3*vp1 - 4*vm1 +   vm2, 2);
+    const T S1_right = S_vp2 + 1./4. * std::pow(3*vp1 - 4*vp2 +   vp3, 2);
+    const T S2_right = S_vp1 + 1./4. * std::pow(  vm1         -   vp2, 2);
+    const T S3_right = S_vm1 + 1./4. * std::pow(  vm2 - 4*vm1 + 3*vp1, 2);
 
     // Weighted coefficients for the reconstruction
     const T w1_left  = (1./10.) / std::pow(S1_left + eps, 2);
@@ -50,9 +50,9 @@ std::pair<T, T> WenoLeftRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
     ) / wsum_left;
 
     const T rec_right = (
-          w1_right * ( 2./6. * vp3 - 7./6. * vp2 + 11./6. * vp1)
-        + w2_right * (-1./6. * vp2 + 5./6. * vp1 +  2./6. * vm1)
-        + w3_right * ( 2./6. * vp1 + 5./6. * vm1 -  1./6. * vm2)
+          w1_right * ( 11./6. * vp1 - 7./6. * vp2 + 2./6. * vp3)
+        + w2_right * (  2./6. * vm1 + 5./6. * vp1 - 1./6. * vp2)
+        + w3_right * ( -1./6. * vm2 + 5./6. * vm1 + 2./6. * vp1)
     ) / wsum_right;
 
     return {rec_left, rec_right};
@@ -95,7 +95,7 @@ std::pair<T, T> WenoLeftRightRecKernel(T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
     T S2_left = std::fma(T(-1), vp1, vm2); // vm2 - vp1
     T S3_left = std::fma(T(3), vm1, vp2);  // 3*vm1 + vp2
     T S1_right = std::fma(T(-4), vp2, vp3); // vp3 - 4*vp2
-    T S2_right = std::fma(T(-1), vm1, vp2); // vp2 - vm1
+    T S2_right = std::fma(T(-1), vp2, vm1); // vm1 - vp2
     T S3_right = std::fma(T(3), vp1, vm2); // 3*vp1 + vm2
 
     S1_left = std::fma(T(3), vm1, S1_left); // 3*vm1 + (...)
@@ -224,7 +224,7 @@ inline double sum(__m256d v)
 std::pair<double, double> WenoLeftRightRecKernel(double vm3, double vm2, double vm1, double vp1, double vp2, double vp3)
 {
     // Regularity indicators (common part)
-    __m256d vm3p1   = _mm256_set_pd(vm3, vm2, vm1, vm1);
+    __m256d vm3p1   = _mm256_set_pd(vm3, vm2, vm1, vp1);
     __m256d vm2p2   = _mm256_set_pd(vm2, vm1, vp1, vp2);
     __m256d vm1p3   = _mm256_set_pd(vm1, vp1, vp2, vp3);
     __m256d coeff   = _mm256_set_pd(-2, -2, -2, -2);
@@ -238,8 +238,8 @@ std::pair<double, double> WenoLeftRightRecKernel(double vm3, double vm2, double 
     // Regularity indicators
     __m256d S123X_left, SX321_right;
 
-    __m256d coeff123X = _mm256_set_pd(1, 1, 3, 0);
-    __m256d coeffX321 = _mm256_set_pd(0, 3, 1, 1);
+    __m256d coeff123X = _mm256_set_pd(1, 1,  3, 0);
+    __m256d coeffX321 = _mm256_set_pd(0, 3, -1, 1);
     S123X_left  = _mm256_mul_pd(coeff123X, vm3p1);
     SX321_right = _mm256_mul_pd(coeffX321, vm1p3);
 
@@ -249,7 +249,7 @@ std::pair<double, double> WenoLeftRightRecKernel(double vm3, double vm2, double 
     SX321_right = _mm256_fmadd_pd(coeffX321, vm2p2, SX321_right);
 
     coeff123X   = _mm256_set_pd(3, -1, 1, 0);
-    coeffX321   = _mm256_set_pd(0, 1, -1, 3);
+    coeffX321   = _mm256_set_pd(0,  1, 1, 3);
     S123X_left  = _mm256_fmadd_pd(coeff123X, vm1p3, S123X_left);
     SX321_right = _mm256_fmadd_pd(coeffX321, vm3p1, SX321_right);
 
@@ -443,7 +443,7 @@ template <typename Flux, typename T>
 inline
 T WenoFluxKernel(Flux const& flux, T vm3, T vm2, T vm1, T vp1, T vp2, T vp3)
 {
-    const auto rec = WenoRecKernel(vm3, vm3, vm1, vp1, vp2, vp3);
+    const auto rec = WenoRecKernel(vm3, vm2, vm1, vp1, vp2, vp3);
     return flux(rec.first, rec.second);
 }
 
