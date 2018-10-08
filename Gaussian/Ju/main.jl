@@ -20,7 +20,7 @@ function factorMatrix!(M::Array{Float64, 2})
     n, m = size(M)
     for line = 1:n
         # find pivot
-         @inbounds(cmax= line-1+indmax(abs.(M[line:n,line])))
+         @inbounds(cmax= line-1+findmax(abs.(M[line:n,line]))[2])
         # exchange rows if necessary
         if cmax != line
             @simd for j = line:m
@@ -45,7 +45,7 @@ end
 
 function doall(n::Int64)
     Ro = RandoData()
-    M = Array{Float64}(n, n+1)
+    M = Array{Float64}(undef,n, n+1)
     RandomFeedMatrix(M, Ro)
     
 
@@ -71,10 +71,9 @@ println("start")
 #Profile.clear()
 
 while MatrixSize > liminf
-    T = doall(MatrixSize)
-    println(MatrixSize)
-    D[MatrixSize] = 1.e-9 * T
-    MatrixSize = convert(Int64, MatrixSize/2)
+     T = doall(MatrixSize)
+     D[MatrixSize] = 1.e-9 * T
+    global MatrixSize = div(MatrixSize,2)
 end
 
 

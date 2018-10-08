@@ -3,7 +3,8 @@ push!(LOAD_PATH, "./")
 # switch comments on the two following lines:
 using Sparse23
 #using Sparse23push
-
+using Printf
+using SparseArrays,LinearAlgebra
 
 function dotest(dim::Int,size::Int)
     # 1) matrix creation:
@@ -21,7 +22,9 @@ function dotest(dim::Int,size::Int)
 
     # 2) matrix x vector product.
     t2 = time_ns()
-    A_mul_B!(W,M,V)
+    #A_mul_B!(W,M,V)
+    mul!(W,M,V)
+    
     t2 = time_ns()-t2
 
     return order,nc,t1,t2

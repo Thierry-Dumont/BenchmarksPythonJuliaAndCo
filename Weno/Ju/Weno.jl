@@ -1,5 +1,6 @@
 module Weno
 export weno!,WenoData
+using LinearAlgebra
 #using Devectorize
 #===================================================
 Weno 5  method in 1d.
@@ -21,29 +22,29 @@ struct WenoData
     alphaleft::Array{Float64,1}
     beta::Array{Float64,1}
     WenoData(size)=new(transpose(reshape(
-        [11./6.,-7./6.,1./3.,1./3.,5./6.,-1./6.,
-         -1./6.,5./6.,1./3.,1./3.,-7/6.,11./6.],3,4)),
-               Array([3./10.,3./5.,1./10.]),
-               Array([1./10.,3./5.,3./10]),
-               13./12.,
-               1./4.,
-                   1.e-6,
+        [11.0/6.0,-7.0/6.0,1.0/3.0,1.0/3.0,5.0/6.0,-1.0/6.0,
+         -1.0/6.0,5.0/6.0,1.0/3.0,1.0/3.0,-7/6.0,11.0/6.0],3,4)),
+               Array([3.0/10.0,3.0/5.0,1.0/10.0]),
+               Array([1.0/10.0,3.0/5.0,3.0/10]),
+               13.0/12.0,
+               1.0/4.0,
+                   1.0e-6,
                    size,
-                   Array{Float64}(size+4), #InC
-                   Array{Float64}(3),Array{Float64}(3),#right,left
-                   Array{Float64}(2*size+8),#reconstructed
-                   Array{Float64}(size+2),#work
-                   Array{Float64}(3),Array{Float64}(3),#alpha{right,left}
-                   Array{Float64}(3)#beta
+                   Array{Float64}(undef,size+4), #InC
+                   Array{Float64}(undef,3),Array{Float64}(undef,3),#right,left
+                   Array{Float64}(undef,2*size+8),#reconstructed
+                   Array{Float64}(undef,size+2),#work
+                   Array{Float64}(undef,3),Array{Float64}(undef,3),#alpha{right,left}
+                   Array{Float64}(undef,3)#beta
                )
 
 end
 
 function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
 
-    const size=W.size
+    size=W.size
 
-    const h1 = -1./(L/size)
+    h1 = -1.0/(L/size)
     
     # build an extended array with phantom cells to deal with periodicity:
     W.InC[1]=In[size-1]
@@ -81,13 +82,13 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
         #-------------------------------------------
         # regularity coefficients
         W.beta[1]=W.b0* W.work[vol]+ 
-	W.b1*(3.*W.InC[vol]-4.*W.InC[vol+1]+W.InC[vol+2])^2
+	W.b1*(3.0*W.InC[vol]-4.0*W.InC[vol+1]+W.InC[vol+2])^2
         
         W.beta[2]=W.b0* W.work[vol-1]+ 
         W.b1*(W.InC[vol-1]-W.InC[vol+1])^2
         
         W.beta[3]=W.b0*W.work[vol-2]+ 
-	W.b1*(W.InC[vol-2]-4.*W.InC[vol-1]+3*W.InC[vol])^2
+	W.b1*(W.InC[vol-2]-4.0*W.InC[vol-1]+3*W.InC[vol])^2
 
         
         sleft=0.0

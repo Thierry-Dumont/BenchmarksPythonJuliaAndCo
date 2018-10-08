@@ -5,7 +5,7 @@ function PreLapl2(size::Int)
     I=Int[]
     J=Int[]
     V=Float64[]
-    h=1./(size-1)
+    h=1.0/(size-1)
     size2=size*size
     h2=h*h
     cd=-4.0/h2
@@ -47,7 +47,7 @@ function PreLapl3(size)
     I=Int[]
     J=Int[]
     V=Float64[]
-    h=1./(size-1)
+    h=1.0/(size-1)
     size2=size*size
     h2=h*h
     cd=-6.0/h2

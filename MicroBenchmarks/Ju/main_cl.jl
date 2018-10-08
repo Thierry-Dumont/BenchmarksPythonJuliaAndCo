@@ -4,7 +4,7 @@ function Init!(X,L)
     h=L/size
     for i=0:size-1
         if i>floor(size//8) && i<floor(size//2)+floor(size//8)
-            X[i+1]=1.-2*(i-floor(size/8))*h/L;
+            X[i+1]=1.0-2*(i-floor(size/8))*h/L;
         else
             X[i+1]=0.0
         end
@@ -32,7 +32,7 @@ function proc2!(A::Array{Float64,1},B::Array{Float64,1},
 end
 function proc3!(A::Array{Float64,1},B::Array{Float64,1},
                 C::Array{Float64,1},D::Array{Float64,1},niter::Int64)
-    const size=length(A)
+    size=length(A)
     for it=1:niter
         @simd for i in 1:size
             A[i]=1.7*B[i]-0.8*C[i]-0.9*D[i]
@@ -67,18 +67,18 @@ function test(p,A::Array{Float64,1},B::Array{Float64,1},
    
     niter=nit
     # be sure to run once before actually running the benchmark!
-    Init!(A,1.)
-    Init!(B,1.)
-    Init!(C,1.)
-    Init!(D,1.)
+    Init!(A,1.0)
+    Init!(B,1.0)
+    Init!(C,1.0)
+    Init!(D,1.0)
     p(A,B,C,D,niter)
     #
-    T=0.
+    T=0.0
     while true
-        Init!(A,1.)
-        Init!(B,1.)
-        Init!(C,1.)
-        Init!(D,1.)
+        Init!(A,1.0)
+        Init!(B,1.0)
+        Init!(C,1.0)
+        Init!(D,1.0)
         t1 = time_ns()
         p(A,B,C,D,niter)
         t = (time_ns() -t1)/niter
@@ -109,11 +109,11 @@ const niter=2
 fw=open("RunningOn"*gethostname()*"_cl","w")
 while size<sizemax
     println("size: ",size,":\n")
-    A=Array{Float64}(size)
-    B=Array{Float64}(size)
-    C=Array{Float64}(size)
-    D=Array{Float64}(size)
-    tbest=10.^29
+    A=Array{Float64}(undef,size)
+    B=Array{Float64}(undef,size)
+    C=Array{Float64}(undef,size)
+    D=Array{Float64}(undef,size)
+    tbest=10.0^29
     best=0
     t=0.0
     for p= [proc1!,proc2!,proc3!,proc4!,proc5!]
@@ -134,7 +134,7 @@ while size<sizemax
     println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
-    size*=2
+    global size*=2
     println()
     
 end

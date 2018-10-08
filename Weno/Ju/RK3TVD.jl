@@ -9,7 +9,7 @@ struct RK3TVDData
     c32::Float64
     u1::Array{Float64,1}
     u2::Array{Float64,1}
-RK3TVDData(Size)=new(Size,3./4.,1./4,1./3.,2./3.,zeros(Size),zeros(Size))
+RK3TVDData(Size)=new(Size,3.0/4.0,1.0/4,1.0/3.0,2.0/3.0,zeros(Size),zeros(Size))
 end
 function Rk3tvd!(R::RK3TVDData,W,dt,In::Array{Float64},Out::Array{Float64})
     size=R.size

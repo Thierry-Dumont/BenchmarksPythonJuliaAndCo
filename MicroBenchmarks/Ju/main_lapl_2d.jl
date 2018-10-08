@@ -1,12 +1,12 @@
 
 # initalize an array
 function Init!(X::Array{Float64,2},L)
-    siz=size(X)[1]
+    siz=size(X,1)
     h=L/siz
     for j=0:siz-1
         for i=0:siz-1
             if i>floor(siz//8) && i<floor(siz//2)+floor(siz//8)
-                X[i+1,j+1]=1.-2*(i-floor(siz/8))*h/L;
+                X[i+1,j+1]=1.0-2*(i-floor(siz/8))*h/L;
             else
                 X[i+1,j+1]=0.0
             end
@@ -20,8 +20,8 @@ end
 # styles.
 
 function proc1!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
-    const siz=size(In)[1]
-    h2::Float64= (1./siz)^2
+    siz=size(In,1)
+    h2::Float64= (1.0/siz)^2
     for it=1:niter
         Out[2:siz-1,2:siz-1]=
         h2*(In[1:siz-2,2:siz-1 ] + In[2:siz-1,1:siz-2]-
@@ -31,8 +31,8 @@ function proc1!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
     end 
 end
 function proc2!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
-    const siz=size(In)[1]
-    h2::Float64= (1./siz)^2
+    siz=size(In,1)
+    h2::Float64= (1.0/siz)^2
     for it=1:niter
        @. Out[2:siz-1,2:siz-1]=
         h2*(In[1:siz-2,2:siz-1 ] + In[2:siz-1,1:siz-2]-
@@ -42,8 +42,8 @@ function proc2!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
     end 
 end
 function proc3!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
-    const siz=size(In)[1]
-    h2::Float64= (1./siz)^2
+    siz=size(In,1)
+    h2::Float64= (1.0/siz)^2
     for it=1:niter
         for j=2:siz-1
             for i=2:siz-1
@@ -57,8 +57,8 @@ function proc3!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
     end 
 end
 function proc4!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
-    const siz=size(In)[1]
-    h2::Float64= (1./siz)^2
+    siz=size(In,1)
+    h2::Float64= (1.0/siz)^2
     for it=1:niter
         for j=2:siz-1
             @simd for i=2:siz-1
@@ -72,8 +72,8 @@ function proc4!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
     end 
 end
 function proc5!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
-    const siz=size(In)[1]
-    h2::Float64= (1./siz)^2
+    siz=size(In,1)
+    h2::Float64= (1.0/siz)^2
     for it=1:niter
         for i=2:siz-1
             @simd for j=2:siz-1
@@ -92,14 +92,14 @@ function test(p,In::Array{Float64,2},Out::Array{Float64,2},nit::Int)
    
     niter=nit
     # be sure to run once before actually running the benchmark!
-    Init!(In,1.)
-    Init!(Out,1.)
+    Init!(In,1.0)
+    Init!(Out,1.0)
     p(In,Out,niter)
     # 
-    T=0.
+    T=0.0
     while true
-        Init!(In,1.)
-        Init!(Out,1.)
+        Init!(In,1.0)
+        Init!(Out,1.0)
         t1 = time_ns()
         p(In,Out,niter)
         t = (time_ns() -t1)/niter
@@ -132,9 +132,9 @@ sizemax=2049
 const niter=2
 while siz<sizemax
     println("size: ",siz)
-    In=Array{Float64,2}(siz,siz)
-    Out=Array{Float64,2}(siz,siz)
-    tbest=10.^29
+    In=Array{Float64,2}(undef,siz,siz)
+    Out=Array{Float64,2}(undef,siz,siz)
+    tbest=10.0^29
     best=0
     t=0.0
     for p= [proc1!,proc2!,proc3!,proc4!,proc5!]
@@ -156,7 +156,7 @@ while siz<sizemax
     println("nb. flops: ",nflops, ", Gflops/s (best): ",flops)
     println("-------")
     
-    siz*=2
+    global siz*=2
     println()
 end
 close(fw)

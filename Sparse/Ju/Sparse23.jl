@@ -1,13 +1,14 @@
 module Sparse23
 export PreLapl2,PreLapl3
+using SparseArrays
 function PreLapl2(size::Int)
     I(i::Int64,j::Int64)=(j-1)*size+i
     #I(i,j)=(j-1)*size+i
     nc= 5*(size-2)^2+ 16*(size-2)+ 12
-    row=Array{Int64}(nc)
-    col=Array{Int64}(nc)
-    v=Array{Float64}(nc)
-    h=1./(size-1)
+    row=Array{Int64}(undef,nc)
+    col=Array{Int64}(undef,nc)
+    v=Array{Float64}(undef,nc)
+    h=1.0/(size-1)
     size2=size*size
     h2=h*h
     cd=-4.0/h2
@@ -46,10 +47,10 @@ function PreLapl3(size)
     #const size2=size*size
     I(i::Int64,j::Int64,k::Int64)=(k-1)*size*size+(j-1)*size+i
     nc= 7*(size-2)^3 + 36*(size-2)^2 + 60*(size-2)+ 8*4
-    row=Array{Int64}(nc)
-    col=Array{Int64}(nc)
-    v=Array{Float64}(nc)
-    h=1./(size-1)
+    row=Array{Int64}(undef,nc)
+    col=Array{Int64}(undef,nc)
+    v=Array{Float64}(undef,nc)
+    h=1.0/(size-1)
     h2=h*h
     cd=-6.0/h2
     hd=1.0/h2
