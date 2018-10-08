@@ -1,3 +1,4 @@
+using LinearAlgebra
 #=
 Coefficients for a simple, but reproductible random number generator.
 =#
@@ -28,7 +29,7 @@ function RandomFeedMatrix(M,R::RandoData)
 end
 function doall(n::Int64)
     Ro= RandoData()
-    M=Array{Float64}(n,n+1)
+    M=Array{Float64}(undef,n,n+1)
     RandomFeedMatrix(M,Ro)
     t1 = time_ns()
     factorize(M)
@@ -46,7 +47,7 @@ while MatrixSize>liminf
     T=doall(MatrixSize)
     println(MatrixSize)
     D[MatrixSize]=T*1.e-9
-    MatrixSize=convert(Int64,MatrixSize/2)
+    global MatrixSize=convert(Int64,MatrixSize/2)
 end
 #
 
