@@ -2,6 +2,7 @@
 _*_.tex
 *.pyc
 Build*
+build*
 *~
 __tmpe
 *_temp
