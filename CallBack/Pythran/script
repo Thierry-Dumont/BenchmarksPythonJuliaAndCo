@@ -1,0 +1,3 @@
+pythran -march=native -O3 trapz.py
+pythran -march=native -O3 f.py
+pythran -march=native -O3 g.py
