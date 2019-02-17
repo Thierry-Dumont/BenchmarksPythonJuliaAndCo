@@ -75,17 +75,17 @@ int main()
   for(int i=0;i<loops;i++)
     sum= trapz<F>(0.,1.,1000);
   double t2=(get_time()-t1)/loops;
-  cout<<"F, computing time: "<<t2<<endl;
+  cout<<"f, computing time: "<<t2<<endl;
   cout<<sum<<endl;
-  f<<"F: "<<t2<<endl;
+  f<<"f: "<<t2<<endl;
 
   t1=get_time();
   for(int i=0;i<loops;i++)
     sum= trapz<G>(0.,1.,1000);
   t2=(get_time()-t1)/loops;
-  cout<<"G, computing time: "<<t2<<endl;
+  cout<<"g, computing time: "<<t2<<endl;
   cout<<sum<<endl;
-  f<<"G: "<<t2<<endl;
+  f<<"g: "<<t2<<endl;
   
   t1=get_time();
   for(int i=0;i<loops;i++)

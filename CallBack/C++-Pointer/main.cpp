@@ -64,7 +64,7 @@ int main()
   double t2=(get_time()-t1)/loops;
   cout<<"F, computing time: "<<t2<<endl;
   cout<<sum<<endl;
-  f<<"F: "<<t2<<endl;
+  f<<"f: "<<t2<<endl;
   
   t1=get_time();
   for(int i=0;i<loops;i++)
@@ -72,7 +72,7 @@ int main()
   t2=(get_time()-t1)/loops;
   cout<<"G, computing time: "<<t2<<endl;
   cout<<sum<<endl;
-  f<<"G: "<<t2<<endl;
+  f<<"g: "<<t2<<endl;
   
   t1=get_time();
   for(int i=0;i<loops;i++)

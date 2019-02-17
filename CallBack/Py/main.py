@@ -1,5 +1,6 @@
 from math import exp,sin,cos
 import time
+import socket
 
 def trapz(F,a,b,n):
     h=(b-a)/n
@@ -32,9 +33,14 @@ def implicit(t):
 loops=10000
 n=1000
 
+fic=open("RunningOn"+socket.gethostname(),"w")
+
 for F in [f,g,implicit]:
     t1 = time.time()
     for i in range(0,loops):
         sum=trapz(F,0.0,1.0,n)
     t=(time.time()-t1)/loops
     print(F.__name__," ",t," ",sum)
+    fic.write(F.__name__+": "+str(t)+"\n")
+fic.close()
+print("end.")

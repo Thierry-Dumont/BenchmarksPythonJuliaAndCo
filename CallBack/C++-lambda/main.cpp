@@ -46,7 +46,7 @@ int main()
   double t2=(get_time()-t1)/loops;
   cout<<"computing time: "<<t2<<endl;
   cout<<sum<<endl;
-  f<<"F: "<<t2<<endl;
+  f<<"f: "<<t2<<endl;
   
   auto G= [](double  x) {return x<0.5? -exp(-x)*x*x: exp(x)*x*x;};
   t1=get_time();
@@ -55,7 +55,7 @@ int main()
   t2=(get_time()-t1)/loops;
   cout<<"computing time: "<<t2<<endl;
   cout<<sum<<endl;
-  f<<"G: "<<t2<<endl;
+  f<<"g: "<<t2<<endl;
 
   f.close();
 }
