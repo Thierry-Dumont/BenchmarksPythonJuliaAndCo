@@ -1,6 +1,7 @@
 from math import exp,sin,cos
 from numba import jit,float64,int32
 import time
+import socket
 
 #@jit(float64(float64),float64,float64,int32)
 @jit(nopython=True)
@@ -38,9 +39,19 @@ def implicit(t):
 loops=10000
 n=1000
 
-for F in [f,g,implicit]:
+#  work around: same code as in ../Py/main.py does not compile.
+D={f:0,g:0,implicit:0}
+
+for F in D.keys(): 
     t1 = time.time()
     for i in range(0,loops):
         sum=trapz(F,0.0,1.0,n)
     t=(time.time()-t1)/loops
-    print(F.__name__," ",t," ",sum)
+    D[F]=t
+
+f=open("RunningOn"+socket.gethostname(),"w")
+for F in D.keys():
+    print(F.__name__," ",D[F])
+    f.write(F.__name__+": "+str(t)+"\n")
+f.close()
+print("end.")

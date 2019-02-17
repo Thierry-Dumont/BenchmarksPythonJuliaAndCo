@@ -52,21 +52,20 @@ io = IOContext(stdout, :compact => false)
 # is incompatible with @benchmark... who knows ?
 
 f(0.5)
-println("f:")
-bench_res = @benchmark trapz(0.,1.,1000,f)
+bench_res = @benchmark trapz(0.,1.,1000,f);
 show(io, bench_res)
-println("\n\n")
+println("f: ",bench_res)
 
 f1(0.5)
 println("f1:")
-bench_res = @benchmark trapz(0.,1.,1000,f1)
+bench_res = @benchmark trapz(0.,1.,1000,f1);
 show(io, bench_res)
 println("\n\n")
 
 g(0.5)
 println("g:")
-bench_res = @benchmark trapz(0.,1.,1000,g)
-show(io, bench_res)
+bench_res = @benchmark trapz(0.,1.,1000,g);
+#show(io, bench_res)
 println("\n\n")
 
 

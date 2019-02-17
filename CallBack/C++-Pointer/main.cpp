@@ -14,6 +14,14 @@ double get_time() {
     gettimeofday(&tv,0);
     return (double) tv.tv_sec+tv.tv_usec*1e-6;
 }
+string host()
+{
+  char hostnameC[HOST_NAME_MAX];
+  gethostname(hostnameC, HOST_NAME_MAX);
+  return  string(hostnameC);
+}
+
+
 double F(double x){return  exp(-x)*x*x; }
 double G(double x){return x<0.5? -exp(-x)*x*x: exp(x)*x*x;}
 
@@ -31,6 +39,7 @@ double implicit(double t)
     return x;
   
 }
+
 double trapz(double (*F)(double),double a, double b, int n)
 {
   auto h=(b-a)/n;
@@ -42,6 +51,10 @@ double trapz(double (*F)(double),double a, double b, int n)
 }
 int main()
 {
+  auto hostname = host();
+  cout<<"hostname: "<<hostname<<endl;
+  ofstream f; f.open("../RunningOn"+hostname);
+  
   const int loops=100000;
   double sum;
   
@@ -51,18 +64,23 @@ int main()
   double t2=(get_time()-t1)/loops;
   cout<<"F, computing time: "<<t2<<endl;
   cout<<sum<<endl;
-
+  f<<"F: "<<t2<<endl;
+  
   t1=get_time();
   for(int i=0;i<loops;i++)
     sum= trapz(G,0.,1.,1000);
   t2=(get_time()-t1)/loops;
   cout<<"G, computing time: "<<t2<<endl;
   cout<<sum<<endl;
-
+  f<<"G: "<<t2<<endl;
+  
   t1=get_time();
   for(int i=0;i<loops;i++)
     sum= trapz(implicit,0.,1.,1000);
   t2=(get_time()-t1)/loops;
   cout<<"implicit, computing time: "<<t2<<endl;
   cout<<sum<<endl;
+  f<<"implicit: "<<t2<<endl;
+
+  f.close();
 }

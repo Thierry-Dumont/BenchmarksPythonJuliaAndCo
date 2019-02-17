@@ -56,8 +56,18 @@ template<class Fonc> double trapz(double a, double b, int n)
   
   return sum*h;
 }
+string host()
+{
+  char hostnameC[HOST_NAME_MAX];
+  gethostname(hostnameC, HOST_NAME_MAX);
+  return  string(hostnameC);
+}
 int main()
 {
+  auto hostname = host();
+  cout<<"hostname: "<<hostname<<endl;
+  ofstream f; f.open("../RunningOn"+hostname);
+  
   const int loops=100000;
   double sum;
   
@@ -67,6 +77,7 @@ int main()
   double t2=(get_time()-t1)/loops;
   cout<<"F, computing time: "<<t2<<endl;
   cout<<sum<<endl;
+  f<<"F: "<<t2<<endl;
 
   t1=get_time();
   for(int i=0;i<loops;i++)
@@ -74,11 +85,17 @@ int main()
   t2=(get_time()-t1)/loops;
   cout<<"G, computing time: "<<t2<<endl;
   cout<<sum<<endl;
-
+  f<<"G: "<<t2<<endl;
+  
   t1=get_time();
   for(int i=0;i<loops;i++)
     sum= trapz<implicit>(0.,1.,1000);
   t2=(get_time()-t1)/loops;
   cout<<"implicit, computing time: "<<t2<<endl;
-  cout<<sum<<endl;  
+  cout<<sum<<endl;
+  f<<"implicit: "<<t2<<endl;
+
+  f.close();
+
+  cout<<"end."<<endl;
 }
