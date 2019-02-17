@@ -45,6 +45,8 @@ for n in files:
 
 
 with open("result.md","w") as file:
+    sc=" ".join([l.ljust(15) for l in ["Type","  f","  g","implicit"]])
+    print(sc)
     file.write("  Type      |     f     |    g     |    implicit    \n")
     file.write("------------------ |-----------|----------|---------------- \n")
     for k in Call.keys():
@@ -54,6 +56,8 @@ with open("result.md","w") as file:
                 s+=str(Call[k][sk])[0:5]+"        | "
             else:
                 s+=" none | "
-        print(s)
+        sc=[str(l).ljust(15) for l in s.split("|")]
+
+        print(" ".join([str(l).ljust(15) for l in s.split("|")]))
         file.write(s[0:-2]+"\n")
         file.write("------------------ |-----------|----------|---------------- \n")
