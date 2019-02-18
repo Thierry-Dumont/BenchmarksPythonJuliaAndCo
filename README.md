@@ -14,7 +14,7 @@ optimized implementation (and sometimes with a Fortran one)..
 
 The benchmark(s):
 
-*  ** new ** Calbacks (small and not so small functions, numerically integrated).
+*  :new: Calbacks (small and not so small functions, numerically integrated).
 
 * Gaussian:  Gaussian elimination with partial pivoting.
   
