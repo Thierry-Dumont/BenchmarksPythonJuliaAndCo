@@ -16,11 +16,11 @@ double get_time() {
 }
 
 struct F {
-  double operator()(double x) const {return exp(-x)*x*x;}
+  inline double operator()(double x) const {return exp(-x)*x*x;}
 };
 
 struct G {
-  double operator()(double x) const
+  inline double operator()(double x) const
   {
     double h=0.0;
     if(x<0.5)
@@ -32,7 +32,7 @@ struct G {
 };
 
 struct implicit{
-  double operator()(double t) const 
+  inline double operator()(double t) const 
   {
     // implicit = root of  4*sin(x)-exp(x)+t
     // Newton iterations, starting from zero:
