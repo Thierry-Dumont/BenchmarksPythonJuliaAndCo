@@ -1,4 +1,4 @@
-#pythran export trapz(float(float),float,float,int32)
+#pythran export trapz(float(float),float,float,int)
 def trapz(F,a,b,n):
     h=(b-a)/n
     sum=0.5*(F(a)+F(b))

@@ -12,8 +12,6 @@ end
                
 f(x::Float64)=+exp(-x)*x^2
 
-
-
 function g(x::Float64)
     h=0.0
     if x<0.5
@@ -24,7 +22,7 @@ function g(x::Float64)
     return h*x^2
 end
 
-# Note: replacing f by f1 and g by g1 do not change the computing time.
+# Note: replacing f by f1 and g by g1 do not change the computing time:
 # f1(x)=x < 1.5 ? +exp(-x)*x^2 :  +exp(-x)*x^2
 # g1(x::Float64)=x < 0.5 ? -exp(-x)*x^2 :  exp(x)*x^2
 

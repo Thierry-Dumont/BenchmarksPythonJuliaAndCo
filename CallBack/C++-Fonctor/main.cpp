@@ -18,6 +18,7 @@ double get_time() {
 struct F {
   double operator()(double x) const {return exp(-x)*x*x;}
 };
+
 struct G {
   double operator()(double x) const
   {
@@ -33,7 +34,7 @@ struct G {
 struct implicit{
   double operator()(double t) const 
   {
-    // implicit = root/x of  4*sin(x)-exp(x)+t
+    // implicit = root of  4*sin(x)-exp(x)+t
     // Newton iterations, starting from zero:
     double x=0.0;
     double F= 4*sin(x)-exp(x)+t;
@@ -68,7 +69,7 @@ int main()
   cout<<"hostname: "<<hostname<<endl;
   ofstream f; f.open("../RunningOn"+hostname);
   
-  const int loops=100000;
+  const int loops=10000;
   double sum;
   
   double t1=get_time();

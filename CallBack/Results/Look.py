@@ -1,26 +1,32 @@
 #!/usr/bin/python3
 #
-#comparison between c++ and other computations
+#comparison between a reference computaion and other computations
 #
 import socket
-def parsit(D,name,l):
-    #
-    D[name]=float(l.replace("\n",""))
+
 # directories to explore ---------   
 files=[
      "C++-lambda",  "C++-Pointer",
     "Py",
-    "Ju",
+    "Pythran",
     "Numba",
+    "Ju",
+    
 ]
+#  ----  Directory of the reference program (C++?), from which computing time
+# will be taken as  units
+# --------------------------------------------------------------------------
 cpp="C++-Fonctor"
-#-------------------------------------------
-# build a dict  n-> computing time for  C++
+
+#---------------------------------------------------------------------------
+# build a dict  n-> computing time for "cpp" directory
 C={}
 with open("../"+cpp+"/RunningOn"+socket.gethostname(), 'r') as file:
     for line in file:
         l=line.replace("\n","").split()
         C[l[0]]=float(l[1])
+        
+#---- now loop on files [] and compare, if possible.
 Call={}
 for n in files:
     Cloc={}
@@ -42,11 +48,10 @@ for n in files:
                     Cloc[l[0]]=float(l[1])/C[l[0]]
     Call[n]=Cloc
 
-
+#----- print and save results:
 
 with open("result.md","w") as file:
-    sc=" ".join([l.ljust(15) for l in ["Type","  f","  g","implicit"]])
-    print(sc)
+    print("\n"+" ".join([l.ljust(15) for l in ["Type","  f","  g","implicit"]]))
     file.write("  Type      |     f     |    g     |    implicit    \n")
     file.write("------------------ |-----------|----------|---------------- \n")
     for k in Call.keys():
@@ -56,7 +61,6 @@ with open("result.md","w") as file:
                 s+=str(Call[k][sk])[0:5]+"        | "
             else:
                 s+=" none | "
-        sc=[str(l).ljust(15) for l in s.split("|")]
 
         print(" ".join([str(l).ljust(15) for l in s.split("|")]))
         file.write(s[0:-2]+"\n")

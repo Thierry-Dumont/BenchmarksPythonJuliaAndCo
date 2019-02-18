@@ -20,6 +20,7 @@ string host()
   gethostname(hostnameC, HOST_NAME_MAX);
   return  string(hostnameC);
 }
+
 template<typename Fonc> double trapz(Fonc &F,double a, double b, int n)
 {
   auto h=(b-a)/n;
@@ -34,7 +35,7 @@ int main()
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
   
-  const int loops=100000;
+  const int loops=10000;
   double sum;
   
   ofstream f; f.open("../RunningOn"+hostname);

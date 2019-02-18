@@ -37,11 +37,13 @@ def implicit(t):
 #----------------------main program starts here ------------------
 loops=10000
 n=1000
-1000
 
 fic=open("RunningOn"+socket.gethostname(),"w")
-
+    
 for F in [f,g,implicit]:
+    # running once seems to improve performances (just in time compilation !)
+    sum=trapz(F,0.0,1.0,n)
+    #
     t1 = time.time()
     for i in range(0,loops):
         sum=trapz(F,0.0,1.0,n)

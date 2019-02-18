@@ -55,7 +55,7 @@ int main()
   cout<<"hostname: "<<hostname<<endl;
   ofstream f; f.open("../RunningOn"+hostname);
   
-  const int loops=100000;
+  const int loops=10000;
   double sum;
   
   double t1=get_time();
