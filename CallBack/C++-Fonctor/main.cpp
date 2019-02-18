@@ -49,8 +49,8 @@ struct implicit{
 
 template<class Fonc> double trapz(double a, double b, int n)
 {
-  Fonc F;
-  auto h=(b-a)/n;
+  const Fonc F;
+  const auto h=(b-a)/n;
   auto sum=0.5*(F(a)+F(b));
   for(int i=1;i<=n;i++)
     sum+=F(i*h);
