@@ -14,6 +14,8 @@ optimized implementation (and sometimes with a Fortran one)..
 
 The benchmark(s):
 
+* new: Calbacks (small and not so small functions, numerically integrated).
+
 * Gaussian:  Gaussian elimination with partial pivoting.
   
 * FeStiff: compute the stiffness matrix, for the Poisson equation,
@@ -22,7 +24,7 @@ The benchmark(s):
 *  Weno: a classical solver for hyperbolic equations, in
   dimension 1, with application to Burghers equation and to Convection. 
 
-* :new: Sparse: building a sparse matrix and doing a sparse matrix x vector product.
+* :Sparse: building a sparse matrix and doing a sparse matrix x vector product.
   
 * MicroBenchmarks: very simple benchmarks to show the importance
   of different programing styles. 
