@@ -46,7 +46,7 @@ for dim=2:3
         sizeM=2048
     else
         size=16
-        sizeM=256
+        sizeM=128
     end
     @printf "%4s %8s %9s %10s %10s \n" "size" "order" "nc" "T.b" "T.p"
     while size<=sizeM
