@@ -11,7 +11,7 @@ echo "--- "
 
 for i in Ju Numba  Pythran ; do
     echo  "Test: "$i
-    echo "--- "
+    echo "--- " 
     (cd $i; ./script)
 done
 

@@ -11,7 +11,7 @@ for i in C++  C++NoCopy C++-Modulo C++-Pointers Fortran ; do
     (cd $i; mkdir -p Build; cd Build; cmake ..; make; ./run)
 done
 for i in Ju Numba   ; do
-    echo  "Test: "$i
+    echo  "Test: "$i 
     echo "--- "
     (cd $i; ./script)
 done

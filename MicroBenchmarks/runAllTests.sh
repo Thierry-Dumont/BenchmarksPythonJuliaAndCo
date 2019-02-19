@@ -11,7 +11,7 @@ echo "--- "
 
 for i in Ju Numba ; do
     echo  "Test: "$i
-    echo "--- "
+    echo "--- " 
     (cd $i; for j in main*; do ./script $j; done)
 done
 echo  "Test: Py"

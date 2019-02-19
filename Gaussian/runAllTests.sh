@@ -14,7 +14,7 @@ for i in Ju Numba  PyScipy  PythranVec Pythran ; do
     echo  "Test: "$i
     echo "--- "
     (cd $i; ./script)
-done
+done  
 for i in Py PyVec ; do
     echo  "Test: "$i
     echo "--- "
