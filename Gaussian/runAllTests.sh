@@ -10,12 +10,12 @@ for i in C++  C++Lib ; do
     echo "--- "
     (cd $i; mkdir -p Build; cd Build; cmake ..; make; ./run)
 done
-for i in Ju Numba  PyScipy  PythranVec Pythran ; do
+for i in Ju Numba  PythranVec Pythran ; do
     echo  "Test: "$i
     echo "--- "
     (cd $i; ./script)
 done  
-for i in Py PyVec ; do
+for i in Py PyVec PyScipy; do
     echo  "Test: "$i
     echo "--- "
     (cd $i; python3 ./main.py)
