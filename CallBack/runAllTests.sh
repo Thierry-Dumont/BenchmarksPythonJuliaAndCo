@@ -11,8 +11,8 @@ for i in C++-Fonctor  C++-lambda  C++-Pointer; do
     echo "--- "
     (cd $i; mkdir -p Build; cd Build; cmake ..; make; ./run)
 done
-for i in Ju Numba Pythran ; do
-     echo "--- "
+for i in Ju Numba Pythran ; do 
+     echo "--- " 
     echo  "Test: "$i
     echo "--- "
     (cd $i; ./script)
