@@ -14,7 +14,7 @@ optimized implementation (and sometimes with a Fortran one)..
 
 The benchmark(s):
 
-*  :new: Callback: callback of small and not so small functions.
+*  :new: Callback: callbacks of small and not so small functions.
 
 * Gaussian:  Gaussian elimination with partial pivoting.
   
