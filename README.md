@@ -75,6 +75,20 @@ and so on...
 
 You can also install them from [conda](https://conda.io/docs/).
 
+# How to run the Benchmarks ?
+
+-1 First solution: enter the directories CallBack/, FeStiff,
+Gaussian/, MicroBenchmarks/, Sparse/ or Weno/. Then read the README.md, which
+explains how to run the benchmark.
+
+-2 Second solution: In each of these directories, you will find a script: runAllTests.sh . This
+script will run the benchmark, for every language (and variant).
+
+-2 Third solution: stay here. Run the scripty runAllBenchmarks.sh; this will run everything for you. Then enter individial directories, and look at README.md to know hos to exploit the results. 
+
+The first solution is certainly the safest.
+
+
 # Results:
 
 Have a look at the [wiki](https://github.com/Thierry-Dumont/BenchmarksPythonJuliaAndCo/wiki), where you can find results obtained on my personal
