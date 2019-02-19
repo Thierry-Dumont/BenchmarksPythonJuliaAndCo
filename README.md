@@ -84,7 +84,7 @@ explains how to run the (local) benchmark.
 -2: Second solution: In each of these directories, you will find a script: runAllTests.sh . This
 script will run the benchmark, for every language (and variant).
 
--3: Third solution: stay here. Run the script runAllBenchmarks.sh; this will run everything for you. Then enter individial directories, and look at README.md to know how to exploit the results. This will take a __long time__ to run! 
+-3: Third solution: stay here: The script runAllBenchmarks.sh  will run everything for you. Then enter individial directories, and look at README.md to know how to exploit the results. Note that his will take a __long time__ to run, and potential problems will be difficult to fiagnose.
 
 The __first solution is certainly the safest__. 
 
