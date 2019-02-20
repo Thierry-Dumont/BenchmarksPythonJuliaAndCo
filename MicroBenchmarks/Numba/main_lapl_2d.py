@@ -13,7 +13,7 @@ def Init(X,L):
             else:
                 X[i]=0.0
 
-@jit
+@jit(nopython=True)
 def lapl2d_1(In,Out,niter):
     # Vectorized version:
     siz=In.shape[0]
@@ -25,7 +25,7 @@ def lapl2d_1(In,Out,niter):
             4.0*In[1:siz-1,1:siz-1]+
             In[2:siz,1:siz-1]+In[1:siz-1,2:siz])
         In,Out=Out,In
-@jit
+@jit(nopython=True)
 def lapl2d_2(In,Out,niter):
     # Naïve version:
     size=In.shape[0]
@@ -41,7 +41,7 @@ def lapl2d_2(In,Out,niter):
 @stencil
 def kernel(In,h2):
     return h2*(In[1,0] + In[0,-1]-4.0*In[0,0]+In[+1,0]+In[0,+1])
-@jit
+@jit(nopython=True)
 def lapl2d_3(In,Out,niter):
     # Version using Numba "stencils".
     size=In.shape[0]
