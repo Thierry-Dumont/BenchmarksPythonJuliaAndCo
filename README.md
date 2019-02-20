@@ -24,7 +24,7 @@ The benchmark(s):
 *  Weno: a classical solver for hyperbolic equations, in
   dimension 1, with application to Burghers equation and to Convection. 
 
-* :Sparse: building a sparse matrix and doing a sparse matrix x vector product.
+* Sparse: building a sparse matrix and doing a sparse matrix x vector product.
   
 * MicroBenchmarks: very simple benchmarks to show the importance
   of different programing styles. 
@@ -84,7 +84,7 @@ explains how to run the (local) benchmark.
 -2: Second solution: In each of these directories, you will find a script: runAllTests.sh . This
 script will run the benchmark, for every language (and variant).
 
--3: Third solution: stay here: The script runAllBenchmarks.sh  will run everything for you. Then enter individial directories, and look at README.md to know how to exploit the results. Note that his will take a __long time__ to run, and potential problems will be difficult to fiagnose.
+-3: Third solution: stay here: The script runAllBenchmarks.sh  will run everything for you. Then enter individial directories, and look at README.md to know how to exploit the results. Note that his will take a __long time__ to run, and potential problems will be difficult to diagnose.
 
 The __first solution is certainly the safest__. 
 
