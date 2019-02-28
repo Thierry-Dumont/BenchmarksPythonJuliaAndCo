@@ -3,6 +3,7 @@
 #comparison between a reference computaion and other computations
 #
 import socket
+from pathlib import Path
 
 # directories to explore ---------   
 files=[
@@ -29,24 +30,29 @@ with open("../"+cpp+"/RunningOn"+socket.gethostname(), 'r') as file:
 #---- now loop on files [] and compare, if possible.
 Call={}
 for n in files:
-    Cloc={}
     filename= "../"+n+"/RunningOn"+socket.gethostname()
-    if n == "Ju":
-        with open(filename,"r") as file:
-            for line in file:
-                l=line.replace("\n","").split()
-                if len(l)!=0:
-                    s=l[1].replace("Trial(","").replace(" μs","")
-                    if l[0] in C.keys():
-                        Cloc[l[0]]=float(s)*1.e-6/C[l[0]]         
+    p_file = Path(filename)
+    if p_file.is_file():
+        Cloc={}
+        if n == "Ju":
+            with open(filename,"r") as file:
+                for line in file:
+                    l=line.replace("\n","").split()
+                    if len(l)!=0:
+                        s=l[1].replace("Trial(","").replace(" μs","")
+                        if l[0] in C.keys():
+                            Cloc[l[0]]=float(s)*1.e-6/C[l[0]]         
                     
+        else:
+            with open(filename,"r") as file:
+                for line in file:
+                    l=line.replace("\n","").split()
+                    if l[0] in C.keys():
+                        Cloc[l[0]]=float(l[1])/C[l[0]]
+        Call[n]=Cloc
     else:
-        with open(filename,"r") as file:
-            for line in file:
-                l=line.replace("\n","").split()
-                if l[0] in C.keys():
-                    Cloc[l[0]]=float(l[1])/C[l[0]]
-    Call[n]=Cloc
+        print("\n\nFile "+filename+ " does not exists !")
+        print("did you run test in "+n+" ?\n\n")
 
 #----- print and save results:
 
