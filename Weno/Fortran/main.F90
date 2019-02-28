@@ -51,6 +51,7 @@ program main
 
   call hostnm(hostname)
   open(unit=12, file="../RunningOn" // trim(hostname), action="write", status="replace")
+  write(12, *) "Burghers Godunov"
   write(12, *) finish - start
   close(12)
   

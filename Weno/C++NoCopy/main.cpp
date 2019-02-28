@@ -6,7 +6,8 @@
 #include <algorithm>
 #include <unistd.h>
 #include <limits.h>
-
+#include <typeinfo>
+#include <utility>
 #include "GodunovFlux.hpp"
 #include "LaxFriedrichsFlux.hpp"
 #include "Burghers.hpp"
@@ -41,7 +42,13 @@ std::string host()
   gethostname(hostnameC, HOST_NAME_MAX);
   return std::string(hostnameC);
 }
-
+template<class T> std::pair<std::string,std::string> how_computed(T& t)
+{
+  std::string s=typeid(t).name();
+  std::string problem=s.find("Burghers")!=std::string::npos? "Burghers":"Convection";
+  std::string flux=s.find("Godunov")!=std::string::npos?"Godunov": "Lax-Friedrichs";
+  return std::make_pair(problem,flux);
+}
 /// Initial condition
 template <typename TData, typename T>
 void init(TData & X, T L)
@@ -84,12 +91,17 @@ int main()
     // Scheme
     auto const scheme = makeWeno(num_flux, L);
 
+    //std::cout<<typeid(scheme).name()<<endl;
     // Time integrator
     auto const time_int = makeRK3TVD(scheme);
 
     // Initialization
     auto const hostname = host();
     std::cout << "Hostname: " << hostname << std::endl;
+
+    auto P=how_computed(num_flux);
+    std::cout<<P.first <<" with "<<P.second<<endl;
+    
     std::size_t const nsteps = T/dt;
     std::cout << "size = " << size << " ; dt = " << dt << " ; nsteps = " << nsteps << std::endl;
     
@@ -150,6 +162,7 @@ int main()
 #endif
 
     std::ofstream fb; fb.open("../RunningOn" + hostname);
+    fb<<P.first<<" "<<P.second<<endl;
     fb << duration << endl;
     fb.close();
 

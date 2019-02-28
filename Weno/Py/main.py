@@ -42,11 +42,21 @@ Flux=Burg
 NumFlux=Godunov
 #NumFlux=LaxFriedrichs 
 
+if NumFlux==Godunov:
+     pF="Godunov"
+else:
+     pF="Lax-Friedrichs"
+if Flux==Burg:
+     pE="Burghers"
+else:
+     pE="Convection"
+     
 Meth=lambda x,y: W.weno(NumFlux,Flux,L,x,y)
 
 
 R=RK3TVD(size)
 
+print(pE," with ",pF)
 
 t=0
 
@@ -63,6 +73,7 @@ np.savetxt("gp",In)
 fi.close()
 print("A file 'gp' with the final solution was created.")
 
-f=open("RunningOn"+socket.gethostname(),"w")   
+f=open("RunningOn"+socket.gethostname(),"w")
+f.write(pE+" "+pF+"\n")
 f.write(str(t)+"\n")
 f.close()

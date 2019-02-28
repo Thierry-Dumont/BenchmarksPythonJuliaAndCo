@@ -5,7 +5,7 @@
 struct  Burghers
 {
   //! the flux.
-  inline double flux(double x) 
+  static inline double flux(double x) 
   {
     return 0.5*x*x;
   }

@@ -34,8 +34,21 @@ NumF=NF.GodunovBurghers
 #NumF=NF.LaxFriedrichsConvection
 #NumF=NF.LaxFriedrichsBurghers
 
+if NumF==NF.GodunovBurghers:
+     pE="Burghers"
+     pF="Godunov"
+elif NumF==NF.GodunovConvection:
+     pE="Convection"
+     pF="Godunov"
+elif NumF==NF.LaxFriedrichsConvection:
+     pE="Convection"
+     pF="Lax-Friedrichs"
+else:
+     pE="Convection"
+     pF="Burghers"
 t=0
 
+print(pE," with ",pF)
 t1 = time.time()
 while t<T:
      Out=R.op(NumF,In,dt)
@@ -49,6 +62,7 @@ np.savetxt("gp",In)
 fi.close()
 print("A file 'gp' with the final solution was created.")
 
-f=open("RunningOn"+socket.gethostname(),"w")   
+f=open("RunningOn"+socket.gethostname(),"w")
+f.write(pE+" "+pF+"\n")
 f.write(str(t)+"\n")
 f.close()

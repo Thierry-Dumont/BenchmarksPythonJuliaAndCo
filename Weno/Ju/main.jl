@@ -45,10 +45,18 @@ const EQ=Burghers
   const NF=NumfluxGodunov
 # const NF=NumfluxLaxFriedrichs
 
+if EQ==Burghers
+    pE="Burghers"
+else
+    pE="Concevtion"
+end
+
 if NF==NumfluxGodunov
     @inline NumFlux(X::Float64,Y::Float64)=NumfluxGodunov(EQ.minf,EQ.maxf,X,Y)
+    pF="Godunov"
 else
     @inline NumFlux(X::Float64,Y::Float64)=NumfluxLaxFriedrichs(EQ.flux,X,Y,1.0)
+    pF="Lax-Friedrichs"
 end
 
 S(X::Array{Float64,1},Y::Array{Float64,1})=weno!(W,NumFlux,L,X,Y)
@@ -63,7 +71,7 @@ Init!(In,L)
 f=open("gp0","w")
 writedlm(f, In)
 close(f)
-
+println(pE," using ",pF)
 println("start computation")
 t=0.0
 t1 = time_ns()
@@ -84,5 +92,6 @@ writedlm(f, In)
 close(f)
 println("A file 'gp' with the final solution was created.")
 open("RunningOn"*gethostname(),"w") do f
+    write(f,pE*" "*pF,"\n")
     write(f,string(tcomp),"\n")
 end

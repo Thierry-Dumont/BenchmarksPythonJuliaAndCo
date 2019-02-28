@@ -14,6 +14,8 @@
 #include <fstream>
 #include <cmath>
 #include <ctime>
+#include <typeinfo>
+#include <utility>
 //#define DO_GNUPLOT_FILES
 using namespace std;
 
@@ -29,7 +31,13 @@ string host()
   gethostname(hostnameC, HOST_NAME_MAX);
   return  string(hostnameC);
 }
-
+template<typename T> pair<string,string> how_computed()
+{
+  string s=typeid(T).name();
+  string problem=s.find("Burghers")!=std::string::npos? "Burghers":"Convection";
+  string flux=s.find("Godunov")!=std::string::npos?"Godunov": "Lax-Friedrichs";
+  return make_pair(problem,flux);
+}
 void Init(double *  X,double L,int size)
 {
   double h=L/size;
@@ -59,6 +67,10 @@ int main()
   fparam[0]=1.;
   auto hostname = host();
   cout<<"hostname: "<<hostname<<endl;
+
+  auto pc=how_computed<NumFlux>();
+  cout<<pc.first<<" solved with "<<pc.second<<" flux." <<endl;
+  
   int nsteps=T/dt;
   cout<<"size= "<<size<<" dt= "<<dt<<" nsteps= "<<nsteps<<endl;
   double * InOut=new double[size];
@@ -125,6 +137,7 @@ int main()
 
 
   ofstream fb; fb.open("../RunningOn"+hostname);
+  fb<<pc.first<<" "<<pc.second<<endl;
   fb<<t2-t1<<endl;
   fb.close();
 
