@@ -1,2 +1,4 @@
 #!/bin/bash
 pythran -march=native -O3 factorMatrix.py
+echo "run test:"
+python3 main.py
