@@ -45,9 +45,9 @@ discretization of order 5 when applied to smooth functions.
 ### The directories contain:
 
 - **C++**:      pure C++, sequential.
-- ** C++-Pointers**  :  other sequential C++ implementation.
-- ** C++-NoCopy**  :  other sequential C++ implementation.
-- ** C++-Modulo**  :  other sequential C++ implementation.
+- **C++-Pointers**  :  other sequential C++ implementation.
+- **C++-NoCopy**  :  other sequential C++ implementation.
+- **C++-Modulo**  :  other sequential C++ implementation.
 - **Py**:       pure Python (with numpy).
 - **PyVec**:    vectorized Python version.
 - **Ju**:       Ĵulia.
