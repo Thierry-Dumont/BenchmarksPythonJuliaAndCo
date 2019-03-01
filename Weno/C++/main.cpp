@@ -25,7 +25,7 @@ double get_time() {
     gettimeofday(&tv,0);
     return (double) tv.tv_sec+tv.tv_usec*1e-6;
 }
-clock_t ck() {return clock();}
+//clock_t ck() {return clock();}
 string host()
 {
   char hostnameC[HOST_NAME_MAX];

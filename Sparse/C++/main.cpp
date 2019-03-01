@@ -12,8 +12,8 @@
 #include <fstream>
 
 using namespace std;
-clock_t ck() {return clock();}
-//get... time.
+
+//get... time in seconds.
 double get_time() {
   struct timeval tv;
   gettimeofday(&tv,0);
@@ -36,7 +36,7 @@ template<int dim> void Init(double X[],int size)
       v=-v;
     }
 }
-template<int dim> tuple<clock_t,clock_t,int,int> dotest_arrays(int size)
+template<int dim> tuple<double,double,int,int> dotest_arrays(int size)
 {
   int order,nc;
   // build matrix:
@@ -47,10 +47,10 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_arrays(int size)
   int *col;
   double *v;
   
-  auto c1=ck();
+  auto c1=get_time();
   std::tie(order,nc)= PreLapl<dim>(row,col,v,size);
   Csr M(row,col,v,order,nc);
-  auto c2=ck()-c1;
+  auto c2=get_time()-c1;
   
   
   //auto In=std::make_unique<double[]>(order);
@@ -61,27 +61,27 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_arrays(int size)
   Init<dim>(In,size); Init<dim>(Out,size);
   // product:
   int iterm=1;
-  clock_t c4;
+  double c4;
   do
     {
-      auto c3=ck();
+      auto c3=get_time();
       for(int it=0;it<iterm;it++)
 	M.prod(In,Out);
-      c4=ck()-c3;
+      c4=get_time()-c3;
       iterm*=2;
     }
-  while(c4<CLOCKS_PER_SEC/100);
+  while(c4<0.1);
 
   delete[] In; delete[] Out;
-  return make_tuple(order,nc,c2,c4/(iterm-1));
+  return make_tuple(c2,c4/(iterm-1),order,nc);
 }
-template<int dim> tuple<clock_t,clock_t,int,int> dotest_map(int size)
+template<int dim> tuple<double,double,int,int> dotest_map(int size)
 {
   
   int ni,nj,sizem;
 
   // build the matrix:
-  auto c1=ck();
+  auto c1=get_time();
   PreSparse P;
   PreLapl<dim>(P,size);
  
@@ -89,7 +89,7 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_map(int size)
  
   Csr M(P);
 
-  auto c2=ck()-c1;
+  auto c2=get_time()-c1;
 
   
   P.purge();
@@ -102,26 +102,27 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_map(int size)
   Init<dim>(In,size); Init<dim>(Out,size);
   // product:
   int iterm=1;
-  clock_t c4;
+
+  double c4;
   do
     {
-      auto c3=ck();
+      auto c3=get_time();
       for(int it=0;it<iterm;it++)
 	M.prod(In,Out);
-      c4=ck()-c3;
+      c4=get_time()-c3;
       iterm*=2;
     }
-  while(c4<CLOCKS_PER_SEC/100);
+  while(c4<0.1);//at least run 0.1 second
 
   delete[] In; delete[] Out;
-  return make_tuple(ni,sizem,c2,c4/(iterm-1));
+  return make_tuple(c2,c4/(iterm-1),ni,sizem);
 }
 void banner()
 {
-  cout<<left<<setw(9)<<"size"<<left<<setw(9)<<"order"<<setw(10)<<"nc"<<" ";
-  cout<<left<<setw(10)<<"T.b."<<setw(10)<<"T.p."<<setw(15)
-      <<"T.b/nc"<<setw(13)<<"T.m./nc"<<setw(20)<<"Gflops/s"<<endl;
-  for(int i=0;i<85;i++)
+  cout<<left<<setw(9)<<"size"<<left<<setw(15)<<"order"<<setw(15)<<"nc"<<" ";
+  cout<<left<<setw(15)<<"T.b."<<setw(15)<<"T.p."<<setw(15)
+      <<"T.b/nc"<<setw(13)<<"T.m./nc"<<setw(10)<<"Gflops/s"<<endl;
+  for(int i=0;i<107;i++)
     cout<<"-";
   cout<<endl;
 }  
@@ -146,26 +147,25 @@ int main()
   int sizemin=32,sizemax=2048;
   
   cout<<"2d:"<<endl;
-  clock_t tb,tm;
+  double tb,tm;
   int order,ncoefs;
   fb.open("../RunningOn"+hostname+"-2");
   banner();
   for(int size=sizemin;size<=sizemax;size*=2)
     {
-      tie(order,ncoefs,tb,tm) = dotest_arrays<2>(size);
+      tie(tb,tm,order,ncoefs) = dotest_arrays<2>(size);
       
-      auto tbd=static_cast<double>(tb);
-      auto tmb=static_cast<double>(tm)/CLOCKS_PER_SEC;
+
       long int flops=2*ncoefs-order;
-      double Gflopss= pow(10,-9)*flops/tmb;
-      cout<<left<<setw(9)<<size<<left<<setw(9)<<order<<setw(10)<<ncoefs<<" ";
-      cout<<left<<setw(10)<<tbd/CLOCKS_PER_SEC<<setw(10)
-	  <<tmb<<setw(15)
+      double Gflopss=   pow(10,-9)*flops/tm;
+      cout<<left<<setw(9)<<size<<left<<setw(15)<<order<<setw(15)<<ncoefs<<" ";
+      cout<<left<<setw(15)<<tb<<setw(15)
+	  <<tm<<setw(15)
 	  <<static_cast<double>(tb)/ncoefs<<setw(13)
 	  <<static_cast<double>(tm)/ncoefs<<setw(10)<<Gflopss<<
 	endl;
       fb<<size<<" "<<order<<" "<<ncoefs<<" "
-	<<tbd/CLOCKS_PER_SEC<<" "<<tmb<<endl;
+	<<tb<<" "<<tm<<endl;
     }
   fb.close();
   
@@ -173,23 +173,21 @@ int main()
   sizemin=16; sizemax=256;
   fb.open("../RunningOn"+hostname+"-3");
   banner();
+ 
   for(int size=sizemin;size<=sizemax;size*=2)
     {
-      tie(order,ncoefs,tb,tm) =dotest_arrays<3>(size);
-      //tie(order,ncoefs,tb,tm) =dotest_map<3>(size);
-      auto tbd=static_cast<double>(tb);
-      auto tmb=static_cast<double>(tm)/CLOCKS_PER_SEC;
+      tie(tb,tm,order,ncoefs) = dotest_arrays<3>(size);
+      
       long int flops=2*ncoefs-order;
-      double Gflopss= pow(10,-9)*flops/tmb;
-      cout<<left<<setw(9)<<size<<left<<setw(9)<<order<<setw(10)<<ncoefs<<" ";
-      cout<<left<<setw(10)<<tbd/CLOCKS_PER_SEC<<setw(10)
-	  <<tmb<<setw(15)
+      double Gflopss=   pow(10,-9)*flops/tm;
+      cout<<left<<setw(9)<<size<<left<<setw(15)<<order<<setw(15)<<ncoefs<<" ";
+      cout<<left<<setw(15)<<tb<<setw(15)
+	  <<tm<<setw(15)
 	  <<static_cast<double>(tb)/ncoefs<<setw(13)
 	  <<static_cast<double>(tm)/ncoefs<<setw(10)<<Gflopss<<
 	endl;
       fb<<size<<" "<<order<<" "<<ncoefs<<" "
-	<<tbd/CLOCKS_PER_SEC<<" "<<tmb<<endl;
-      
+	<<tb<<" "<<tm<<endl;
     }
   fb.close();
   cout<<"end."<<endl;
