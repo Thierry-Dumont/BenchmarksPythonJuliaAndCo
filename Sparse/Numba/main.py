@@ -39,7 +39,9 @@ for dim in [2,3]:
         size=16
         sizeM=256
     banner(dim)
-
+    
+    dotest(dim,size) # make a "hot start" !
+    
     f=open("RunningOn"+socket.gethostname()+"-"+str(dim),"w")
     while size<=sizeM:
         order,nc,tb,tm=dotest(dim,size)
