@@ -11,7 +11,7 @@ map.
 then build the CSR matrix (exactly what we do in Ju, Py, Numba and Pythran).
 
 Although the first method is very convenient, it is much slower (one
-reason could be that we do a lot of memory allocations). So we use the
+reason could be that we make a lot of memory allocations). So we use the
 second one, but you can use the first one (look at main: replace calls to
 *do_test_arrays* with calls to *dotest_map*).
 
