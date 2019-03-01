@@ -75,7 +75,7 @@ and so on...
 
 You can also install them from [conda](https://conda.io/docs/).
 
-Note that, for Pythran it was necessary to create a .pythranrc file in the home directory, to describe which blas is used:
+Note that, for Pythran it seems  necessary to create a .pythranrc file in the home directory, to describe which blas is used:
 ```
 [compiler]
 blas=openblas
