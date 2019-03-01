@@ -4,7 +4,7 @@
 #include <math.h>  
 #include <iostream>
 #include <tuple>
-#include <memory>
+//#include <memory>
 #include <iomanip>
 #include <sys/time.h>
 #include <unistd.h>
@@ -25,7 +25,8 @@ string host()
   gethostname(hostnameC, HOST_NAME_MAX);
   return string(hostnameC);
 }
-template<int dim> void Init(std::unique_ptr<double[]>& X,int size)
+//template<int dim> void Init(std::unique_ptr<double[]>& X,int size)
+template<int dim> void Init(double X[],int size)
 {
   int sized=pow(size,dim);
   double v=1.;
@@ -39,17 +40,24 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_arrays(int size)
 {
   int order,nc;
   // build matrix:
-  std::shared_ptr<int[]> row;
-  std::shared_ptr<int[]> col;
-  std::shared_ptr<double[]> v;
+  // std::shared_ptr<int[]> row;
+  // std::shared_ptr<int[]> col;
+  // std::shared_ptr<double[]> v;
+  int *row;
+  int *col;
+  double *v;
+  
   auto c1=ck();
   std::tie(order,nc)= PreLapl<dim>(row,col,v,size);
   Csr M(row,col,v,order,nc);
   auto c2=ck()-c1;
   
   
-  auto In=std::make_unique<double[]>(order);
-  auto Out=std::make_unique<double[]>(order);
+  //auto In=std::make_unique<double[]>(order);
+  //auto Out=std::make_unique<double[]>(order);
+  auto In= new double[order];
+  auto Out=new double[order];
+  
   Init<dim>(In,size); Init<dim>(Out,size);
   // product:
   int iterm=1;
@@ -63,6 +71,8 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_arrays(int size)
       iterm*=2;
     }
   while(c4<CLOCKS_PER_SEC/100);
+
+  delete[] In; delete[] Out;
   return make_tuple(order,nc,c2,c4/(iterm-1));
 }
 template<int dim> tuple<clock_t,clock_t,int,int> dotest_map(int size)
@@ -84,8 +94,11 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_map(int size)
   
   P.purge();
   
-  auto In=std::make_unique<double[]>(ni);
-  auto Out=std::make_unique<double[]>(ni);
+  //auto In=std::make_unique<double[]>(ni);
+  //auto Out=std::make_unique<double[]>(ni);
+  auto In=new double[ni];
+  auto Out=new double[ni];
+  
   Init<dim>(In,size); Init<dim>(Out,size);
   // product:
   int iterm=1;
@@ -100,6 +113,7 @@ template<int dim> tuple<clock_t,clock_t,int,int> dotest_map(int size)
     }
   while(c4<CLOCKS_PER_SEC/100);
 
+  delete[] In; delete[] Out;
   return make_tuple(ni,sizem,c2,c4/(iterm-1));
 }
 void banner()

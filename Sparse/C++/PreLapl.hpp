@@ -1,21 +1,23 @@
 #include "PreSparse.hpp"
 #include <math.h>
 #include <iostream>
-#include <memory>
+//#include <memory>
 #include <tuple>
 
-template<int dim> pair<int,int> PreLapl(std::shared_ptr<int[]>& row,
-					std::shared_ptr<int[]>& col,
-					std::shared_ptr<double[]>& v,
+template<int dim> pair<int,int> PreLapl(int*& row,int*& col,double*&  v,
 					int size)
 
 {
   double h=1./(size-1), h2=h*h, cd=-4/h2,hd=1./h2;
   int order=pow(size,2);
   int nc= 5*pow(size-2,2)+ 16*(size-2)+ 12;
-  row=std::make_unique<int[]>(nc);
-  col=std::make_unique<int[]>(nc);
-  v=std::make_unique<double[]>(nc);
+  //row=std::make_unique<int[]>(nc);
+  //col=std::make_unique<int[]>(nc);
+  //v=std::make_unique<double[]>(nc);
+  row=new int[nc];
+  col=new int[nc];
+  v=new double[nc];
+  
   auto I=[size](int i,int j){return i*size+j;};
 
   int count=0;
@@ -46,17 +48,19 @@ template<int dim> pair<int,int> PreLapl(std::shared_ptr<int[]>& row,
   
 }
 
-template<> pair<int,int> PreLapl<3>(std::shared_ptr<int[]>& row,
-					std::shared_ptr<int[]>& col,
-					std::shared_ptr<double[]>& v,
+template<> pair<int,int> PreLapl<3>(int*& row,int*& col,double*&  v,
 					int size)
 {
   double h=1./(size-1), h2=h*h, cd=-4/h2,hd=1./h2;
   int order=pow(size,3),size2=pow(size,2);
   int nc= 7*pow(size-2,3)+ 36*pow(size-2,2)+  60*(size-2)+ 8*4;
-  row=std::make_unique<int[]>(nc);
-  col=std::make_unique<int[]>(nc);
-  v=std::make_unique<double[]>(nc);
+  // row=std::make_unique<int[]>(nc);
+  // col=std::make_unique<int[]>(nc);
+  // v=std::make_unique<double[]>(nc);
+  row=new int[nc];
+  col=new int[nc];
+  v=new double[nc];
+  
   auto I=[size,size2](int i,int j,int k){return i*size2+j*size+k;};
   
   int count=0;

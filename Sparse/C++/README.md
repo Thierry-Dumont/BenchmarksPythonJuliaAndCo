@@ -18,6 +18,13 @@ second one, but you can use the first one (look at main: replace calls to
 We could imagine other methods, like using std::vector's, which grow on
 demand, but this will probably also be slower than the second method.
 
+### Note that:
+
+shared_ptr have a well known problem with "old" compilers like g++-5 (cannot write a[]
+when a is a shared_ptr: one must use a get), and as we are a bit lazzy, we
+have switched to a old style programming, with new and delete.
+This will not change the performances. Feel free to change this.
+
 ### Compilation:
 ```
 mkdir Build

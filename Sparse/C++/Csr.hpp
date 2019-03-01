@@ -8,9 +8,12 @@
 //#define DEBUG
 class Csr
 {
-  std::shared_ptr<double[]> V;
-  std::unique_ptr<int[]> ia;
-  std::shared_ptr<int[]> ja;
+  // std::shared_ptr<double[]> V;
+  // std::unique_ptr<int[]> ia;
+  // std::shared_ptr<int[]> ja;
+  double *V;
+  int *ia;
+  int *ja;
   int nlig,nc;
 public:
   Csr(const PreSparse& P)
@@ -20,9 +23,12 @@ public:
     if(nlig!=ncol)
       throw std::runtime_error("Csr: not a square matrix: nlig, ncol= "+
 			       to_string(nlig)+" "+to_string(ncol));
-    ia=std::make_unique<int[]>(nlig+1);
-    ja=std::make_unique<int[]>(nc);
-    V=std::make_unique<double[]>(nc);
+    //ia=std::make_unique<int[]>(nlig+1);
+    //ja=std::make_unique<int[]>(nc);
+    //V=std::make_unique<double[]>(nc);
+    ia=new int[nlig+1];
+    ja=new int[nc];
+    V=new double[nc];
     //
     for(int i=0;i<nlig+1;i++) ia[i]=0;
     for(int i=0;i<nc;i++) ja[i]=0;
@@ -49,13 +55,15 @@ public:
     ia[nlig]=pia;
   
   }
-  Csr(std::shared_ptr<int[]>& row,std::shared_ptr<int[]>& col,
-      std::shared_ptr<double[]>& v,int order,int _nc)
+  // Csr(std::shared_ptr<int[]>& row,std::shared_ptr<int[]>& col,
+  //     std::shared_ptr<double[]>& v,int order,int _nc)
+  Csr(int*& row,int*& col,double*& v,int order,int _nc)  
   {
     ja=col;
     V=v;
     nlig=order; nc=_nc;
-    ia=std::make_unique<int[]>(nlig+1);
+    //ia=std::make_unique<int[]>(nlig+1);
+    ia= new int[nlig+1];
     int pia=0,curia=0;
     for(int I=0;I<nc;I++)
       {
@@ -75,8 +83,10 @@ public:
   }
   ~Csr()
   {
+    delete[] ia; delete[] ja; delete[] V;
   }
-  void prod(std::unique_ptr<double[]>& In, std::unique_ptr<double[]>& Out)
+  //void prod(std::unique_ptr<double[]>& In, std::unique_ptr<double[]>& Out)
+  void prod(double In[],double Out[])
   {
     for(int i=0;i<nlig;i++)
       {
