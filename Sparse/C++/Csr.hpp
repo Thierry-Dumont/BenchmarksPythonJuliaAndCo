@@ -106,8 +106,6 @@ public:
   }
   void print()
   {
-    //for(int i=0;i<10;i++) cout<<ia[i]<<" ";
-    //cout<<endl;
     std::cout<<"order= "<<nlig<<" nzeros= "<<nc<<std::endl;
     for(int i=0;i<nlig;i++)
     {

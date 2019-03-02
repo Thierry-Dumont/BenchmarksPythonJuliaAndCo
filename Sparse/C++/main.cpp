@@ -17,7 +17,7 @@ using namespace std;
 double get_time() {
   struct timeval tv;
   gettimeofday(&tv,0);
-  return (double) tv.tv_sec+tv.tv_usec*1e-6;
+  return static_cast<double>(tv.tv_sec)+ static_cast<double>(tv.tv_usec)*1e-6;
 }
 string host()
 {
@@ -60,7 +60,7 @@ template<int dim> tuple<double,double,int,int> dotest_arrays(int size)
   
   Init<dim>(In,size); Init<dim>(Out,size);
   // product:
-  int iterm=1;
+  int iterm=10;
   double c4;
   do
     {
@@ -69,6 +69,7 @@ template<int dim> tuple<double,double,int,int> dotest_arrays(int size)
 	M.prod(In,Out);
       c4=get_time()-c3;
       iterm*=2;
+      //cout<<iterm<< " "<<c3<<" "<<c4<<endl;
     }
   while(c4<0.1);
 
@@ -111,6 +112,7 @@ template<int dim> tuple<double,double,int,int> dotest_map(int size)
 	M.prod(In,Out);
       c4=get_time()-c3;
       iterm*=2;
+  
     }
   while(c4<0.1);//at least run 0.1 second
 
