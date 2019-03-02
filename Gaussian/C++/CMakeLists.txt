@@ -16,10 +16,10 @@ if (${CMAKE_CXX_COMPILER} MATCHES "icpc.*$")
 elseif(${CMAKE_CXX_COMPILER} MATCHES "clang.*$")
   set (USING_GNU TRUE)
   set(CMAKE_CXX_COMPILER "clang++")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3  -DCLANG  -Wall -std=c++11")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3  -DCLANG  -Wall -std=c++14")
 else ()
   set (USING_GNU TRUE)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -DGCC -DALIGN_64 -ftree-vectorizer-verbose=2 -std=c++11 -march=native")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall  -DGCC -DALIGN_64 -ftree-vectorizer-verbose=2 -std=c++14 -march=native")
 
 endif ()
 include_directories(

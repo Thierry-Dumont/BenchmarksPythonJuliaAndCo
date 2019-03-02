@@ -69,7 +69,6 @@ template<int dim> tuple<double,double,int,int> dotest_arrays(int size)
 	M.prod(In,Out);
       c4=get_time()-c3;
       iterm*=2;
-      //cout<<iterm<< " "<<c3<<" "<<c4<<endl;
     }
   while(c4<0.1);
 
