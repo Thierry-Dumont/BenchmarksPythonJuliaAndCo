@@ -1,9 +1,11 @@
-First compile what should be  just _pythranized_;  type:
+Compile what should be  just _pythranized_ and run the code; just type:
 ```
 ./script
 ```
-Then run the code:
+
+!Z! if you are using OpenBlas, you probably must create  a .pythranrc in your home directory like this:
 
 ```
-python3 main.py
+[compiler]
+blas=openblas
 ```

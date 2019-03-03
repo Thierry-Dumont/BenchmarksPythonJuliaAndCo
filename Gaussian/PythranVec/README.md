@@ -1,11 +1,8 @@
-First compile factorMatrix.py; just type:
+Compile factorMatrix.py and run the code;  just type:
 ```
 ./script
 ```
-Then run the code:
-```
-python3 main.py
-```
+
 !Z! if you are using OpenBlas, you probably must create  a .pythranrc in your home directory like this:
 
 ```

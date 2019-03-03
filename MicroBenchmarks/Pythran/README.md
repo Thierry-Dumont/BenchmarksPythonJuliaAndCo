@@ -1,15 +1,11 @@
-* First compile the _pythranized_ procedures:
+* Compile the _pythranized_ procedures, and run all the tests:
 ```
 ./script
 ```
 
 
-* Then, to run the different codes, just do:
+!Z! if you are using OpenBlas, you probably must create  a .pythranrc in your home directory like this:
 
 ```
-python3  code.py
-```
-
-with code.py = main_cl.py,  main_lapl_1d.py or main_lapl_2d.py
-
-
+[compiler]
+blas
