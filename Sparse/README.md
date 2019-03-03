@@ -46,7 +46,7 @@ Thierry Dumont   tdumont@math.univ-lyon1.fr
 - **Ju**: Julia computation.
 
 
-### Running the benchmarks
+### Running the benchmarks:
 
 cd successively in C++, Py, Pythran, Numba, Ju; then look at the documentation.
 
@@ -54,7 +54,7 @@ Once you have run the benchmark in **all** directories, go to Results/
 and look at the documentation to know how to exploit the results.
 
 
-### Note
+### Note:
 
 In C++, using clang++ (clang version 7.0.0-3), it seems impossible to optimize
 with -Ox with x>1 (this is a problem with the Clock). If you can help, you are
