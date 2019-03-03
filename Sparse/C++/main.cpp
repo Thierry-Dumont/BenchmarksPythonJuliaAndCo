@@ -4,6 +4,7 @@
 #include <math.h>  
 #include <iostream>
 #include <tuple>
+#include <algorithm> 
 //#include <memory>
 #include <iomanip>
 #include <sys/time.h>
@@ -11,6 +12,7 @@
 #include <limits.h>
 #include <fstream>
 #include <chrono>
+
 using namespace std;
 using namespace std::chrono;
 // Clock!
@@ -84,8 +86,9 @@ template<int dim> tuple<double,double,int,int> dotest_arrays(int size)
       for(int it=0;it<iterm;it++)
 	M.prod(In,Out);
       c2=T.sec();
+      //cout<<iterm<<" "<<c2<<endl;
       iterm*=1+0.5/c2;
-    
+      
     }
   while(c2<0.5);
   //cout<<iterm<<endl;

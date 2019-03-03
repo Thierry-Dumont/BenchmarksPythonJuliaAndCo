@@ -54,3 +54,8 @@ Once you have run the benchmark in **all** directories, go to Results/
 and look at the documentation to know how to exploit the results.
 
 
+### Note
+
+In C++, using clang++ (clang version 7.0.0-3), it seems impossible to optimize
+with -Ox with x>1 (this is a problem with the Clock). If you can help, you are
+welcome! 
