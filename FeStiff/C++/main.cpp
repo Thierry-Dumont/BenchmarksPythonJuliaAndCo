@@ -6,9 +6,30 @@
 #include <unistd.h>
 #include <limits.h>
 #include <cmath>
-using namespace std;
+#include <chrono>
 
-clock_t ck() {return clock();}
+using namespace std;
+using namespace std::chrono;
+
+// Clock!
+class Mtime
+{
+  high_resolution_clock::time_point t1 ;
+  public:
+  // Initialize (start time!)
+  void start()
+  {
+    t1= high_resolution_clock::now();
+  }
+  // Get duration since timer was started, in seconds.
+  double sec() const
+  {
+    high_resolution_clock::time_point t2= high_resolution_clock::now();
+    return 1.e-9*
+      static_cast<double>(duration_cast<nanoseconds>(t2 - t1 ).count());
+  }
+};
+
 string host()
 {
   char hostnameC[HOST_NAME_MAX];
@@ -64,31 +85,31 @@ int main()
       cout<<endl;
     }
   cout<<"\nNow, start the benchmark:"<<endl;
+
+  Mtime Tm;
+  
   cout<<ntri<<" triangles."<<endl;
-  auto t1=ck();
+  Tm.start();
   for(long int tri=0;tri<ntri;tri++)
     {
       RandomTriangle(R,x,y);
       S(x,y,mat);
     }
-  auto T= ck()- -t1;
-  cout<<"first phase: "<<static_cast<double>(T)/ CLOCKS_PER_SEC<<" seconds."
-      <<endl;
- 
-  t1= ck();
-
+  auto T= Tm.sec();
+  cout<<"first phase: "<<T<<" seconds."<<endl;
+					 
+  Tm.start();	
   for(long int tri=0;tri<ntri;tri++)
     {
       RandomTriangle(R,x,y);
     }
-  auto t2= ck()-t1;
-  cout<<"second phase: "<<static_cast<double>(t2)/ CLOCKS_PER_SEC <<" seconds"
-      <<endl;
+    auto t2= Tm.sec();
+  cout<<"second phase: "<<t2<<" seconds" <<endl;
  
   T-=t2;
-  cout<<"Total time: "<<static_cast<double>(T)/ CLOCKS_PER_SEC <<" seconds."<<
+  cout<<"Total time: "<<T <<" seconds."<<
     endl;
-  double ttri=static_cast<double>(T)/ CLOCKS_PER_SEC /ntri;
+  double ttri= T /ntri;
   cout<<"Time by triangle: "<<ttri<<" second."<<endl;
 
   cout<<S.flops/ttri<<" Gflops/s."<<endl;
