@@ -8,24 +8,36 @@
 #include <algorithm>
 #include <map>
 #include <string>
-#include <sys/time.h>
 #include <unistd.h>
 #include <limits.h>
 #include <fstream>
 #include <cmath>
-#include <ctime>
 #include <memory>
 #include <typeinfo>
 #include <utility>
+#include <chrono>
 //#define DO_GNUPLOT_FILES
 using namespace std;
+using namespace std::chrono;
 
-double get_time() {
-    struct timeval tv;
-    gettimeofday(&tv,0);
-    return (double) tv.tv_sec+tv.tv_usec*1e-6;
-}
-clock_t ck() {return clock();}
+// Clock!
+class Mtime
+{
+  high_resolution_clock::time_point t1 ;
+  public:
+  // Initialize (start time!)
+  void start()
+  {
+    t1= high_resolution_clock::now();
+  }
+  // Get duration since timer was started, in seconds.
+  double sec() const
+  {
+    high_resolution_clock::time_point t2= high_resolution_clock::now();
+    return 1.e-9*
+      static_cast<double>(duration_cast<nanoseconds>(t2 - t1 ).count());
+  }
+};
 string host()
 {
   char hostnameC[HOST_NAME_MAX];
@@ -94,10 +106,12 @@ int main()
 
   double t=0.;
 
+  Mtime Tm;
+  
   int step=0;
   cout<<"start..."<<endl;
   
-  double t1=get_time();
+  Tm.start();
   while(t<T)
     {
       RFL.step(InOut,dt);
@@ -119,10 +133,10 @@ int main()
       t+=dt;
  
     }
-  double t2=get_time();
+  double t2=Tm.sec();
 
   
-  cout<<"Computing time: "<<t2-t1<<" seconds."<<endl;
+  cout<<"Computing time: "<<t2<<" seconds."<<endl;
   cout<<"nsteps: "<<step<<endl;
 #ifdef DO_GNUPLOT_FILES 
   gpfile.close();
@@ -139,7 +153,7 @@ int main()
 
   ofstream fb; fb.open("../RunningOn"+hostname);
   fb<<pc.first<<" "<<pc.second<<endl;
-  fb<<t2-t1<<endl;
+  fb<<t2<<endl;
   fb.close();
 
   

@@ -59,4 +59,5 @@ for n in files:
         for k in kk:
             file.write(str(k)+" "+str(D[k])+'\n')
             
-print("\n see gpc* files to plot with gnuplot.")
+print("\nsee gpc* files to plot with gnuplot.\n")
+print('In gnuplot do:\nload "gp"\nand\nload "gp-nolibs"')

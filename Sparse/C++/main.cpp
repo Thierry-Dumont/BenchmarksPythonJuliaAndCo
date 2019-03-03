@@ -10,15 +10,27 @@
 #include <unistd.h>
 #include <limits.h>
 #include <fstream>
-
+#include <chrono>
 using namespace std;
-
-//get... time in seconds.
-double get_time() {
-  struct timeval tv;
-  gettimeofday(&tv,0);
-  return static_cast<double>(tv.tv_sec)+ static_cast<double>(tv.tv_usec)*1e-6;
-}
+using namespace std::chrono;
+// Clock!
+class Mtime
+{
+  high_resolution_clock::time_point t1 ;
+  public:
+  // Initialize (start time!)
+  void start()
+  {
+    t1= high_resolution_clock::now();
+  }
+  // Get duration since timer was started, in seconds.
+  double sec() const
+  {
+    high_resolution_clock::time_point t2= high_resolution_clock::now();
+    return 1.e-9*
+      static_cast<double>(duration_cast<nanoseconds>(t2 - t1 ).count());
+  }
+};
 string host()
 {
   char hostnameC[HOST_NAME_MAX];
@@ -46,11 +58,13 @@ template<int dim> tuple<double,double,int,int> dotest_arrays(int size)
   int *row;
   int *col;
   double *v;
+
+  Mtime T;
   
-  auto c1=get_time();
+  T.start();
   std::tie(order,nc)= PreLapl<dim>(row,col,v,size);
   Csr M(row,col,v,order,nc);
-  auto c2=get_time()-c1;
+  auto c1=T.sec();
   
   
   //auto In=std::make_unique<double[]>(order);
@@ -61,27 +75,32 @@ template<int dim> tuple<double,double,int,int> dotest_arrays(int size)
   Init<dim>(In,size); Init<dim>(Out,size);
   // product:
   int iterm=10;
-  double c4;
+
+  double c2;
+ 
   do
     {
-      auto c3=get_time();
+      T.start();
       for(int it=0;it<iterm;it++)
 	M.prod(In,Out);
-      c4=get_time()-c3;
-      iterm*=2;
+      c2=T.sec();
+      iterm*=1+0.5/c2;
+    
     }
-  while(c4<0.1);
-
+  while(c2<0.5);
+  //cout<<iterm<<endl;
   delete[] In; delete[] Out;
-  return make_tuple(c2,c4/(iterm-1),order,nc);
+  return make_tuple(c1,c2/(iterm-1),order,nc);
 }
 template<int dim> tuple<double,double,int,int> dotest_map(int size)
 {
   
   int ni,nj,sizem;
-
+  
+  Mtime T;
   // build the matrix:
-  auto c1=get_time();
+
+  T.start();
   PreSparse P;
   PreLapl<dim>(P,size);
  
@@ -89,7 +108,7 @@ template<int dim> tuple<double,double,int,int> dotest_map(int size)
  
   Csr M(P);
 
-  auto c2=get_time()-c1;
+  auto c2=T.sec();
 
   
   P.purge();
@@ -106,10 +125,10 @@ template<int dim> tuple<double,double,int,int> dotest_map(int size)
   double c4;
   do
     {
-      auto c3=get_time();
+      T.start();
       for(int it=0;it<iterm;it++)
 	M.prod(In,Out);
-      c4=get_time()-c3;
+      c4=T.sec();
       iterm*=2;
   
     }

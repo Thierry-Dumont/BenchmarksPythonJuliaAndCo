@@ -9,15 +9,31 @@
 #include <unistd.h>
 #include <limits.h>
 #include <fstream>
+#include <chrono>
 #include "protos_lapack.hpp"
 using namespace std;
 using namespace odes;
 using namespace Arrays;
-double get_time() {
-  struct timeval tv;
-  gettimeofday(&tv,0);
-  return (double) tv.tv_sec+tv.tv_usec*1e-6;
-}
+using namespace std::chrono;
+
+// Clock!
+class Mtime
+{
+  high_resolution_clock::time_point t1 ;
+  public:
+  // Initialize (start time!)
+  void start()
+  {
+    t1= high_resolution_clock::now();
+  }
+  // Get duration since timer was started, in seconds.
+  double sec() const
+  {
+    high_resolution_clock::time_point t2= high_resolution_clock::now();
+    return 1.e-9*
+      static_cast<double>(duration_cast<nanoseconds>(t2 - t1 ).count());
+  }
+};
 int main()
 {
   char hostnameC[HOST_NAME_MAX];
@@ -30,6 +46,9 @@ int main()
   int size=sizeG;
   int liminf=2;
   int loop=1;
+
+  Mtime T;
+  
   while(size>liminf)
     {
       rando R;
@@ -38,15 +57,14 @@ int main()
       int lda=size;
       int *piv=new int[size];
       int info;
-      double t1=get_time();
+      T.start();
       for(int iter=0;iter<loop;iter++)
 	{
 	  RandomFeedMatrix(M,R);
 	  //factorMatrix(M);
 	  dgetrf_(&size,&size,M.data(),&lda,piv,&info);
 	}
-      double t2=get_time();
-      double t=(t2-t1)/loop;
+      double t=T.sec()/loop;
  
       times[size]=t;
       size /=2;
@@ -63,11 +81,10 @@ int main()
       rando R;
       Array<double,2>  M(size,size+1);
       
-      double t1=get_time();
+      T.start();
       for(int iter=0;iter<loop;iter++)
 	RandomFeedMatrix(M,R);
-      double t2=get_time();
-      double t=(t2-t1)/loop;
+      double t=T.sec()/loop;
   
       times[size]-=t;
       size /=2;

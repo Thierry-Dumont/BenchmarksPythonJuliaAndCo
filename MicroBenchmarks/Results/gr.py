@@ -62,5 +62,8 @@ if not os.path.exists("./results"):
     
 for t in types:
     doWhatWeMustDo(files,t)
-print("\n see  files in ./results (to plot with gnuplot).")
+print("\nsee  files in ./results.\n")
+print("To plot results with gnuplot just type:")
+print('load "vis_cl"\nor:\n load "vis_lapl_1"\nor:\nload "vis_lapl_2"')
+print("at gnuplot prompt.\n")
 
