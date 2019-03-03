@@ -1,5 +1,5 @@
 from numba import jit
-@jit
+@jit(nopython=True)
 def RandomTriangle(R,x,y):
     # domain is [0,10]x[0,10]
     for i in range(0,3):
