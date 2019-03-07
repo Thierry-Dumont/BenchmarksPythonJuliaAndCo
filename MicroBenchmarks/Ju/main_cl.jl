@@ -26,7 +26,7 @@ end
 function proc2!(A::Array{Float64,1},B::Array{Float64,1},
                 C::Array{Float64,1},D::Array{Float64,1},niter::Int64)
     for it=1:niter
-        @. A[:]=1.7*B[:]-0.8*C[:]-0.9*D[:]
+        @views @. A[:]=1.7*B[:]-0.8*C[:]-0.9*D[:]
         A,D = D,A
     end
 end
@@ -43,10 +43,10 @@ end
 function proc4!(A::Array{Float64,1},B::Array{Float64,1},
                 C::Array{Float64,1},D::Array{Float64,1},niter::Int64)
     for it=1:niter
-        A[:]=1.7*B[:]
-        A[:]-=0.8*C[:]
-        A[:]-=0.9*D[:]
-        A,D = D,A
+        @views A[:]=1.7*B[:]
+        @views A[:]-=0.8*C[:]
+        @views A[:]-=0.9*D[:]
+        @views A,D = D,A
     end
 end
 function proc5!(A::Array{Float64,1},B::Array{Float64,1},

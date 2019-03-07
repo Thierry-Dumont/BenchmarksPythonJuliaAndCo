@@ -23,7 +23,7 @@ function proc1!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
     siz=size(In,1)
     h2::Float64= (1.0/siz)^2
     for it=1:niter
-        Out[2:siz-1,2:siz-1]=
+        @views Out[2:siz-1,2:siz-1]=
         h2*(In[1:siz-2,2:siz-1 ] + In[2:siz-1,1:siz-2]-
             4.0*In[2:siz-1,2:siz-1]+
             In[3:siz,2:siz-1]+In[2:siz-1,3:siz])
@@ -34,7 +34,7 @@ function proc2!(In::Array{Float64,2},Out::Array{Float64,2},niter::Int64)
     siz=size(In,1)
     h2::Float64= (1.0/siz)^2
     for it=1:niter
-       @. Out[2:siz-1,2:siz-1]=
+        @. Out[2:siz-1,2:siz-1]=
         h2*(In[1:siz-2,2:siz-1 ] + In[2:siz-1,1:siz-2]-
             4.0*In[2:siz-1,2:siz-1]+
             In[3:siz,2:siz-1]+In[2:siz-1,3:siz])

@@ -10,7 +10,7 @@ function trapz(a::Float64,b::Float64,n::Int64,f::Function)
     sum*=h
 end
                
-f(x::Float64)=+exp(-x)*x^2
+@inline f(x::Float64)=+exp(-x)*x^2
 
 function g(x::Float64)
     h=0.0
