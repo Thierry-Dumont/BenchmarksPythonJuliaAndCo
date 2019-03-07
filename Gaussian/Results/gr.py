@@ -60,4 +60,5 @@ for n in files:
             file.write(str(k)+" "+str(D[k])+'\n')
             
 print("\nsee gpc* files to plot with gnuplot.\n")
-print('In gnuplot do:\nload "gpc"\nand\nload "gpc-nolibs"')
+print('In gnuplot do:\nload "gpc"\nor load "gpc-nolibs"')
+print('or load "gpc-only-libs"')

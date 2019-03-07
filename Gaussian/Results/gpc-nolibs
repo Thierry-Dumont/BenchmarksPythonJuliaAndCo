@@ -2,6 +2,7 @@ set logscale
 set key top right
 set xlabel "matrix size"
 set ylabel "cpu time / cpu time C++"
+set title "Not using external libraries"
 plot "./Results/C++" title "C++" with linespoint pointtype 7 
 replot "./Results/Py"      title "Python" with linespoint
 replot "./Results/PyVec"      title "Python vect." with linespoint
