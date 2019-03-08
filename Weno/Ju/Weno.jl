@@ -49,11 +49,15 @@ function weno!(W,F,L,In::Array{Float64},Out::Array{Float64})
     # build an extended array with phantom cells to deal with periodicity:
     W.InC[1]=In[size-1]
     W.InC[2]=In[size]
-    #W.InC[3:2+size]=In[:] #slower!
-    #W.InC[3:2+size]=copy(In[:]) #slower!
-    @simd for i=1:size
-       W.InC[2+i]=In[i]
-    end
+
+    # same computing time (on my machine) with A and B:
+
+    # A:
+    @views W.InC[3:2+size]=In[:] #slower!
+    # B:
+    # @simd for i=1:size
+    #    W.InC[2+i]=In[i]
+    # end
     W.InC[size+3]=In[1]
     W.InC[size+4]=In[2]
     # precompute for regularity coefficients:
