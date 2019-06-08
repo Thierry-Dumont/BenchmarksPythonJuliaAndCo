@@ -12,7 +12,7 @@ programs.
 and Julia easy to use and efficient? We compare them with a C++
 optimized implementation (and sometimes with a Fortran one)..
 
-The benchmark(s):
+## The benchmark(s):
 
 *  :new: Callback: callbacks of small and not so small functions.
 
