@@ -1,7 +1,7 @@
 
 # Numerical benchmarks for Julia, Python.
 
-We try to avoid trivial and non-sens benchmarks (for people doing
+We try to avoid trivial and nonsense benchmarks (for people doing
 numerics!) like fibonacci, sorting and so on.
 
 We put ourself in the shoes of a typical Matlab or Matlab-like
