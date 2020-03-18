@@ -1,4 +1,4 @@
 #!/bin/bash
-pythran -march=native -O3 -DNDEBUG  StiffOut.py
+pythran -march=native -O3 -DUSE_XSIMD stiff_out.py
 echo "run test:"
 python3 main.py
