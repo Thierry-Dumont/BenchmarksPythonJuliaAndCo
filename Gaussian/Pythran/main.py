@@ -24,11 +24,11 @@ print("")
 while size>=sizelim:
     R=rando()
     M=np.empty((size,size+1))
-    t1 = time.clock()
+    t1 = time.time()
     for iter in range(0,loop):
         RandomFeedMatrix(M,R)
         factorMatrix.factorMatrix(M)
-    t=(time.clock()-t1)/loop
+    t=(time.time()-t1)/loop
     print("size:",size," t: ",t)
     D[size]=t
     size//=2
@@ -41,10 +41,10 @@ loop=1
 while size>=sizelim:
     R=rando()
     M=np.empty((size,size+1))
-    t1 = time.clock()
+    t1 = time.time()
     for iter in range(0,loop):
         RandomFeedMatrix(M,R)
-    t=(time.clock()-t1)/loop
+    t=(time.time()-t1)/loop
     print("size:",size," t: ",t)
     D[size] -= t
     size//=2
