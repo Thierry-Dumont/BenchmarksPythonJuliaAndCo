@@ -1,6 +1,6 @@
 from numba import jit
 import numpy as np
-@jit
+@jit(nopython=True)
 def build3(size):
     nc= 7*(size-2)**3 + 36*(size-2)**2 + 60*(size-2)+ 8*4
     row= np.empty((nc),dtype=int)

@@ -1,5 +1,6 @@
 import numpy as np
-from numba import jitclass,float64,int64
+from numba.experimental import jitclass
+from numba import float64,int64
 spec=[
     ('ji',float64[:,:]),
     ('grads',float64[:,:]),

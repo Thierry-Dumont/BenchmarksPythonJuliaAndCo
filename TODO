@@ -1,0 +1,11 @@
+There are some problems with nowadays version of Numba (0.51.1 / 2020/08):
+
+-FeStiff:  adeprecation warning, and a warning concerning dot.
+
+-MicroBenchMarks: cannot parallelize lapl1d_2 in main_lapl_1d.py
+
+-Sparse: build3.py has a problem with np.empty
+
+-Weno: some warnings.
+
+all this needs modifications.
