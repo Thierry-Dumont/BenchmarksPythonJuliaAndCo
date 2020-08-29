@@ -27,7 +27,7 @@ def lapl2d_1(In,Out,niter):
         In,Out=Out,In
 @jit(nopython=True)
 def lapl2d_2(In,Out,niter):
-    # Naïve version:
+    # Naive version:
     size=In.shape[0]
     h2= (1./size)**2
     for it in range(0,niter):
@@ -73,7 +73,7 @@ def test(p,In,Out,nit):
     return T,niter
 
 DD={"lapl2d_1":"Vectorized          ",
-    "lapl2d_2":"Naïve               ",
+    "lapl2d_2":"Naive               ",
     "lapl2d_3":"Numba stencil kernel"}
 
 f=open("RunningOn"+socket.gethostname()+"_lapl_2","w")

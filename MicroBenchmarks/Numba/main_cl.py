@@ -52,7 +52,7 @@ def test(p,A,B,C,D,nit):
 
     return T,niter
 
-DD={"cl_2":"Naïve     ",
+DD={"cl_2":"Naive     ",
     "cl_1":"Vectorized"}
 
 f=open("RunningOn"+socket.gethostname()+"_cl","w")

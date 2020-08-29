@@ -61,7 +61,7 @@ def test(p,In,Out,nit):
     return T,niter
 
 DD={"lapl1d_1":"Vectorized          ",
-    "lapl1d_2":"Naïve               ",
+    "lapl1d_2":"Naive               ",
     "lapl1d_3":"Numba stencil kernel"}
 
 f=open("RunningOn"+socket.gethostname()+"_lapl_1","w")
