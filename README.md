@@ -18,7 +18,7 @@ optimized implementation (and sometimes with a Fortran one)..
 
 * Gaussian:  Gaussian elimination with partial pivoting.
   
-* FeStiff: compute the stiffness matrix, for the Poisson equation,
+* FeStiff: compute the stiffness matrix  for the Poisson equation,
   discretized with P2 finite elements on triangles.
   
 *  Weno: a classical solver for hyperbolic equations, in
